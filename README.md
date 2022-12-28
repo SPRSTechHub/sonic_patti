@@ -1,6 +1,6 @@
 # sonic_patti
 
-A new Flutter project.
+Best Game app fron SPRS GAMEX.
 
 ## Getting Started
 
