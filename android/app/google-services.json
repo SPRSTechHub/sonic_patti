@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "727450063419",
+    "project_id": "sonic-patti",
+    "storage_bucket": "sonic-patti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727450063419:android:855c37c67c29cd659ac21e",
+        "android_client_info": {
+          "package_name": "com.example.sonic_patti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727450063419-jqsg04pqd3n8d0ors85tje2rg0nu0pat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmanR2Oeg8l5hSQnwHYl8i0_Y0auuHpQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727450063419-jqsg04pqd3n8d0ors85tje2rg0nu0pat.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "727450063419-fe32ubhcjn4aa1nr2sr1ckj3dfklibbq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sonicPatti"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727450063419:android:6568d7e5835021739ac21e",
+        "android_client_info": {
+          "package_name": "com.sonic.patti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727450063419-jqsg04pqd3n8d0ors85tje2rg0nu0pat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmanR2Oeg8l5hSQnwHYl8i0_Y0auuHpQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727450063419-jqsg04pqd3n8d0ors85tje2rg0nu0pat.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "727450063419-fe32ubhcjn4aa1nr2sr1ckj3dfklibbq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sonicPatti"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

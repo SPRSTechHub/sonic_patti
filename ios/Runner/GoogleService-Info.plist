@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>727450063419-fe32ubhcjn4aa1nr2sr1ckj3dfklibbq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.727450063419-fe32ubhcjn4aa1nr2sr1ckj3dfklibbq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAx-_4FUWmkty8lytYvZXOPZKncorGxuBU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>727450063419</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.sonicPatti</string>
+	<key>PROJECT_ID</key>
+	<string>sonic-patti</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sonic-patti.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:727450063419:ios:144653b68aa4b3e49ac21e</string>
+</dict>
+</plist>

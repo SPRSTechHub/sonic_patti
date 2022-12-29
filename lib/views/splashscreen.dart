@@ -1,22 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/utils/constants.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+import '../controllers/cmc.dart';
+import '../utils/constants.dart';
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _MainScreenState extends State<MainScreen> {
+  final ConnectionManagerController _controller =
+      Get.find<ConnectionManagerController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: Get.height,
-        color: bgColor1,
+      body: Center(
+        child: Obx(() {
+          if (_controller.isDeviceConnected.value == false) {
+            // showDialogBox();
+            return const Text('No Internet');
+          } else {
+            return const Text('Got Internet');
+          }
+        }),
       ),
     );
   }
+
+/*   showDialogBox() {
+    return Get.defaultDialog(
+      title: "Alert",
+      content: const Text('data'),
+      onConfirm: () {
+        //getConnectivity();
+      },
+      cancelTextColor: bgColor2,
+      middleText: "Dialog made in 3 lines of code",
+      barrierDismissible: false,
+    );
+  } */
 }
