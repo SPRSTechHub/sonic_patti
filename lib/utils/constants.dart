@@ -5,8 +5,21 @@ import 'package:google_fonts/google_fonts.dart';
 //colors used in this app
 const Color white = Colors.white;
 const Color black = Colors.black;
-const Color bgColor1 = Color(0xFFAA8F00);
-const Color bgColor2 = Color(0xFF393318);
+
+const Color bgColor1 = Color(0xff312B4F);
+const Color bgColor2 = Color(0xffAA8F00);
+
+const Color appBarBg = Color(0xff93000A);
+const Color appBarText = Color(0xFFFFEDEA);
+
+const Color navBg = Color(0xff690005);
+const Color navText = Color(0xffFFEDEA);
+const Color navHighlighter = Color(0xffE4C542);
+
+const Color fabBg = Color(0xFF0062A1);
+const Color fabText = Color(0xffFFEDEA);
+
+const Color appBody = Color(0xffAA8F00);
 // heading for ob screen
 const String ht1 = 'Play';
 const String ht2 = 'Bid';
@@ -86,71 +99,5 @@ class AppStyles {
       ],
       tileMode: TileMode.mirror,
     ),
-  );
-}
-
-class MyColor {
-  static const lightColorScheme = ColorScheme(
-    brightness: Brightness.light,
-    primary: Color(0xFF6F5D00),
-    onPrimary: Color(0xFFFFFFFF),
-    primaryContainer: Color(0xFFFFE16B),
-    onPrimaryContainer: Color(0xFF221B00),
-    secondary: Color(0xFF0062A1),
-    onSecondary: Color(0xFFFFFFFF),
-    secondaryContainer: Color(0xFFD0E4FF),
-    onSecondaryContainer: Color(0xFF001D35),
-    tertiary: Color(0xFF44664E),
-    onTertiary: Color(0xFFFFFFFF),
-    tertiaryContainer: Color(0xFFC5ECCD),
-    onTertiaryContainer: Color(0xFF00210E),
-    error: Color(0xFFBA1A1A),
-    errorContainer: Color(0xFFFFDAD6),
-    onError: Color(0xFFFFFFFF),
-    onErrorContainer: Color(0xFF410002),
-    background: Color(0xFFFFFBFF),
-    onBackground: Color(0xFF1D1B16),
-    surface: Color(0xFFFFFBFF),
-    onSurface: Color(0xFF1D1B16),
-    surfaceVariant: Color(0xFFEAE2CF),
-    onSurfaceVariant: Color(0xFF4B4739),
-    outline: Color(0xFF7C7767),
-    onInverseSurface: Color(0xFFF6F0E7),
-    inverseSurface: Color(0xFF33302A),
-    inversePrimary: Color(0xFFE4C542),
-    shadow: Color(0xFF000000),
-    surfaceTint: Color(0xFF6F5D00),
-  );
-
-  static const darkColorScheme = ColorScheme(
-    brightness: Brightness.dark,
-    primary: Color(0xFFE4C542),
-    onPrimary: Color(0xFF3A3000),
-    primaryContainer: Color(0xFF544600),
-    onPrimaryContainer: Color(0xFFFFE16B),
-    secondary: Color(0xFF9CCAFF),
-    onSecondary: Color(0xFF003257),
-    secondaryContainer: Color(0xFF00497B),
-    onSecondaryContainer: Color(0xFFD0E4FF),
-    tertiary: Color(0xFFAAD0B2),
-    onTertiary: Color(0xFF153722),
-    tertiaryContainer: Color(0xFF2C4E37),
-    onTertiaryContainer: Color(0xFFC5ECCD),
-    error: Color(0xFFFFB4AB),
-    errorContainer: Color(0xFF93000A),
-    onError: Color(0xFF690005),
-    onErrorContainer: Color(0xFFFFDAD6),
-    background: Color(0xFF1D1B16),
-    onBackground: Color(0xFFE8E2D9),
-    surface: Color(0xFF1D1B16),
-    onSurface: Color(0xFFE8E2D9),
-    surfaceVariant: Color(0xFF4B4739),
-    onSurfaceVariant: Color(0xFFCDC6B4),
-    outline: Color(0xFF979080),
-    onInverseSurface: Color(0xFF1D1B16),
-    inverseSurface: Color(0xFFE8E2D9),
-    inversePrimary: Color(0xFF6F5D00),
-    shadow: Color(0xFF000000),
-    surfaceTint: Color(0xFFE4C542),
   );
 }

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:sonic_patti/utils/constants.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:sonic_patti/controllers/home_controller.dart';
+import 'package:sonic_patti/views/components/navigation.dart';
+import 'package:sonic_patti/views/gameScreens/all_games.dart';
+
+import '../../utils/constants.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -10,148 +15,113 @@ class GameBoard extends StatefulWidget {
 }
 
 class _GameBoardState extends State<GameBoard> {
-  static const List<Color> colors = <Color>[
-    Colors.yellow,
-    Colors.orange,
-    Colors.pink,
-    Colors.purple,
-    Colors.cyan,
-  ];
-
-  static final List<Widget> items = List<Widget>.generate(
-    colors.length,
-    (int index) => Container(color: colors[index], height: 150.0),
-  ).reversed.toList();
-
-  late ScrollController _controller;
-  bool _isElevated = true;
-  bool _isVisible = true;
-
-  FloatingActionButtonLocation get _fabLocation => _isVisible
-      ? FloatingActionButtonLocation.endDocked
-      : FloatingActionButtonLocation.endFloat;
-
-  void _listen() {
-    final ScrollDirection direction = _controller.position.userScrollDirection;
-    if (direction == ScrollDirection.forward) {
-      _show();
-    } else if (direction == ScrollDirection.reverse) {
-      _hide();
-    }
-  }
-
-  void _show() {
-    if (!_isVisible) {
-      setState(() => _isVisible = true);
-    }
-  }
-
-  void _hide() {
-    if (_isVisible) {
-      setState(() => _isVisible = false);
-    }
-  }
-
-  void _onElevatedChanged(bool value) {
-    setState(() {
-      _isElevated = value;
-    });
-  }
-
+  final HomeController _mainController = Get.find<HomeController>();
+  final _isVisible = true;
   @override
   void initState() {
+    print(GetStorage().read('permission'));
     super.initState();
-    _controller = ScrollController();
-    _controller.addListener(_listen);
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_listen);
-    _controller.dispose();
     super.dispose();
   }
 
+  bool shadowColor = false;
+  double? scrolledUnderElevation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bottom App Bar Demo'),
-      ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView(
-              controller: _controller,
-              children: items.toList(),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.menu_open_outlined,
+            color: appBarText,
+            shadows: <Shadow>[Shadow(color: Colors.white, blurRadius: 2.0)],
+          ),
+          onPressed: () {
+            //
+          },
+        ),
+        title: const Text('Sonic Patti'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.account_balance_wallet_outlined,
+              color: navText,
+              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)],
             ),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.notification_add,
+              color: appBarText,
+              shadows: <Shadow>[Shadow(color: Colors.white, blurRadius: 2.0)],
+            ),
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('This is a snackbar')));
+            },
           ),
         ],
+        scrolledUnderElevation: 4.0,
+        backgroundColor: appBarBg,
+        foregroundColor: appBarText,
+        shadowColor: shadowColor ? appBarBg.withAlpha(5) : appBarBg,
       ),
+      body: buildBody(),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        tooltip: 'Add New Item',
+        onPressed: () {
+          //
+        },
         elevation: _isVisible ? 0.0 : null,
-        label: const Text('Add'),
+        label: const Text('Fund'),
         icon: const Icon(Icons.add),
+        foregroundColor: fabText,
+        backgroundColor: fabBg,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-      bottomNavigationBar:
-          _DemoBottomAppBar(isElevated: _isElevated, isVisible: _isVisible),
+      bottomNavigationBar: navBar(
+          isElevated: true, isVisible: _mainController.isVisible.value ?? true),
     );
+  }
+
+  Widget buildBody() {
+    return Obx(() => IndexedStack(
+          index: _mainController.tabIndex.value,
+          children: const [AllGames(), Profile(), Bids(), Profile()],
+        ));
   }
 }
 
-class _DemoBottomAppBar extends StatelessWidget {
-  const _DemoBottomAppBar({
-    required this.isElevated,
-    required this.isVisible,
-  });
-
-  final bool isElevated;
-  final bool isVisible;
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      height: isVisible ? 80.0 : 0,
-      child: BottomAppBar(
-        elevation: isElevated ? null : 0.0,
-        child: Row(
-          children: <Widget>[
-            IconButton(
-              tooltip: 'Open popup menu',
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {
-                final SnackBar snackBar = SnackBar(
-                  content: const Text('Yay! A SnackBar!'),
-                  action: SnackBarAction(
-                    label: 'Undo',
-                    onPressed: () {},
-                  ),
-                );
+  State<Profile> createState() => _ProfileState();
+}
 
-                // Find the ScaffoldMessenger in the widget tree
-                // and use it to show a SnackBar.
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-            ),
-            IconButton(
-              tooltip: 'Search',
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
-            IconButton(
-              tooltip: 'Favorite',
-              icon: const Icon(
-                Icons.favorite,
-              ),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
+class _ProfileState extends State<Profile> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class Bids extends StatefulWidget {
+  const Bids({super.key});
+
+  @override
+  State<Bids> createState() => _BidsState();
+}
+
+class _BidsState extends State<Bids> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Profile'),
     );
   }
 }

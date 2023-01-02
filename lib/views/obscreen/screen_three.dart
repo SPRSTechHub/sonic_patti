@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/splashscreen.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'dart:math' as math;
@@ -153,7 +154,7 @@ class OnboardingScreenThree extends StatelessWidget {
                         GetStorage box = GetStorage();
                         box.write('initFirst', true);
                         Get.to(
-                          const MainScreen(
+                          const GameBoard(
 /*                             title: 'Test App',
  */
                               ),
@@ -162,9 +163,9 @@ class OnboardingScreenThree extends StatelessWidget {
                         );
                       },
                       backgroundColor: const Color(0xFF93000A),
-                      child: Icon(
+                      child: const Icon(
                         Icons.done_rounded,
-                        color: MyColor.lightColorScheme.onInverseSurface,
+                        color: bgColor2,
                         size: 30,
                       ),
                     ),
