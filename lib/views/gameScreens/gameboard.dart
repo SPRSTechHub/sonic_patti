@@ -19,7 +19,6 @@ class _GameBoardState extends State<GameBoard> {
   final _isVisible = true;
   @override
   void initState() {
-    print(GetStorage().read('permission'));
     super.initState();
   }
 
@@ -74,7 +73,7 @@ class _GameBoardState extends State<GameBoard> {
       body: buildBody(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          //
+          _mainController.fetchCatagories();
         },
         elevation: _isVisible ? 0.0 : null,
         label: const Text('Fund'),

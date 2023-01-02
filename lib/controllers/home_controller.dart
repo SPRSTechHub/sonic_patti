@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
+import '../models/catagory_model.dart';
+import '../services/api.dart';
+
 class HomeController extends GetxController {
   RxBool permissions = false.obs;
   var tabIndex = 0.obs;
   ScrollController scrollController = ScrollController();
   RxBool isVisible = true.obs;
+
+  var catLists = <Catlists>[].obs;
+  var isDataProcessing = false.obs;
 
   void changeTabIndex(int index) {
     tabIndex.value = index;
@@ -14,6 +20,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    fetchCatagories();
     super.onInit();
   }
 
@@ -23,23 +30,35 @@ class HomeController extends GetxController {
     super.onReady();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    scrollController.dispose();
+  }
+
   scrollCtlr() {
     scrollController.addListener(() {
       final ScrollDirection direction =
           scrollController.position.userScrollDirection;
       if (direction == ScrollDirection.forward) {
-        //print('show bottombar');
         isVisible.value = true;
       } else if (direction == ScrollDirection.reverse) {
-        //print('hide bottombar');
         isVisible.value = false;
       }
     });
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    scrollController.dispose();
+  void fetchCatagories() async {
+    try {
+      isDataProcessing(true);
+      var cats = await RemoteApi.fetchCatagory('game_cat', 'monday');
+      catLists.clear();
+      if (cats != null) {
+        isDataProcessing(false);
+        catLists.assignAll(cats);
+      }
+    } finally {
+      isDataProcessing(false);
+    }
   }
 }
