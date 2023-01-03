@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:sonic_patti/views/gameScreens/detail_games.dart';
 
 import '../../controllers/home_controller.dart';
 
@@ -13,7 +14,6 @@ class ListofGames extends StatefulWidget {
 
 class _ListofGamesState extends State<ListofGames> {
   final HomeController listController = Get.find<HomeController>();
-
   @override
   Widget build(BuildContext context) {
     return MasonryGridView.builder(
@@ -24,13 +24,17 @@ class _ListofGamesState extends State<ListofGames> {
           var catData = listController.catLists[index];
           return GestureDetector(
             onTap: (() {
-              setState(() {
+              /*  setState(() {
                 Get.snackbar('Message', 'We are working on this....');
-              });
-              print(catData.catId);
+              }); */
+              Get.to(const SubGames(),
+                  duration: const Duration(seconds: 1),
+                  transition: Transition.zoom);
+
+              //print(catData.catId);
             }),
             child: Container(
-              padding: const EdgeInsets.all(0),
+              height: 220,
               margin: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -40,11 +44,12 @@ class _ListofGamesState extends State<ListofGames> {
                     fit: BoxFit.cover),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(
-                    height: 80,
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.loose,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,23 +89,28 @@ class _ListofGamesState extends State<ListofGames> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 70,
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(12),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 1,
+                    child: Container(
+                      //alignment: Alignment.bottomCenter,
+                      /*  height: 70, */
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
+                        color: Color.fromRGBO(21, 55, 34, 0.90),
                       ),
-                      color: Color.fromRGBO(21, 55, 34, 0.90),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(catData.catTitle, textAlign: TextAlign.left),
-                        Text("imageHero$index", textAlign: TextAlign.left)
-                      ],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(catData.catTitle, textAlign: TextAlign.left),
+                          Text("imageHero$index", textAlign: TextAlign.left)
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttericon/iconic_icons.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/home_controller.dart';
@@ -35,7 +34,7 @@ class _navBarState extends State<navBar> {
         duration: const Duration(milliseconds: 500),
         height: controller.isVisible.isFalse ? 0 : 72.0,
         child: BottomAppBar(
-          color: navBg,
+          color: Theme.of(context).colorScheme.surface,
           elevation: widget.isElevated ? null : 0.0,
           child: Row(
             children: [
@@ -95,11 +94,13 @@ class _navBarState extends State<navBar> {
                                     size: Get.width * .068,
                                     shadows: const <Shadow>[
                                       Shadow(
-                                          color: Colors.black, blurRadius: 15.0)
+                                          color: Colors.black,
+                                          blurRadius: 2.0,
+                                          offset: Offset.zero)
                                     ],
                                     color: index == controller.tabIndex.value
                                         ? navHighlighter
-                                        : Colors.white70,
+                                        : null,
                                   ),
                                   Text(
                                     listOfTexts[index],

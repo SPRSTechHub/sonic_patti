@@ -2,13 +2,12 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
-import 'package:sonic_patti/views/splashscreen.dart';
 import 'controllers/controller_binding.dart';
 import 'firebase_options.dart';
+import 'utils/color_schemes.g.dart';
 import 'views/obscreen/screen_one.dart';
 
 bool? initFirst;
@@ -29,41 +28,103 @@ void main() async {
   final fcmToken = await FirebaseMessaging.instance.getToken();
   await GetStorage.init();
   initFirst = GetStorage().read('initFirst');
-  GetStorage().write('IS_DARK_MODE', true);
+  Get.isDarkMode
+      ? GetStorage().write('IS_DARK_MODE', false)
+      : GetStorage().write('IS_DARK_MODE', true);
+
   GetStorage().write('fcmToken', fcmToken ?? false);
   //FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
-Color brandColor = const Color(0xffAA8F00);
+/* Color brandColor = Color.fromARGB(255, 51, 0, 255); */
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DynamicColorBuilder(
+    return GetMaterialApp(
+        initialBinding: ControllerBinding(),
+        debugShowCheckedModeBanner: false,
+        title: 'Sonic Patti',
+        theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+        themeMode: ThemeMode.system,
+        home: AnimatedSplashScreen(
+            duration: 1000,
+            splashIconSize: 90,
+            splash: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: const Image(
+                  width: 90,
+                  height: 90,
+                  image: AssetImage("assets/icon/logo_sonic.png")),
+            ),
+            nextScreen: openApp(), //const MainScreen(),
+            splashTransition: SplashTransition.fadeTransition,
+            backgroundColor: Colors.yellow));
+  }
+
+  openApp() {
+    return initFirst != true
+        ? OnboardingScreenOne()
+        : const GameBoard(
+            /* title: 'Test App', */
+            );
+  }
+}
+
+
+/* Set Dynamic Color */
+/* 
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+        initialBinding: ControllerBinding(),
+        debugShowCheckedModeBanner: false,
+        title: 'Sonic Patti',
+        theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+        themeMode: ThemeMode.system,
+        home: AnimatedSplashScreen(
+            duration: 1000,
+            splashIconSize: 90,
+            splash: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: const Image(
+                  width: 90,
+                  height: 90,
+                  image: AssetImage("assets/icon/logo_sonic.png")),
+            ),
+            nextScreen: openApp(), //const MainScreen(),
+            splashTransition: SplashTransition.fadeTransition,
+            backgroundColor: Colors.yellow));
+     return DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? dark) {
       ColorScheme lightColorScheme;
       ColorScheme darkColorScheme;
 
       if (lightDynamic != null && dark != null) {
         lightColorScheme = lightDynamic.harmonized()..copyWith();
-        lightColorScheme = lightDynamic.copyWith(secondary: brandColor);
+        lightColorScheme = lightDynamic.copyWith(
+            secondary: brandColor, brightness: Brightness.light);
 
         darkColorScheme = lightDynamic.harmonized();
-        darkColorScheme = lightDynamic.copyWith(secondary: brandColor);
+        darkColorScheme = lightDynamic.copyWith(
+          secondary: brandColor,
+        );
       } else {
         lightColorScheme = ColorScheme.fromSeed(
-            seedColor: brandColor, brightness: Brightness.dark);
-        darkColorScheme = ColorScheme.fromSeed(
             seedColor: brandColor, brightness: Brightness.light);
+        darkColorScheme = ColorScheme.fromSeed(
+            seedColor: brandColor, brightness: Brightness.dark);
       }
 
       return GetMaterialApp(
           initialBinding: ControllerBinding(),
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Sonic Patti',
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightColorScheme,
@@ -85,13 +146,5 @@ class MyApp extends StatelessWidget {
               splashTransition: SplashTransition.fadeTransition,
               backgroundColor: Colors.yellow));
     });
-  }
-
-  openApp() {
-    return initFirst != true
-        ? OnboardingScreenOne()
-        : const GameBoard(
-            /* title: 'Test App', */
-            );
-  }
-}
+ 
+  }*/

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/views/components/navigation.dart';
 import 'package:sonic_patti/views/gameScreens/all_games.dart';
+import 'package:sonic_patti/views/users/profileScreen.dart';
 
 import '../../utils/constants.dart';
 
@@ -32,12 +32,15 @@ class _GameBoardState extends State<GameBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.menu_open_outlined,
-            color: appBarText,
-            shadows: <Shadow>[Shadow(color: Colors.white, blurRadius: 2.0)],
+            color: Theme.of(context).colorScheme.primary,
+            shadows: const <Shadow>[
+              Shadow(color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
+            ],
           ),
           onPressed: () {
             //
@@ -46,18 +49,24 @@ class _GameBoardState extends State<GameBoard> {
         title: const Text('Sonic Patti'),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.account_balance_wallet_outlined,
-              color: navText,
-              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)],
+              color: Theme.of(context).colorScheme.primary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+              ],
             ),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.notification_add,
-              color: appBarText,
-              shadows: <Shadow>[Shadow(color: Colors.white, blurRadius: 2.0)],
+              color: Theme.of(context).colorScheme.primary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
+              ],
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -66,8 +75,8 @@ class _GameBoardState extends State<GameBoard> {
           ),
         ],
         scrolledUnderElevation: 4.0,
-        backgroundColor: appBarBg,
-        foregroundColor: appBarText,
+        /*   backgroundColor: appBarBg,
+        foregroundColor: appBarText, */
         shadowColor: shadowColor ? appBarBg.withAlpha(5) : appBarBg,
       ),
       body: buildBody(),
@@ -78,8 +87,8 @@ class _GameBoardState extends State<GameBoard> {
         elevation: _isVisible ? 0.0 : null,
         label: const Text('Fund'),
         icon: const Icon(Icons.add),
-        foregroundColor: fabText,
-        backgroundColor: fabBg,
+        /*   foregroundColor: fabText,
+        backgroundColor: fabBg, */
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       bottomNavigationBar: navBar(
@@ -92,20 +101,6 @@ class _GameBoardState extends State<GameBoard> {
           index: _mainController.tabIndex.value,
           children: const [AllGames(), Profile(), Bids(), Profile()],
         ));
-  }
-}
-
-class Profile extends StatefulWidget {
-  const Profile({super.key});
-
-  @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sonic_patti/main.dart';
 import 'package:sonic_patti/views/components/catagories_panel.dart';
 
 import '../../controllers/home_controller.dart';
@@ -17,11 +16,16 @@ class AllGames extends StatefulWidget {
 
 class _AllGamesState extends State<AllGames> {
   final HomeController _mainController = Get.find<HomeController>();
+  @override
+  void initState() {
+    super.initState();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: appBody,
+      color: AppColors().kPrimaryBoxBackground,
       child: SingleChildScrollView(
         controller: _mainController.scrollController,
         child: Column(
@@ -29,10 +33,10 @@ class _AllGamesState extends State<AllGames> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 10,
+              height: 4,
             ),
             SizedBox(
-              height: 210,
+              height: 180,
               width: Get.width,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -50,7 +54,7 @@ class _AllGamesState extends State<AllGames> {
               height: 10,
             ),
             Container(
-              height: 40,
+              height: 32,
               width: Get.width,
               color: Colors.red,
             ),
@@ -58,7 +62,7 @@ class _AllGamesState extends State<AllGames> {
               height: 10,
             ),
             SizedBox(
-              height: 500,
+              height: 700,
               child: Center(
                 child: Obx(() {
                   if (_mainController.isDataProcessing.value == true) {
