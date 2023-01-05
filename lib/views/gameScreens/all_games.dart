@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sonic_patti/views/components/catagories_panel.dart';
 

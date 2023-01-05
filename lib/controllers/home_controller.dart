@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:sonic_patti/models/games_model.dart';
 
 import '../models/catagory_model.dart';
 import '../services/api.dart';
@@ -13,6 +14,9 @@ class HomeController extends GetxController {
 
   var catLists = <Catlists>[].obs;
   var isDataProcessing = false.obs;
+
+  var gameLists = <GameLists>[].obs;
+  var isGameDataProcessing = false.obs;
 
   void changeTabIndex(int index) {
     tabIndex.value = index;
@@ -59,6 +63,27 @@ class HomeController extends GetxController {
       }
     } finally {
       isDataProcessing(false);
+    }
+  }
+
+  void gameRefresh() {
+    gameLists.refresh(); //clear();
+  }
+
+  void fetchGameLists(String? catId) async {
+    // gameLists.clear();
+    try {
+      isGameDataProcessing(true);
+      var games =
+          await RemoteApi.fetchGameLists('game_list', 'thursday', catId!);
+      gameLists.clear();
+      gameLists.refresh();
+      if (games != null) {
+        isGameDataProcessing(false);
+        gameLists.assignAll(games);
+      }
+    } finally {
+      isGameDataProcessing(false);
     }
   }
 }

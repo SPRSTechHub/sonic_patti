@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
+import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/navigation.dart';
 import 'package:sonic_patti/views/gameScreens/all_games.dart';
 import 'package:sonic_patti/views/users/profileScreen.dart';
@@ -27,57 +28,14 @@ class _GameBoardState extends State<GameBoard> {
     super.dispose();
   }
 
-  bool shadowColor = false;
   double? scrolledUnderElevation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu_open_outlined,
-            color: Theme.of(context).colorScheme.primary,
-            shadows: const <Shadow>[
-              Shadow(color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
-            ],
-          ),
-          onPressed: () {
-            //
-          },
-        ),
-        title: const Text('Sonic Patti'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.account_balance_wallet_outlined,
-              color: Theme.of(context).colorScheme.primary,
-              shadows: const <Shadow>[
-                Shadow(
-                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
-              ],
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.notification_add,
-              color: Theme.of(context).colorScheme.primary,
-              shadows: const <Shadow>[
-                Shadow(
-                    color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
-              ],
-            ),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')));
-            },
-          ),
-        ],
-        scrolledUnderElevation: 4.0,
-        /*   backgroundColor: appBarBg,
-        foregroundColor: appBarText, */
-        shadowColor: shadowColor ? appBarBg.withAlpha(5) : appBarBg,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(56.0),
+        child: TopAppBar(),
       ),
       body: buildBody(),
       floatingActionButton: FloatingActionButton.extended(
