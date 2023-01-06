@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
-import 'package:timer_builder/timer_builder.dart';
 
 import '../../controllers/home_controller.dart';
 
@@ -30,24 +29,21 @@ class ListofSubGames extends StatefulWidget {
 
 class _ListofSubGamesState extends State<ListofSubGames> {
   final HomeController gamesController = Get.find<HomeController>();
-  Timer? countdownTimer;
-  //Duration myDuration = Duration(days: 1);
-  //const mt = widget.matchTime;
+  bool liveStat = false;
 
-  Duration myDuration = const Duration(days: 1);
-  void startTimer() {
+  Timer? countdownTimer;
+  int remainSeconds = 1;
+  Duration myDuration = const Duration(hours: 1);
+
+  startTimer(int seconds) {
     countdownTimer =
         Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
-  }
-
-  // Step 4
-  void stopTimer() {
-    setState(() => countdownTimer!.cancel());
   }
 
   // Step 6
   void setCountDown() {
     const reduceSecondsBy = 1;
+    if (!mounted) return;
     setState(() {
       final seconds = myDuration.inSeconds - reduceSecondsBy;
       if (seconds < 0) {
@@ -61,25 +57,31 @@ class _ListofSubGamesState extends State<ListofSubGames> {
   @override
   void initState() {
     if (!mounted) return;
+    startTimer(900);
     if (widget.live == 'yes') {
-      startTimer();
+      liveStat = true;
+      var mTime = widget.matchTime;
+
+      dynamic timeHour = int.parse(mTime.substring(0, 2).toString());
+      dynamic timeMinutes =
+          int.parse(mTime.substring(mTime.length - 2).toString());
     }
-    //print(myDuration);
-    //var td = DateFormat.Hms([widget.matchTime]);
-    // print(td);
+    String strDigits(int n) => n.toString().padLeft(2, '0');
+    final hours = strDigits(myDuration.inHours.remainder(24));
+    final minutes = strDigits(myDuration.inMinutes.remainder(60));
+    final seconds = strDigits(myDuration.inSeconds.remainder(60));
+    print('$hours:$minutes:$seconds');
 
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    String strDigits(int n) => n.toString().padLeft(2, '0');
-    final days = strDigits(myDuration.inDays);
-    // Step 7
-    final hours = strDigits(myDuration.inHours.remainder(24));
-    final minutes = strDigits(myDuration.inMinutes.remainder(60));
-    final seconds = strDigits(myDuration.inSeconds.remainder(60));
+  void dispose() {
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() {
         if (widget.live == 'no') {
@@ -116,43 +118,46 @@ class _ListofSubGamesState extends State<ListofSubGames> {
               ),
             ),
             Positioned(
-                child: Center(
-              child: Text(
-                widget.gameTitle,
-                textAlign: TextAlign.left,
-                style: const TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                    fontFamily: 'Inter',
-                    fontSize: 16,
-                    letterSpacing: 0,
-                    fontWeight: FontWeight.normal,
-                    height: 1),
+              child: Center(
+                child: Text(
+                  widget.gameTitle,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                      fontFamily: 'Inter',
+                      fontSize: 16,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.normal,
+                      height: 1),
+                ),
               ),
-            )),
+            ),
             Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    margin: const EdgeInsets.only(left: 12),
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Color.fromRGBO(223, 203, 26, 1),
-                            offset: Offset(2, 2),
-                            blurRadius: 0)
-                      ],
-                      color: const Color.fromRGBO(217, 217, 217, 1),
-                      border: Border.all(
-                        color: const Color.fromRGBO(255, 255, 255, 1),
-                        width: 1,
-                      ),
-                      image: DecorationImage(
-                          image: NetworkImage("${widget.matchIcon}"),
-                          fit: BoxFit.cover),
-                      borderRadius:
-                          const BorderRadius.all(Radius.elliptical(60, 60)),
-                    ))),
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: const EdgeInsets.only(left: 12),
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromRGBO(223, 203, 26, 1),
+                        offset: Offset(2, 2),
+                        blurRadius: 0)
+                  ],
+                  color: const Color.fromRGBO(217, 217, 217, 1),
+                  border: Border.all(
+                    color: const Color.fromRGBO(255, 255, 255, 1),
+                    width: 1,
+                  ),
+                  image: DecorationImage(
+                      image: NetworkImage("${widget.matchIcon}"),
+                      fit: BoxFit.cover),
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(60, 60)),
+                ),
+              ),
+            ),
             Positioned(
               top: 12,
               left: 300,
@@ -195,14 +200,14 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                 padding: const EdgeInsets.all(2.0),
                 margin: const EdgeInsets.only(right: 22.0, top: 16.0),
                 child: Text(
-                  '$hours:$minutes:$seconds',
+                  'time',
+                  //widget.live == 'yes' ? '${gameController.time.value}' : 'Closed',
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                       color: Colors.red,
                       fontFamily: 'Inter',
                       fontSize: 12,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
+                      letterSpacing: 0,
                       fontWeight: FontWeight.normal,
                       height: 1),
                 ),
@@ -220,8 +225,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                         color: Color.fromRGBO(255, 255, 255, 1),
                         fontFamily: 'Inter',
                         fontSize: 12,
-                        letterSpacing:
-                            0 /*percentages not used in flutter. defaulting to zero*/,
+                        letterSpacing: 0,
                         fontWeight: FontWeight.normal,
                         height: 1),
                   )),
@@ -274,18 +278,3 @@ class _ListofSubGamesState extends State<ListofSubGames> {
     );
   }
 }
-
-
-/*
- "id": "17",
-      "match_id": "FFLV17",
-      "match_time": "09:55",
-      "day": "thursday",
-      "game_title": "NM BAZAR BAZI - 1",
-      "game_id": "FFGCID17",
-      "cat_title": "NEW MUMBAI BAZAR",
-      "cat_id": "FFGC3",
-      "match_icon": "https://control.fatafatguru.in/uploads/sub.jpg",
-      "status": "0",
-      "live": "no"
-      */

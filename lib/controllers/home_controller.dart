@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,6 @@ class HomeController extends GetxController {
 
   var catLists = <Catlists>[].obs;
   var isDataProcessing = false.obs;
-
   var gameLists = <GameLists>[].obs;
   var isGameDataProcessing = false.obs;
 
@@ -75,7 +76,7 @@ class HomeController extends GetxController {
     try {
       isGameDataProcessing(true);
       var games =
-          await RemoteApi.fetchGameLists('game_list', 'thursday', catId!);
+          await RemoteApi.fetchGameLists('game_list', 'satarday', catId!);
       gameLists.clear();
       gameLists.refresh();
       if (games != null) {

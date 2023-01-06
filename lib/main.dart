@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
+import 'package:sonic_patti/views/test.dart';
 import 'controllers/controller_binding.dart';
 import 'firebase_options.dart';
 import 'utils/color_schemes.g.dart';
@@ -69,7 +70,8 @@ class MyApp extends StatelessWidget {
   openApp() {
     return initFirst != true
         ? OnboardingScreenOne()
-        : const GameBoard(
+        : /* Testt(); */
+        const GameBoard(
             /* title: 'Test App', */
             );
   }

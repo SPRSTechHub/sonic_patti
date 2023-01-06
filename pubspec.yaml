@@ -39,6 +39,7 @@ dependencies:
   firebase_messaging: ^14.2.1
   flutter:
     sdk: flutter
+  flutter_countdown_timer: ^4.1.0
   flutter_launcher_icons: ^0.11.0
   flutter_local_notifications: ^13.0.0
   flutter_staggered_animations: ^1.1.1
@@ -53,7 +54,6 @@ dependencies:
   lottie: ^2.1.0
   permission_handler: ^10.2.0
   swipe_to: ^1.0.2
-  timer_builder: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
