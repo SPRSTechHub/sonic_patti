@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -40,6 +39,10 @@ class AppColors {
       ? const Color(0xff002328)
       : const Color(0xff002328);
   var kBlackColor = Colors.black;
+
+  static var kListCardGradient = GetStorage().read('IS_DARK_MODE')
+      ? const [Color(0xff294E3B), Color(0xff00363D)]
+      : const [Color.fromRGBO(41, 78, 59, 1), Color.fromRGBO(0, 54, 61, 1)];
 }
 
 class AppTextStyles {

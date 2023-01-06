@@ -71,16 +71,13 @@ class _SubGamesState extends State<SubGames> {
                               child: SlideAnimation(
                                 verticalOffset: 50.0,
                                 child: FadeInAnimation(
-                                  child: GestureDetector(
-                                    onTap: (() {
-                                      //print(catData.catId);
-                                    }),
-                                    child: Container(
-                                      height: 80,
-                                      margin: const EdgeInsets.all(6),
-                                      child: Text(gameData.gameTitle),
-                                    ),
-                                  ),
+                                  child: ListofSubGames(
+                                      matchId: gameData.gameId,
+                                      matchTime: gameData.matchTime,
+                                      gameTitle: gameData.gameTitle,
+                                      matchIcon: gameData.matchIcon,
+                                      status: gameData.status,
+                                      live: gameData.live),
                                 ),
                               ),
                             );
