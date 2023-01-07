@@ -68,12 +68,10 @@ class MyApp extends StatelessWidget {
   }
 
   openApp() {
-    return initFirst != true
-        ? OnboardingScreenOne()
-        : /* Testt(); */
-        const GameBoard(
+    return initFirst != true ? OnboardingScreenOne() : Testt();
+    /* const GameBoard(
             /* title: 'Test App', */
-            );
+            ); */
   }
 }
 

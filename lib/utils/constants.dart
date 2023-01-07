@@ -50,6 +50,20 @@ class AppTextStyles {
   var kTextStyleTwelveWithGreyColor = GoogleFonts.montserrat(
     fontSize: 12,
   );
+
+  static var kSubGameTitle = GoogleFonts.montserrat(
+      color: const Color.fromRGBO(255, 255, 255, 1),
+      fontSize: 16,
+      letterSpacing: 0,
+      fontWeight: FontWeight.bold,
+      height: 1);
+
+  static var kGameTime = GoogleFonts.oxanium(
+      color: Colors.white70,
+      fontSize: 12,
+      letterSpacing: 0,
+      fontWeight: FontWeight.normal,
+      height: 1);
 }
 
 class AppStyles {
@@ -63,5 +77,61 @@ class AppStyles {
       ],
       tileMode: TileMode.mirror,
     ),
+  );
+
+  static var subGameListBg = BoxDecoration(
+    borderRadius: BorderRadius.circular(18),
+    boxShadow: const [
+      BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.25),
+          offset: Offset(0, 4),
+          blurRadius: 4)
+    ],
+    gradient: LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: AppColors.kListCardGradient,
+    ),
+  );
+
+  static var timerBG = BoxDecoration(
+    borderRadius: BorderRadius.circular(12),
+    gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color.fromRGBO(252, 0, 197, 0.56),
+          Color.fromRGBO(0, 35, 40, 1)
+        ]),
+  );
+
+  static var subGameBetStatusBG = BoxDecoration(
+    borderRadius: BorderRadius.circular(12),
+    gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color.fromRGBO(0, 255, 176, 1),
+          Color.fromRGBO(249, 255, 0, 0.5)
+        ]),
+  );
+
+  static var subGametopTimeBG = const BoxDecoration(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(0),
+      topRight: Radius.circular(0),
+      bottomLeft: Radius.circular(14),
+      bottomRight: Radius.circular(14),
+    ),
+    boxShadow: [
+      BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.25),
+          offset: Offset(0, 2),
+          blurRadius: 1)
+    ],
+    gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Color.fromRGBO(36, 74, 58, 0), Color.fromRGBO(7, 28, 22, 1)]),
   );
 }

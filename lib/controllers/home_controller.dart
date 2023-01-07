@@ -76,7 +76,7 @@ class HomeController extends GetxController {
     try {
       isGameDataProcessing(true);
       var games =
-          await RemoteApi.fetchGameLists('game_list', 'satarday', catId!);
+          await RemoteApi.fetchGameLists('game_list', 'saturday', catId!);
       gameLists.clear();
       gameLists.refresh();
       if (games != null) {

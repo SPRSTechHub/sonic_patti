@@ -50,7 +50,7 @@ class _SubGamesState extends State<SubGames> {
               height: 120,
             ),
             SizedBox(
-              height: 800,
+              /*  height: 800, */
               child: Obx(() {
                 if (gameController.isDataProcessing.value == true) {
                   return const Center(

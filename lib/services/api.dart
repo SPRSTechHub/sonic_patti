@@ -5,7 +5,8 @@ import '../models/catagory_model.dart';
 
 class RemoteApi {
   static var client = http.Client();
-  static var url = 'https://control.fatafatguru.in/api';
+//  static var url = 'https://control.fatafatguru.in/api';
+  static var url = 'https://console.digitalsprs.fun/api';
 
   static Future<List<Catlists>?> fetchCatagory(
       String action, String day) async {

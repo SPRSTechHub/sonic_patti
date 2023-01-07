@@ -1,10 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
-
 import '../../controllers/home_controller.dart';
+
+String formatTime(int seconds) {
+  return '${(Duration(seconds: seconds))}'.split('.')[0].padLeft(8, '0');
+}
 
 class ListofSubGames extends StatefulWidget {
   ListofSubGames(
@@ -29,48 +31,43 @@ class ListofSubGames extends StatefulWidget {
 
 class _ListofSubGamesState extends State<ListofSubGames> {
   final HomeController gamesController = Get.find<HomeController>();
+  Timer? timer;
   bool liveStat = false;
 
-  Timer? countdownTimer;
-  int remainSeconds = 1;
-  Duration myDuration = const Duration(hours: 1);
+  late final mTime = widget.matchTime ?? '00:00';
+  late final currentTime = DateTime.now();
+  late final startTime = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      int.parse(mTime.substring(0, 2)),
+      int.parse(mTime.substring(mTime.length - 2)));
+  late int seconds = startTime.difference(currentTime).inSeconds;
 
-  startTimer(int seconds) {
-    countdownTimer =
-        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
-  }
-
-  // Step 6
-  void setCountDown() {
-    const reduceSecondsBy = 1;
-    if (!mounted) return;
-    setState(() {
-      final seconds = myDuration.inSeconds - reduceSecondsBy;
-      if (seconds < 0) {
-        countdownTimer!.cancel();
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (seconds > 0) {
+        setState(() {
+          seconds--;
+        });
       } else {
-        myDuration = Duration(seconds: seconds);
+        stopTimer();
       }
     });
+  }
+
+  void stopTimer() {
+    timer?.cancel();
+    Get.back();
   }
 
   @override
   void initState() {
     if (!mounted) return;
-    startTimer(900);
     if (widget.live == 'yes') {
       liveStat = true;
-      var mTime = widget.matchTime;
-
-      dynamic timeHour = int.parse(mTime.substring(0, 2).toString());
-      dynamic timeMinutes =
-          int.parse(mTime.substring(mTime.length - 2).toString());
+      startTimer();
     }
-    String strDigits(int n) => n.toString().padLeft(2, '0');
-    final hours = strDigits(myDuration.inHours.remainder(24));
-    final minutes = strDigits(myDuration.inMinutes.remainder(60));
-    final seconds = strDigits(myDuration.inSeconds.remainder(60));
-    print('$hours:$minutes:$seconds');
 
     super.initState();
   }
@@ -86,6 +83,8 @@ class _ListofSubGamesState extends State<ListofSubGames> {
       onTap: (() {
         if (widget.live == 'no') {
           Get.snackbar('Alert', 'This Game is not Live now');
+        } else {
+          showModalB(widget.matchId);
         }
         print(widget.matchId);
       }),
@@ -101,20 +100,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                 padding: const EdgeInsets.all(6.0),
                 width: Get.width,
                 height: 77,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                        offset: Offset(0, 4),
-                        blurRadius: 4)
-                  ],
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: AppColors.kListCardGradient,
-                  ),
-                ),
+                decoration: AppStyles.subGameListBg,
               ),
             ),
             Positioned(
@@ -122,13 +108,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                 child: Text(
                   widget.gameTitle,
                   textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontFamily: 'Inter',
-                      fontSize: 16,
-                      letterSpacing: 0,
-                      fontWeight: FontWeight.normal,
-                      height: 1),
+                  style: AppTextStyles.kSubGameTitle,
                 ),
               ),
             ),
@@ -164,16 +144,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
               child: Container(
                 width: 82,
                 height: 25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromRGBO(252, 0, 197, 0.56),
-                        Color.fromRGBO(0, 35, 40, 1)
-                      ]),
-                ),
+                decoration: AppStyles.timerBG,
               ),
             ),
             Align(
@@ -182,16 +153,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                 margin: const EdgeInsets.only(right: 12.0, bottom: 12.0),
                 width: 82,
                 height: 25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromRGBO(0, 255, 176, 1),
-                        Color.fromRGBO(249, 255, 0, 0.5)
-                      ]),
-                ),
+                decoration: AppStyles.subGameBetStatusBG,
               ),
             ),
             Align(
@@ -200,16 +162,9 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                 padding: const EdgeInsets.all(2.0),
                 margin: const EdgeInsets.only(right: 22.0, top: 16.0),
                 child: Text(
-                  'time',
-                  //widget.live == 'yes' ? '${gameController.time.value}' : 'Closed',
+                  widget.live == 'yes' ? formatTime(seconds) : 'Closed',
                   textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      color: Colors.red,
-                      fontFamily: 'Inter',
-                      fontSize: 12,
-                      letterSpacing: 0,
-                      fontWeight: FontWeight.normal,
-                      height: 1),
+                  style: AppTextStyles.kGameTime,
                 ),
               ),
             ),
@@ -218,10 +173,10 @@ class _ListofSubGamesState extends State<ListofSubGames> {
               child: Container(
                   padding: const EdgeInsets.all(2.0),
                   margin: const EdgeInsets.only(right: 18.0, bottom: 16.0),
-                  child: const Text(
-                    'PLACE BET',
+                  child: Text(
+                    widget.live == 'yes' ? 'PLACE BET' : 'BET CLOSE',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color.fromRGBO(255, 255, 255, 1),
                         fontFamily: 'Inter',
                         fontSize: 12,
@@ -231,31 +186,12 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                   )),
             ),
             Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                    width: 120,
-                    height: 24,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0),
-                        topRight: Radius.circular(0),
-                        bottomLeft: Radius.circular(14),
-                        bottomRight: Radius.circular(14),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.25),
-                            offset: Offset(0, 2),
-                            blurRadius: 1)
-                      ],
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color.fromRGBO(36, 74, 58, 0),
-                            Color.fromRGBO(7, 28, 22, 1)
-                          ]),
-                    ))),
+              alignment: Alignment.topCenter,
+              child: Container(
+                  width: 120,
+                  height: 24,
+                  decoration: AppStyles.subGametopTimeBG),
+            ),
             Align(
                 alignment: Alignment.topCenter,
                 child: Container(
@@ -263,18 +199,65 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                   child: Text(
                     widget.matchTime,
                     textAlign: TextAlign.left,
-                    style: const TextStyle(
-                        color: Color.fromRGBO(255, 0, 0, 1),
-                        fontFamily: 'Inter',
-                        fontSize: 12,
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.bold,
-                        height: 1),
+                    style: AppTextStyles.kGameTime,
                   ),
                 )),
           ],
         ),
       ),
     );
+  }
+
+  showModalB(param) {
+    return showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25.0),
+          ),
+        ),
+        builder: (BuildContext context) {
+          return SizedBox(
+            height: Get.height * .7,
+            width: Get.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(25.0),
+                    ),
+                    color: bgColor1,
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Select Bet Type'),
+                      IconButton(
+                          onPressed: (() => Get.back()),
+                          icon: const Icon(
+                            Icons.close_outlined,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    width: Get.width,
+                    color: AppColors().kPrimaryBoxBackground,
+                    child: Text(param.toString()),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
   }
 }
