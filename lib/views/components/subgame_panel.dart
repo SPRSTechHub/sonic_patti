@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonic_patti/views/gameScreens/betplacement_a.dart';
 import '../../controllers/home_controller.dart';
 
 String formatTime(int seconds) {
@@ -210,6 +211,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
 
   showModalB(param) {
     return showModalBottomSheet(
+        backgroundColor: bottomBarBg,
         context: context,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -229,30 +231,405 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(25.0),
                     ),
-                    color: bgColor1,
+                    color: bottomBarHeader,
                   ),
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Select Bet Type'),
+                      const Expanded(flex: 2, child: Text('Select Bet Type')),
                       IconButton(
-                          onPressed: (() => Get.back()),
-                          icon: const Icon(
-                            Icons.close_outlined,
-                            color: Colors.white,
-                          ))
+                        onPressed: (() => Get.back()),
+                        icon: const Icon(
+                          Icons.question_mark_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: (() => Get.back()),
+                        icon: const Icon(
+                          Icons.close_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 Flexible(
                   flex: 1,
                   fit: FlexFit.tight,
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    width: Get.width,
-                    color: AppColors().kPrimaryBoxBackground,
-                    child: Text(param.toString()),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Get.back();
+                                Get.to(SingleDigitBet(matchId: param),
+                                    transition: Transition.downToUp);
+                              },
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                width: 186,
+                                height: 72,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Color.fromRGBO(142, 111, 0, 1),
+                                        Color.fromRGBO(249, 255, 0, 1),
+                                        Color.fromRGBO(142, 111, 0, 1)
+                                      ]),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Image(
+                                      width: 48,
+                                      height: 48,
+                                      image:
+                                          AssetImage('assets/images/digit.png'),
+                                    ),
+                                    Text(
+                                      'SINGLE DIGIT',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              width: 186,
+                              height: 72,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromRGBO(142, 111, 0, 1),
+                                      Color.fromRGBO(249, 255, 0, 1),
+                                      Color.fromRGBO(142, 111, 0, 1)
+                                    ]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const <Widget>[
+                                  Image(
+                                    width: 60,
+                                    height: 48,
+                                    image: AssetImage(
+                                        'assets/images/jodi_digit.png'),
+                                  ),
+                                  Text(
+                                    'JODI DIGIT',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              height: 72,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromRGBO(142, 111, 0, 1),
+                                      Color.fromRGBO(249, 255, 0, 1),
+                                      Color.fromRGBO(142, 111, 0, 1)
+                                    ]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const <Widget>[
+                                  Image(
+                                    width: 48,
+                                    height: 48,
+                                    image:
+                                        AssetImage('assets/images/single.png'),
+                                  ),
+                                  Text(
+                                    'SINGLE \n PANNA',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              height: 72,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromRGBO(142, 111, 0, 1),
+                                      Color.fromRGBO(249, 255, 0, 1),
+                                      Color.fromRGBO(142, 111, 0, 1)
+                                    ]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const <Widget>[
+                                  Image(
+                                    width: 48,
+                                    height: 48,
+                                    image:
+                                        AssetImage('assets/images/double.png'),
+                                  ),
+                                  Text(
+                                    'DOUBLE \n PANNA',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              height: 72,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromRGBO(142, 111, 0, 1),
+                                      Color.fromRGBO(249, 255, 0, 1),
+                                      Color.fromRGBO(142, 111, 0, 1)
+                                    ]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const <Widget>[
+                                  Image(
+                                    width: 48,
+                                    height: 48,
+                                    image:
+                                        AssetImage('assets/images/tripple.png'),
+                                  ),
+                                  Text(
+                                    'TRIPPLE \n PANNA',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              height: 72,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromRGBO(142, 111, 0, 1),
+                                      Color.fromRGBO(249, 255, 0, 1),
+                                      Color.fromRGBO(142, 111, 0, 1)
+                                    ]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const <Widget>[
+                                  Image(
+                                    width: 48,
+                                    height: 48,
+                                    image:
+                                        AssetImage('assets/images/single.png'),
+                                  ),
+                                  Text(
+                                    'HALF \n MILAN',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              height: 72,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromRGBO(142, 111, 0, 1),
+                                      Color.fromRGBO(249, 255, 0, 1),
+                                      Color.fromRGBO(142, 111, 0, 1)
+                                    ]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const <Widget>[
+                                  Image(
+                                    width: 48,
+                                    height: 48,
+                                    image:
+                                        AssetImage('assets/images/double.png'),
+                                  ),
+                                  Text(
+                                    'FULL \n MILAN',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              height: 72,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromRGBO(142, 111, 0, 1),
+                                      Color.fromRGBO(249, 255, 0, 1),
+                                      Color.fromRGBO(142, 111, 0, 1)
+                                    ]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const <Widget>[
+                                  Image(
+                                    width: 48,
+                                    height: 48,
+                                    image:
+                                        AssetImage('assets/images/tripple.png'),
+                                  ),
+                                  Text(
+                                    'CP \n BID',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('MORE BIDS ADDED HERE ....'),
+                    ],
                   ),
                 )
               ],

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
 
 import '../models/catagory_model.dart';

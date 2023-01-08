@@ -6,8 +6,6 @@ import 'package:sonic_patti/views/components/navigation.dart';
 import 'package:sonic_patti/views/gameScreens/all_games.dart';
 import 'package:sonic_patti/views/users/profileScreen.dart';
 
-import '../../utils/constants.dart';
-
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
 
@@ -72,7 +70,7 @@ class Bids extends StatefulWidget {
 class _BidsState extends State<Bids> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Profile'),
     );
   }
