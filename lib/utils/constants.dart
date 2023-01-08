@@ -13,6 +13,9 @@ const Color bgColor2 = Color(0xffAA8F00);
 const Color appBarBg = Color(0xff93000A);
 const Color appBarText = Color(0xFFFFEDEA);
 
+const Color bottomBarHeader = Color(0xFF001F24);
+const Color bottomBarBg = Color(0xFF0B2722);
+
 //ColorScheme.fromSeed(seedColor: brandColor); // Color(0xff690005);
 Color navBgDark = darkColorScheme.surface;
 Color navBgLight = lightColorScheme.surface;
