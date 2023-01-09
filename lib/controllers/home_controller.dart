@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,6 +16,66 @@ class HomeController extends GetxController {
   ScrollController scrollController = ScrollController();
   RxBool isVisible = true.obs;
 
+  ////////////////////
+  final RxList<BidsModal> bids = RxList<BidsModal>([]);
+  late BidsModal bidsModal;
+  var bid = 0.obs;
+
+  addBid(String bidVal, String bidamnt) {
+    final index = bids.indexWhere((element) => element.bidNum == bidVal);
+    if (index >= 0) {
+      Get.snackbar('Alert', 'Already added',
+          duration: const Duration(seconds: 1),
+          shouldIconPulse: true,
+          backgroundColor: Colors.amber);
+    } else {
+      bidsModal = BidsModal(bidNum: bidVal, bidAmnt: bidamnt);
+      bids.add(bidsModal);
+      bid.value = bids.length;
+    }
+  }
+
+  void removeBids(int index) {
+    bids.removeAt(index);
+    bid.value = bids.length;
+    /*    if (_item.containsKey(item) && _item[item] == 1) {
+      _item.removeWhere((key, value) => key == item);
+    } else {
+      _item[item] -= 1;
+    } */
+
+    /*  Get.snackbar('added', "Item : ${item.itemName}",
+        snackPosition: SnackPosition.TOP, duration: const Duration(seconds: 1)); */
+  }
+
+/*
+  void formSubmit() async {
+    if (itemsAll.length > 0) {
+      var cartData = _item.entries.map((item) {
+        return {
+          "site_code": Constant.box.read('site_code'),
+          "building_code": Constant.box.read('building_code'),
+          "itemTitle": item.key.itemName,
+          "itemCode": item.key.itemCode,
+          "itemQty": item.value,
+        };
+      }).toList();
+      String stringstudents = json.encode(cartData);
+      Get.snackbar('Alert', "Data stored successfully!",
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 1));
+      //print(stringstudents);
+      if (stringstudents != null) {
+        //print(stringstudents);
+        await RemoteApiService.submitRequisitionForm(stringstudents);
+      }
+    } else {
+      Get.snackbar('Alert', "No Items selected!",
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 1));
+    }
+  }
+*/
   var catLists = <Catlists>[].obs;
   var isDataProcessing = false.obs;
   var gameLists = <GameLists>[].obs;
@@ -73,7 +134,6 @@ class HomeController extends GetxController {
   }
 
   void fetchGameLists(String? catId) async {
-    // gameLists.clear();
     try {
       isGameDataProcessing(true);
       var games =

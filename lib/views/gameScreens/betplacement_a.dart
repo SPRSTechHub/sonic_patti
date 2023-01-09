@@ -16,12 +16,10 @@ class SingleDigitBet extends StatefulWidget {
 
 class _SingleDigitBetState extends State<SingleDigitBet> {
   final HomeController _mainController = Get.find();
-  //final _isVisible = true;
-  //late final List<BidsModal> bidsModal = <BidsModal>[];
   List<BidsModal> bidsModal = [];
   TextEditingController amountText = TextEditingController();
   var bidCount = 0;
-
+  String? _currentIndex;
   @override
   void initState() {
     super.initState();
@@ -34,8 +32,12 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
   }
 
   void addBid(String bidVal, String? amount) {
-    if (bidsModal.asMap().containsKey(bidVal)) {
-      //
+    final index = bidsModal.indexWhere((element) => element.bidNum == bidVal);
+    if (index >= 0) {
+      Get.snackbar('Alert', 'Already added',
+          duration: const Duration(seconds: 1),
+          shouldIconPulse: true,
+          backgroundColor: Colors.amber);
     } else {
       bidsModal.add(BidsModal(bidNum: bidVal, bidAmnt: amount));
     }
@@ -94,15 +96,10 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                   height: 6.0,
                 ),
                 Container(
-                  height: 59,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                      bottomLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
-                    ),
-                    color: Color.fromRGBO(0, 31, 36, 1),
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: const Color.fromRGBO(0, 31, 36, 1),
                   ),
                   child: Row(
                     children: [
@@ -166,7 +163,7 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                     var biDAmnt = amountText.text;
                     if (bidNum != '' && biDAmnt != '') {
                       setState(() {
-                        addBid(bidNum, biDAmnt);
+                        _mainController.addBid(bidNum, biDAmnt);
                       });
                     } else {
                       Get.snackbar('title', 'Empty!');
@@ -193,8 +190,7 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                           color: Color.fromRGBO(255, 255, 255, 1),
                           fontFamily: 'Inter',
                           fontSize: 20,
-                          letterSpacing:
-                              0 /*percentages not used in flutter. defaulting to zero*/,
+                          letterSpacing: 0,
                           fontWeight: FontWeight.normal,
                           height: 1),
                     ),
@@ -203,7 +199,29 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                 Container(
                   height: 500,
                   color: bottomBarBg,
-                  child: Column(
+                  child: Obx(
+                    () => ListView.builder(
+                      itemCount: _mainController.bids.length,
+                      itemBuilder: ((context, index) {
+                        var bidData = _mainController.bids[index];
+                        return ListTile(
+                          title: Text(bidData.bidNum!),
+                          subtitle: Text(bidData.bidAmnt!.toString()),
+                          trailing: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent),
+                            child: const Icon(Icons.delete),
+                            onPressed: () {
+                              _mainController.removeBids(index);
+                              setState(() {});
+                            },
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+
+                  /*  Column(
                     children: bidsModal.map((personone) {
                       return Container(
                         child: Card(
@@ -229,32 +247,37 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                       );
                     }).toList(),
                   ),
+                */
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6.0),
-                  width: 200,
-                  padding: const EdgeInsets.all(12.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color.fromRGBO(225, 221, 0, 1),
-                          Color.fromRGBO(168, 146, 0, 1)
-                        ]),
-                  ),
-                  child: const Text(
-                    'PLACE BID NOW',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        fontFamily: 'Inter',
-                        fontSize: 20,
-                        letterSpacing:
-                            0 /*percentages not used in flutter. defaulting to zero*/,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
+                GestureDetector(
+                  onTap: (() {
+                    //
+                  }),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 6.0),
+                    width: 200,
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromRGBO(225, 221, 0, 1),
+                            Color.fromRGBO(168, 146, 0, 1)
+                          ]),
+                    ),
+                    child: const Text(
+                      'PLACE BID NOW',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          fontFamily: 'Inter',
+                          fontSize: 20,
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.normal,
+                          height: 1),
+                    ),
                   ),
                 ),
               ],
@@ -266,27 +289,31 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
           isElevated: true, isVisible: _mainController.isVisible.value ?? true),
     );
   }
-}
 
-final numbers = List.generate(10, (index) => '$index');
-Widget numberBox() {
-  return GridView.builder(
-    padding: const EdgeInsets.all(8.0),
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 5, mainAxisSpacing: 1, crossAxisSpacing: 1),
-    itemCount: 10,
-    itemBuilder: ((context, index) {
-      final item = numbers[index];
-      return buildNumbers(item);
-    }),
-  );
-}
+  final numbers = List.generate(10, (index) => '$index');
 
-Widget buildNumbers(String number) => GestureDetector(
+  Widget numberBox() {
+    return GridView.builder(
+      padding: const EdgeInsets.all(8.0),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5, mainAxisSpacing: 1, crossAxisSpacing: 1),
+      itemCount: 10,
+      itemBuilder: ((context, index) {
+        final item = numbers[index];
+        return buildNumbers(item);
+      }),
+    );
+  }
+
+  Widget buildNumbers(String number) {
+    return GestureDetector(
       onTap: (() {
         GetStorage().write('bidNum', number);
+        setState(() {
+          _currentIndex = number;
+        });
       }),
       child: Container(
         margin: const EdgeInsets.all(6.0),
@@ -298,13 +325,13 @@ Widget buildNumbers(String number) => GestureDetector(
             color: const Color.fromRGBO(0, 0, 0, 1),
             width: 1,
           ),
-          gradient: const LinearGradient(
-              begin: Alignment(6.123234262925839e-17, 1),
-              end: Alignment(-1, 6.123234262925839e-17),
-              colors: [
-                Color.fromRGBO(34, 72, 57, 1),
-                Color.fromRGBO(0, 35, 40, 1)
-              ]),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: _currentIndex == number
+                ? AppColors.kDigitGradientSelected
+                : AppColors.kListCardGradient,
+          ),
         ),
         child: Center(
           child: Text(
@@ -321,3 +348,5 @@ Widget buildNumbers(String number) => GestureDetector(
         ),
       ),
     );
+  }
+}

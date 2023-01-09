@@ -46,6 +46,14 @@ class AppColors {
   static var kListCardGradient = GetStorage().read('IS_DARK_MODE')
       ? const [Color(0xff294E3B), Color(0xff00363D)]
       : const [Color.fromRGBO(41, 78, 59, 1), Color.fromRGBO(0, 54, 61, 1)];
+
+  static var kDigitGradient = GetStorage().read('IS_DARK_MODE')
+      ? const [Color(0xff224839), Color(0xff002328)]
+      : const [Color(0xff224839), Color(0xff002328)];
+
+  static var kDigitGradientSelected = GetStorage().read('IS_DARK_MODE')
+      ? const [Color(0xff333124), Color(0xff1E1C11)]
+      : const [Color(0xff333124), Color(0xff1E1C11)];
 }
 
 class AppTextStyles {
