@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonic_patti/views/users/mywallet.dart';
+import 'package:sonic_patti/views/users/notifications.dart';
 
 class TopAppBar extends StatefulWidget {
   const TopAppBar({super.key, this.istate});
@@ -41,7 +43,7 @@ class _TopAppBarState extends State<TopAppBar> {
           ],
         ),
         onPressed: () {
-          //
+          Scaffold.of(context).openDrawer();
         },
       );
     }
@@ -61,7 +63,9 @@ class _TopAppBarState extends State<TopAppBar> {
               Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
             ],
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.to(const MyWallet(), transition: Transition.fadeIn);
+          },
         ),
         IconButton(
           icon: Icon(
@@ -72,14 +76,12 @@ class _TopAppBarState extends State<TopAppBar> {
             ],
           ),
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('This is a snackbar')));
+            Get.to(const Notifications(),
+                transition: Transition.leftToRightWithFade);
           },
         ),
       ],
       scrolledUnderElevation: 4.0,
-      /*   backgroundColor: appBarBg,
-        foregroundColor: appBarText, */
       shadowColor: shadowColor ? appBarBg.withAlpha(5) : appBarBg,
     );
   }

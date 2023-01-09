@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/gameScreens/betplacement_a.dart';
+import 'package:sonic_patti/views/components/betplacement_a.dart';
 import '../../controllers/home_controller.dart';
 
 String formatTime(int seconds) {

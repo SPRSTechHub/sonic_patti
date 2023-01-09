@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/navigation.dart';
+import 'package:sonic_patti/views/components/sidenav.dart';
 import 'package:sonic_patti/views/gameScreens/all_games.dart';
+import 'package:sonic_patti/views/gameScreens/allbids.dart';
+import 'package:sonic_patti/views/gameScreens/results.dart';
 import 'package:sonic_patti/views/users/profileScreen.dart';
 
 class GameBoard extends StatefulWidget {
@@ -49,29 +52,14 @@ class _GameBoardState extends State<GameBoard> {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       bottomNavigationBar: navBar(
           isElevated: true, isVisible: _mainController.isVisible.value ?? true),
+      drawer: const SideNav(),
     );
   }
 
   Widget buildBody() {
     return Obx(() => IndexedStack(
           index: _mainController.tabIndex.value,
-          children: const [AllGames(), Profile(), Bids(), Profile()],
+          children: const [AllGames(), Profile(), AllBids(), Results()],
         ));
-  }
-}
-
-class Bids extends StatefulWidget {
-  const Bids({super.key});
-
-  @override
-  State<Bids> createState() => _BidsState();
-}
-
-class _BidsState extends State<Bids> {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Profile'),
-    );
   }
 }

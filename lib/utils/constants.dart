@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'color_schemes.g.dart';
+
+dynamic currentTime = DateTime.now();
 
 //colors used in this app
 const Color white = Colors.white;
@@ -145,4 +146,9 @@ class AppStyles {
         end: Alignment.bottomCenter,
         colors: [Color.fromRGBO(36, 74, 58, 0), Color.fromRGBO(7, 28, 22, 1)]),
   );
+}
+
+class Constant {
+  // Data Storage
+  static final box = GetStorage();
 }

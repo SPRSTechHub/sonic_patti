@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
+import 'package:sonic_patti/utils/constants.dart';
 
 import '../models/catagory_model.dart';
 import '../services/api.dart';
@@ -20,6 +22,9 @@ class HomeController extends GetxController {
   final RxList<BidsModal> bids = RxList<BidsModal>([]);
   late BidsModal bidsModal;
   var bid = 0.obs;
+
+/*   String matchID = Constant.box.read('matchID');
+  String betType = Constant.box.read('betType'); */
 
   addBid(String bidVal, String bidamnt) {
     final index = bids.indexWhere((element) => element.bidNum == bidVal);
@@ -38,44 +43,53 @@ class HomeController extends GetxController {
   void removeBids(int index) {
     bids.removeAt(index);
     bid.value = bids.length;
-    /*    if (_item.containsKey(item) && _item[item] == 1) {
-      _item.removeWhere((key, value) => key == item);
-    } else {
-      _item[item] -= 1;
-    } */
-
-    /*  Get.snackbar('added', "Item : ${item.itemName}",
-        snackPosition: SnackPosition.TOP, duration: const Duration(seconds: 1)); */
   }
 
-/*
+  get itemsAll => bids;
+
   void formSubmit() async {
-    if (itemsAll.length > 0) {
-      var cartData = _item.entries.map((item) {
-        return {
-          "site_code": Constant.box.read('site_code'),
-          "building_code": Constant.box.read('building_code'),
-          "itemTitle": item.key.itemName,
-          "itemCode": item.key.itemCode,
-          "itemQty": item.value,
-        };
-      }).toList();
-      String stringstudents = json.encode(cartData);
-      Get.snackbar('Alert', "Data stored successfully!",
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 1));
-      //print(stringstudents);
-      if (stringstudents != null) {
-        //print(stringstudents);
-        await RemoteApiService.submitRequisitionForm(stringstudents);
+    if (Constant.box.read('matchID') != '' &&
+        Constant.box.read('betType') != '') {
+      if (itemsAll.length > 0) {
+        var bidsData = bids.map((item) {
+          return {
+            "matchId": Constant.box.read('matchID'),
+            "betType": Constant.box.read('betType'),
+            "mobile": '8013738089',
+            "date": DateFormat('dd-MM-yyyy').format(currentTime),
+            "time": DateFormat('HH:mm').format(currentTime),
+            "Amount": item.bidAmnt,
+            "BidValue": item.bidNum,
+          };
+        }).toList();
+        String selectedBids = json.encode(bidsData);
+        print(selectedBids);
+        bids.clear();
+        bid.value = bids.length;
+      } else {
+        Get.snackbar('Alert', "No Bids selected!",
+            snackPosition: SnackPosition.BOTTOM,
+            duration: const Duration(seconds: 1));
       }
     } else {
-      Get.snackbar('Alert', "No Items selected!",
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 1));
+      Get.snackbar('title', 'No data found');
     }
   }
+
+  /*
+        "{
+    action: betplace,
+    day: monday,
+    matchId:FFGC1,
+    betType: SingleDigit/SinglePanna/DoublePanna/TripplePanna/cp,
+    betVal:betnumbers (ie: 123),
+    betAmnt: 'bet amount in INR 0.00',
+    mobile:'user mobile no',
+    date:'DD-MM-YYYY',
+    time:HH:MM (it will be match time in hour in 24, minutes)
+}"
 */
+
   var catLists = <Catlists>[].obs;
   var isDataProcessing = false.obs;
   var gameLists = <GameLists>[].obs;
