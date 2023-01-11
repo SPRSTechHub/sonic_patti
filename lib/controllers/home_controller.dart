@@ -17,6 +17,13 @@ class HomeController extends GetxController {
   var tabIndex = 0.obs;
   ScrollController scrollController = ScrollController();
   RxBool isVisible = true.obs;
+///////////////////////
+  var catLists = <Catlists>[].obs;
+  var isDataProcessing = false.obs;
+  var gameLists = <GameLists>[].obs;
+  var isGameDataProcessing = false.obs;
+  var isBidListsProcessing = false.obs;
+  var bidsList = <BidsList>[].obs;
 
   ////////////////////
   final RxList<BidsModal> bids = RxList<BidsModal>([]);
@@ -76,6 +83,8 @@ class HomeController extends GetxController {
     }
   }
 
+  //checkBidVal();
+
   /*
         "{
     action: betplace,
@@ -89,11 +98,6 @@ class HomeController extends GetxController {
     time:HH:MM (it will be match time in hour in 24, minutes)
 }"
 */
-
-  var catLists = <Catlists>[].obs;
-  var isDataProcessing = false.obs;
-  var gameLists = <GameLists>[].obs;
-  var isGameDataProcessing = false.obs;
 
   void changeTabIndex(int index) {
     tabIndex.value = index;
@@ -115,18 +119,6 @@ class HomeController extends GetxController {
   void onClose() {
     super.onClose();
     scrollController.dispose();
-  }
-
-  scrollCtlr() {
-    scrollController.addListener(() {
-      final ScrollDirection direction =
-          scrollController.position.userScrollDirection;
-      if (direction == ScrollDirection.forward) {
-        isVisible.value = true;
-      } else if (direction == ScrollDirection.reverse) {
-        isVisible.value = false;
-      }
-    });
   }
 
   void fetchCatagories() async {
@@ -161,5 +153,40 @@ class HomeController extends GetxController {
     } finally {
       isGameDataProcessing(false);
     }
+  }
+
+  //get Bids Lists
+
+  fetchPlaceBids(String? catId, String? mobile, String? sortBy, String? sortTo,
+      String? lstart, String? lend, String? searchKey) async {
+    /*  if(searchKey != ''){
+
+    } */
+    try {
+      isBidListsProcessing(true);
+      var allBids = await RemoteApi.fetchBidLists(
+          'bet_history', '7031710782', 'FFGC0', 'date', 'desc', '50', '0', '');
+      bidsList.clear();
+      bidsList.refresh();
+      if (allBids != null) {
+        isBidListsProcessing(false);
+        bidsList.assignAll(allBids);
+      }
+    } finally {
+      isBidListsProcessing(false);
+    }
+  }
+
+  //Scroll Controlling//
+  scrollCtlr() {
+    scrollController.addListener(() {
+      final ScrollDirection direction =
+          scrollController.position.userScrollDirection;
+      if (direction == ScrollDirection.forward) {
+        isVisible.value = true;
+      } else if (direction == ScrollDirection.reverse) {
+        isVisible.value = false;
+      }
+    });
   }
 }

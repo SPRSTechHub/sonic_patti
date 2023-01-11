@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/betplacement_a.dart';
+import 'package:sonic_patti/views/components/betplacement_b.dart';
 import '../../controllers/home_controller.dart';
 
 String formatTime(int seconds) {
@@ -317,45 +318,50 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 ),
                               ),
                             ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              width: 186,
-                              height: 72,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Color.fromRGBO(142, 111, 0, 1),
-                                      Color.fromRGBO(249, 255, 0, 1),
-                                      Color.fromRGBO(142, 111, 0, 1)
-                                    ]),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Image(
-                                    width: 60,
-                                    height: 48,
-                                    image: AssetImage(
-                                        'assets/images/jodi_digit.png'),
-                                  ),
-                                  Text(
-                                    'JODI DIGIT',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  ),
-                                ],
+                            GestureDetector(
+                              onTap: () =>
+                                  Get.snackbar('Alert', 'Working on it....'),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                width: 186,
+                                height: 72,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Color.fromRGBO(142, 111, 0, 1),
+                                        Color.fromRGBO(249, 255, 0, 1),
+                                        Color.fromRGBO(142, 111, 0, 1)
+                                      ]),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Image(
+                                      width: 60,
+                                      height: 48,
+                                      image: AssetImage(
+                                          'assets/images/jodi_digit.png'),
+                                    ),
+                                    Text(
+                                      'JODI DIGIT',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -370,124 +376,148 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              height: 72,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Color.fromRGBO(142, 111, 0, 1),
-                                      Color.fromRGBO(249, 255, 0, 1),
-                                      Color.fromRGBO(142, 111, 0, 1)
-                                    ]),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Image(
-                                    width: 48,
-                                    height: 48,
-                                    image:
-                                        AssetImage('assets/images/single.png'),
-                                  ),
-                                  Text(
-                                    'SINGLE \n PANNA',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              height: 72,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Color.fromRGBO(142, 111, 0, 1),
-                                      Color.fromRGBO(249, 255, 0, 1),
-                                      Color.fromRGBO(142, 111, 0, 1)
-                                    ]),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Image(
-                                    width: 48,
-                                    height: 48,
-                                    image:
-                                        AssetImage('assets/images/double.png'),
-                                  ),
-                                  Text(
-                                    'DOUBLE \n PANNA',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  ),
-                                ],
+                            GestureDetector(
+                              onTap: (() {
+                                Get.back();
+                                Get.to(PannaBet(matchId: param),
+                                    transition: Transition.downToUp);
+                              }),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 72,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Color.fromRGBO(142, 111, 0, 1),
+                                        Color.fromRGBO(249, 255, 0, 1),
+                                        Color.fromRGBO(142, 111, 0, 1)
+                                      ]),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Image(
+                                      width: 48,
+                                      height: 48,
+                                      image: AssetImage(
+                                          'assets/images/single.png'),
+                                    ),
+                                    Text(
+                                      'SINGLE \n PANNA',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              height: 72,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Color.fromRGBO(142, 111, 0, 1),
-                                      Color.fromRGBO(249, 255, 0, 1),
-                                      Color.fromRGBO(142, 111, 0, 1)
-                                    ]),
+                            GestureDetector(
+                              onTap: (() {
+                                Get.back();
+                                Get.to(PannaBet(matchId: param),
+                                    transition: Transition.downToUp);
+                              }),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 72,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Color.fromRGBO(142, 111, 0, 1),
+                                        Color.fromRGBO(249, 255, 0, 1),
+                                        Color.fromRGBO(142, 111, 0, 1)
+                                      ]),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Image(
+                                      width: 48,
+                                      height: 48,
+                                      image: AssetImage(
+                                          'assets/images/double.png'),
+                                    ),
+                                    Text(
+                                      'DOUBLE \n PANNA',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Image(
-                                    width: 48,
-                                    height: 48,
-                                    image:
-                                        AssetImage('assets/images/tripple.png'),
-                                  ),
-                                  Text(
-                                    'TRIPPLE \n PANNA',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  ),
-                                ],
+                            ),
+                            GestureDetector(
+                              onTap: (() {
+                                Get.back();
+                                Get.to(PannaBet(matchId: param),
+                                    transition: Transition.downToUp);
+                              }),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 72,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Color.fromRGBO(142, 111, 0, 1),
+                                        Color.fromRGBO(249, 255, 0, 1),
+                                        Color.fromRGBO(142, 111, 0, 1)
+                                      ]),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Image(
+                                      width: 48,
+                                      height: 48,
+                                      image: AssetImage(
+                                          'assets/images/tripple.png'),
+                                    ),
+                                    Text(
+                                      'TRIPPLE \n PANNA',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
