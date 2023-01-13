@@ -38,6 +38,8 @@ const String ob3 = 'Get Cash anytime';
 const double appPadding = 20.0;
 const double appmargin = 10.0;
 
+const isLogin = false;
+
 class AppColors {
   var kPrimaryBoxBackground = GetStorage().read('IS_DARK_MODE')
       ? const Color(0xff002328)
@@ -58,7 +60,15 @@ class AppColors {
 }
 
 class AppTextStyles {
+  static var kLoginText = GoogleFonts.montserrat(
+      color: const Color.fromRGBO(255, 255, 255, 1),
+      fontSize: 16,
+      letterSpacing: 0,
+      fontWeight: FontWeight.bold,
+      height: 1);
+
   static var kTextStyleWithFont1 = GoogleFonts.cairo;
+
   var kTextStyleTwelveWithGreyColor = GoogleFonts.montserrat(
     fontSize: 12,
   );
@@ -145,6 +155,36 @@ class AppStyles {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [Color.fromRGBO(36, 74, 58, 0), Color.fromRGBO(7, 28, 22, 1)]),
+  );
+
+  static var registerBG = BoxDecoration(
+    borderRadius: BorderRadius.circular(12),
+    boxShadow: const [
+      BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.25),
+          offset: Offset(4, 8),
+          blurRadius: 2)
+    ],
+    border: Border.all(
+      color: const Color.fromRGBO(0, 0, 0, 1),
+      width: .5,
+    ),
+    gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Color(0xFFFBE421), Color(0xFFBA1A1A), Color(0xFF7D0000)]),
+  );
+
+  static var loginFormBg = BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    gradient: const LinearGradient(
+        begin: Alignment(6.123234262925839e-17, 1),
+        end: Alignment(-1, 6.123234262925839e-17),
+        colors: [
+          Color.fromRGBO(0, 0, 0, 0.44999998807907104),
+          Color.fromRGBO(217, 217, 217, 0.15000000596046448),
+          Color.fromRGBO(0, 0, 0, 0.44999998807907104)
+        ]),
   );
 }
 

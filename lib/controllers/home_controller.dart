@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
@@ -14,6 +12,7 @@ import '../services/api.dart';
 
 class HomeController extends GetxController {
   RxBool permissions = false.obs;
+  RxBool isLogin = false.obs;
   var tabIndex = 0.obs;
   ScrollController scrollController = ScrollController();
   RxBool isVisible = true.obs;
@@ -29,6 +28,34 @@ class HomeController extends GetxController {
   final RxList<BidsModal> bids = RxList<BidsModal>([]);
   late BidsModal bidsModal;
   var bid = 0.obs;
+
+  checkLogin() {
+    Constant.box.read('isLogin') ?? false;
+/*     if (isLogin.isFalse) {
+      Constant.box.read('isLogin') ?? false;
+    } */
+  }
+
+  @override
+  void onInit() {
+    checkLogin();
+    fetchCatagories();
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    scrollCtlr();
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    scrollController.dispose();
+  }
+
+//Check Authenticity
 
 /*   String matchID = Constant.box.read('matchID');
   String betType = Constant.box.read('betType'); */
@@ -101,24 +128,6 @@ class HomeController extends GetxController {
 
   void changeTabIndex(int index) {
     tabIndex.value = index;
-  }
-
-  @override
-  void onInit() {
-    fetchCatagories();
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    scrollCtlr();
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    scrollController.dispose();
   }
 
   void fetchCatagories() async {

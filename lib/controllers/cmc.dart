@@ -36,8 +36,10 @@ class ConnectionManagerController extends GetxController {
             await InternetConnectionChecker().hasConnection;
         if (!isDeviceConnected.value && isAlertSet == false) {
           isAlertSet.value = true;
+          Get.snackbar('Alert', 'InternetConnection Lost...');
         } else {
           isAlertSet.value = false;
+          Get.snackbar('Alert', 'InternetConnection Connected...');
         }
       });
 
