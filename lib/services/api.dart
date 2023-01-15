@@ -135,43 +135,6 @@ class RemoteApi {
     }
   }
 
-  // Sign In api call
-/*   static Future<dynamic>? signInCall(
-      String action,
-      String? mobile,
-      String? password,
-      String? fullname,
-      String? referid,
-      String? token) async {
-    Map<String, String> headers = {
-      "Content-type": "application/x-www-form-urlencoded",
-      'Accept': 'application/json',
-    };
-
-    var postData = {
-      'action': action,
-      'mobile': mobile,
-      //'searchKey': searchKey,
-    };
-
-    final response =
-        await http.post(Uri.parse(url), headers: headers, body: postData);
-
-    if (response.statusCode == 200) {
-      var resp = json.decode(response.body);
-      print(resp);
-      /* if (resp['status'] == 0) {
-        var jsonString = jsonEncode(resp['data']);
-        print(jsonString);
-        return jsonString;
-      } else {
-        return null;
-      } */
-    } else {
-      return null;
-    }
-  }
- */
 // Sign In api call
   static Future<dynamic>? signUpCall(
       String action,

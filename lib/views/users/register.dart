@@ -15,10 +15,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
   late bool passwordVisibility;
-<<<<<<< HEAD
   final token = Constant.box.read('fcmToken') ?? false;
-=======
->>>>>>> 1192bf6043818c9caf038c901ef20c8674ea6ba4
   final fullnameCtltxt = TextEditingController();
   final mobileCtltxt = TextEditingController();
   final passwordCtltxt = TextEditingController();
@@ -138,16 +135,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Mobile Number required!';
-<<<<<<< HEAD
                               } else if (value.length != 10) {
                                 return '10 digit Mobile Number!';
                               } else {
                                 return null;
                               }
-=======
-                              }
-                              return null;
->>>>>>> 1192bf6043818c9caf038c901ef20c8674ea6ba4
                             },
                           ),
                         ),
@@ -259,7 +251,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         GestureDetector(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-<<<<<<< HEAD
                               var fullname = fullnameCtltxt.text;
                               var mobile = mobileCtltxt.text;
                               var password = passwordCtltxt.text;
@@ -283,10 +274,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     shouldIconPulse: true,
                                     backgroundColor: Colors.blueGrey);
                               } */
-=======
-                            } else {
-                              Get.snackbar('title', 'No data');
->>>>>>> 1192bf6043818c9caf038c901ef20c8674ea6ba4
                             }
                           },
                           child: Container(
