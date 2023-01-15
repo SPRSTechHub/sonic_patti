@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:sonic_patti/utils/constants.dart';
+
+import '../services/api.dart';
 
 class AuthController extends GetxController {
   var isLogin = false.obs;
@@ -17,4 +18,37 @@ class AuthController extends GetxController {
 
   @override
   void onClose() {}
+
+  void signInFunction(String? fullname, String? mobile, String? password,
+      String? referid, String? token) async {
+    try {
+      var games = await RemoteApi.signInCall(
+          'signup', mobile, password, fullname, referid, token);
+      if (games != null) {
+        //    isGameDataProcessing(false);
+      }
+    } finally {
+      //  isGameDataProcessing(false);
+    }
+  }
+  Future<dynamic> signUpFunction(fullname, mobile, password, referid, token) async {
+    try {
+      //isDataProcessing(true);
+      var response = await RemoteApi.signUpCall(
+          'sugnup',
+          mobile,
+          password,
+          fullname,
+          referid,
+          token);
+
+      if (response != null) {
+        //isDataProcessing(false);
+        return response;
+      }
+    } finally {
+      //isDataProcessing(false);
+    }
+  }
+
 }

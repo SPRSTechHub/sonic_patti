@@ -207,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             } else {
                               setState(() {
                                 //hide Spinner
-                                Navigator.of(context).pop();
+                                // Navigator.of(context).pop();
                               });
                             }
                           },
