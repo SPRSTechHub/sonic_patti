@@ -8,8 +8,6 @@ import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/users/login.dart';
-import 'package:sonic_patti/views/users/register.dart';
-import 'controllers/cmc.dart';
 import 'controllers/controller_binding.dart';
 import 'firebase_options.dart';
 import 'utils/color_schemes.g.dart';

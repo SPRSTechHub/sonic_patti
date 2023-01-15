@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -36,9 +37,19 @@ class HomeController extends GetxController {
     } */
   }
 
+  callTimer() {
+    final periodicTimer = Timer.periodic(
+      const Duration(seconds: 5),
+      (timer) {
+        Get.snackbar('title', 'message1');
+      },
+    );
+  }
+
   @override
   void onInit() {
-    checkLogin();
+    //callTimer();
+    //checkLogin();
     fetchCatagories();
     super.onInit();
   }

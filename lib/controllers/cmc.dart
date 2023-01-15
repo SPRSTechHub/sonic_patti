@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -13,7 +15,6 @@ class ConnectionManagerController extends GetxController {
 
   @override
   void onInit() {
-    getConnectivity();
     super.onInit();
   }
 

@@ -50,8 +50,8 @@ class _GameBoardState extends State<GameBoard> {
         backgroundColor: fabBg, */
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-      bottomNavigationBar: navBar(
-          isElevated: true, isVisible: _mainController.isVisible.value ?? true),
+      bottomNavigationBar:
+          navBar(isElevated: true, isVisible: _mainController.isVisible.value),
       drawer: const SideNav(),
     );
   }
