@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../services/api.dart';
+import '../utils/constants.dart';
 
 class AuthController extends GetxController {
   var isLogin = false.obs;
@@ -31,16 +32,13 @@ class AuthController extends GetxController {
       //  isGameDataProcessing(false);
     }
   }
-  Future<dynamic> signUpFunction(fullname, mobile, password, referid, token) async {
+
+  Future<dynamic> signUpFunction(
+      fullname, mobile, password, referid, token) async {
     try {
       //isDataProcessing(true);
       var response = await RemoteApi.signUpCall(
-          'sugnup',
-          mobile,
-          password,
-          fullname,
-          referid,
-          token);
+          'sugnup', mobile, password, fullname, referid, token);
 
       if (response != null) {
         //isDataProcessing(false);
@@ -50,5 +48,4 @@ class AuthController extends GetxController {
       //isDataProcessing(false);
     }
   }
-
 }
