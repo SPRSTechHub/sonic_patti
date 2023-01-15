@@ -97,4 +97,45 @@ class RemoteApi {
       return null;
     }
   }
+
+  // Sign In api call
+  static Future<List<BidsList>?> signInCall(
+      String action,
+      String? mobile,
+      String? password,
+      String? fullname,
+      String? referid,
+      String? token) async {
+    Map<String, String> headers = {
+      "Content-type": "application/x-www-form-urlencoded",
+      'Accept': 'application/json',
+    };
+    var postData = {
+      'action': action,
+      'mobile': mobile,
+      //'searchKey': searchKey,
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      if (resp['status'] == 0) {
+        var jsonString = jsonEncode(resp['data']);
+        return jsonString;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  /*  action: signup,
+    mobile: 9768327050,
+    password: 12345,
+    fullname: Test User,
+    refer_id:SPSPRS3270
+    */
 }
