@@ -17,6 +17,7 @@ class HomeController extends GetxController {
   var tabIndex = 0.obs;
   ScrollController scrollController = ScrollController();
   RxBool isVisible = true.obs;
+  var cday = DateFormat('EEEE').format(currentTime).obs;
 ///////////////////////
   var catLists = <Catlists>[].obs;
   var isDataProcessing = false.obs;
@@ -32,9 +33,6 @@ class HomeController extends GetxController {
 
   checkLogin() {
     Constant.box.read('isLogin') ?? false;
-/*     if (isLogin.isFalse) {
-      Constant.box.read('isLogin') ?? false;
-    } */
   }
 
   callTimer() {
@@ -48,7 +46,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    fetchBalance();
+    fetchUserDetails();
     fetchCatagories();
     super.onInit();
   }
@@ -66,18 +64,25 @@ class HomeController extends GetxController {
   }
 
 //check User Balance
-  void fetchBalance() async {
-    String? uwbal = Constant.box.read('uwbal');
-    if (uwbal != null) {
-      var getBal = await RemoteApi.fetchCatagory('game_cat', 'monday');
-      if (getBal != null) {
-        Constant.box.write('uwbal', getBal);
+  fetchUserDetails() async {
+    var uwbal = Constant.box.read('uwbal');
+    bool isLogin = Constant.box.read('isLogin');
+    String? mobile = Constant.box.read('mobile');
+    if (uwbal != null && isLogin == true && mobile != null) {
+      var userDetails = await RemoteApi.getUser('get_user', mobile);
+      if (userDetails != null) {
+        if (userDetails['status'] == 0) {
+          Constant.box
+              .write('uwbal', userDetails['result']['wallet']['bal_amnt'] ?? 0);
+          Constant.box.write(
+              'referId', userDetails['result']['profile']['refer_id'] ?? '');
+        }
       }
     }
   }
-//Check Authenticity
 
-/*   String matchID = Constant.box.read('matchID');
+//Check Authenticity
+/* String matchID = Constant.box.read('matchID');
   String betType = Constant.box.read('betType'); */
 
   addBid(String bidVal, String bidamnt) {
@@ -101,23 +106,40 @@ class HomeController extends GetxController {
 
   get itemsAll => bids;
 
-  void formSubmit() async {
+  Future<dynamic> formSubmit() async {
     if (Constant.box.read('matchID') != '' &&
         Constant.box.read('betType') != '') {
       if (itemsAll.length > 0) {
         var bidsData = bids.map((item) {
           return {
-            "matchId": Constant.box.read('matchID'),
+            "matchId": Constant.box.read('matchId'),
             "betType": Constant.box.read('betType'),
-            "mobile": '8013738089',
+            "mobile": Constant.box.read('mobile'),
             "date": DateFormat('dd-MM-yyyy').format(currentTime),
             "time": DateFormat('HH:mm').format(currentTime),
-            "Amount": item.bidAmnt,
-            "BidValue": item.bidNum,
+            "betAmnt": item.bidAmnt,
+            "betVal": item.bidNum,
           };
         }).toList();
+
         String selectedBids = json.encode(bidsData);
-        print(selectedBids);
+
+        if (selectedBids != null) {
+          var resp = await RemoteApi.bidSubmission(selectedBids);
+          if (resp['status'] == 0) {
+            Get.snackbar('Success!', resp['message'],
+                backgroundColor: bottomBarBg,
+                icon: const Icon(Icons.check),
+                duration: const Duration(seconds: 5));
+            Constant.box.write('uwbal', resp['data']['amount']!);
+            return true;
+          } else {
+            Get.snackbar('Alert', resp['message'],
+                snackPosition: SnackPosition.BOTTOM,
+                duration: const Duration(seconds: 1));
+            return false;
+          }
+        }
         bids.clear();
         bid.value = bids.length;
       } else {
@@ -171,8 +193,8 @@ class HomeController extends GetxController {
   void fetchGameLists(String? catId) async {
     try {
       isGameDataProcessing(true);
-      var games =
-          await RemoteApi.fetchGameLists('game_list', 'saturday', catId!);
+      var games = await RemoteApi.fetchGameLists(
+          'game_list', cday.toLowerCase(), catId!);
       gameLists.clear();
       gameLists.refresh();
       if (games != null) {
@@ -186,7 +208,7 @@ class HomeController extends GetxController {
 
   //get Bids Lists
 
-  fetchPlaceBids(String? catId, String? mobile, String? sortBy, String? sortTo,
+  fetchPlaceBids(String catId, String mobile, String? sortBy, String? sortTo,
       String? lstart, String? lend, String? searchKey) async {
     /*  if(searchKey != ''){
 
@@ -194,7 +216,7 @@ class HomeController extends GetxController {
     try {
       isBidListsProcessing(true);
       var allBids = await RemoteApi.fetchBidLists(
-          'bet_history', '7031710782', 'FFGC0', 'date', 'desc', '50', '0', '');
+          'bet_history', mobile, catId, sortBy, sortTo, lstart, lend, '');
       bidsList.clear();
       bidsList.refresh();
       if (allBids != null) {

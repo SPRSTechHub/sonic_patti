@@ -6,6 +6,7 @@ import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
+import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 
 class SingleDigitBet extends StatefulWidget {
   const SingleDigitBet({super.key, required this.matchId});
@@ -171,9 +172,10 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                     onTap: (() {
                       var bidNum = GetStorage().read('bidNum');
                       var biDAmnt = amountText.text;
-                      if (bidNum == '') {
-                        Get.snackbar('Alert', 'Select your number!');
-                      } else if (bidNum != '' && biDAmnt != '') {
+
+                      if (bidNum == '' || biDAmnt == '') {
+                        Get.snackbar('Alert', 'Select your number & amount!');
+                      } else if (int.parse(biDAmnt) > 0) {
                         setState(() {
                           _mainController.addBid(bidNum, biDAmnt);
                         });
@@ -284,9 +286,14 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                     height: 6.0,
                   ),
                   GestureDetector(
-                    onTap: (() {
+                    onTap: (() async {
                       if (Constant.box.read('matchId') != '') {
-                        _mainController.formSubmit();
+                        var rSubmit = await _mainController.formSubmit();
+                        if (rSubmit == true) {
+                          setState(() {
+                            Get.to(const GameBoard());
+                          });
+                        }
                       } else {
                         Get.snackbar('Alert', 'Select the Game first',
                             duration: const Duration(seconds: 1),

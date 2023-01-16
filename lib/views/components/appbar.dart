@@ -56,44 +56,63 @@ class _TopAppBarState extends State<TopAppBar> {
       leading: setLeading(),
       title: const Text('Sonic Patti'),
       actions: <Widget>[
-        Badge(
-          position: BadgePosition.bottomEnd(bottom: -4, end: -4),
-          elevation: 0,
-          shape: BadgeShape.circle,
-          badgeContent: Text(
-            '₹ ${uwbal ?? 0}',
-            style: const TextStyle(fontSize: 10),
-          ),
-          badgeColor: Colors.red,
-          borderSide: const BorderSide(color: Colors.black),
-          child: const Icon(
-            Icons.person,
-            size: 30,
-          ),
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.account_balance_wallet_outlined,
-            color: Theme.of(context).colorScheme.primary,
-            shadows: const <Shadow>[
-              Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+        GestureDetector(
+          onTap: (() {
+            Get.to(const MyWallet(),
+                transition: Transition.leftToRightWithFade);
+          }),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.account_balance_wallet_outlined,
+                size: Get.width * .068,
+                color: Theme.of(context).colorScheme.primary,
+                shadows: const <Shadow>[
+                  Shadow(
+                      color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+                ],
+              ),
+              Text(
+                '₹ ${uwbal ?? 0}',
+                style: const TextStyle(fontSize: 10),
+              ),
             ],
           ),
-          onPressed: () {
-            Get.to(const MyWallet(), transition: Transition.fadeIn);
-          },
+        ),
+        Badge(
+          stackFit: StackFit.loose,
+          position: BadgePosition.topEnd(top: 8, end: 4),
+          elevation: 6,
+          shape: BadgeShape.circle,
+          badgeContent: null,
+          borderSide: const BorderSide(color: Colors.black),
+          child: IconButton(
+            icon: Icon(
+              Icons.notification_add,
+              color: Theme.of(context).colorScheme.primary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
+              ],
+            ),
+            onPressed: () {
+              Get.to(const Notifications(),
+                  transition: Transition.leftToRightWithFade);
+            },
+          ),
         ),
         IconButton(
           icon: Icon(
-            Icons.notification_add,
+            Icons.logout,
             color: Theme.of(context).colorScheme.primary,
             shadows: const <Shadow>[
               Shadow(color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
             ],
           ),
           onPressed: () {
-            Get.to(const Notifications(),
-                transition: Transition.leftToRightWithFade);
+            //Logout
           },
         ),
       ],

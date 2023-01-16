@@ -9,12 +9,13 @@ class RemoteApi {
 //  static var url = 'https://control.fatafatguru.in/api';
   static var url = 'https://console.digitalsprs.fun/api';
 
+  static Map<String, String> headers = {
+    "Content-type": "application/x-www-form-urlencoded",
+    'Accept': 'application/json',
+  };
+
   static Future<List<Catlists>?> fetchCatagory(
       String action, String day) async {
-    Map<String, String> headers = {
-      "Content-type": "application/x-www-form-urlencoded",
-      'Accept': 'application/json',
-    };
     var postData = {'action': action, 'day': day};
 
     final response =
@@ -35,10 +36,6 @@ class RemoteApi {
 
   static Future<List<GameLists>?> fetchGameLists(
       String action, String day, String catId) async {
-    Map<String, String> headers = {
-      "Content-type": "application/x-www-form-urlencoded",
-      'Accept': 'application/json',
-    };
     var postData = {'action': action, 'day': day, 'cat_id': catId};
 
     final response =
@@ -61,16 +58,12 @@ class RemoteApi {
   static Future<List<BidsList>?> fetchBidLists(
       String action,
       String mobile,
-      String? catId,
-      String sortBy,
-      String sortTo,
-      String lstart,
-      String lend,
+      String catId,
+      String? sortBy,
+      String? sortTo,
+      String? lstart,
+      String? lend,
       String? searchKey) async {
-    Map<String, String> headers = {
-      "Content-type": "application/x-www-form-urlencoded",
-      'Accept': 'application/json',
-    };
     var postData = {
       'action': action,
       'mobile': mobile,
@@ -98,14 +91,37 @@ class RemoteApi {
     }
   }
 
+// Sign Up api call
+  static Future<dynamic>? signUpCall(
+      String action,
+      String? mobile,
+      String? password,
+      String? fullname,
+      String? referid,
+      String? token) async {
+    var postData = {
+      'action': action,
+      'mobile': mobile,
+      'password': password,
+      'fullname': fullname,
+      'refer_id': referid,
+      'devkey': token
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      return resp;
+    } else {
+      return null;
+    }
+  }
+
   // Sign In api call
   static Future<dynamic>? signInCall(
       String action, String? mobile, String? password, String? token) async {
-    Map<String, String> headers = {
-      "Content-type": "application/x-www-form-urlencoded",
-      'Accept': 'application/json',
-    };
-
     var postData = {
       'action': action,
       'mobile': mobile,
@@ -124,27 +140,9 @@ class RemoteApi {
     }
   }
 
-// Sign In api call
-  static Future<dynamic>? signUpCall(
-      String action,
-      String? mobile,
-      String? password,
-      String? fullname,
-      String? referid,
-      String? token) async {
-    Map<String, String> headers = {
-      "Content-type": "application/x-www-form-urlencoded",
-      'Accept': 'application/json',
-    };
-
-    var postData = {
-      'action': action,
-      'mobile': mobile,
-      'password': password,
-      'fullname': fullname,
-      'refer_id': referid,
-      'devkey': token
-    };
+// Fetch User Details
+  static Future<dynamic>? getUser(String? action, String? mobile) async {
+    var postData = {'action': action, 'mobile': mobile};
 
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
@@ -154,6 +152,29 @@ class RemoteApi {
       return resp;
     } else {
       return null;
+    }
+  }
+
+  // Bids Submissions
+
+  static Future<dynamic> bidSubmission(String? bidsData) async {
+    var jsonBody = {
+      'action': 'betplace',
+      'bidlists': bidsData,
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: jsonBody);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      if (resp['status'] != '') {
+        return resp;
+      } else {
+        return false;
+      }
+    } else {
+      throw Exception('Failed to submit data.');
     }
   }
 }

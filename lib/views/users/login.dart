@@ -312,12 +312,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-Future spinner(context) {
-  return showDialog(
-    context: context,
-    builder: (context) => const Center(
-      child: CircularProgressIndicator(),
-    ),
-  );
-}

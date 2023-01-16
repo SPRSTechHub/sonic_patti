@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sonic_patti/views/gameScreens/gameboard.dart';
-import 'package:sonic_patti/views/splashscreen.dart';
+import 'package:sonic_patti/views/users/login.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'dart:math' as math;
 
@@ -154,10 +153,7 @@ class OnboardingScreenThree extends StatelessWidget {
                         GetStorage box = GetStorage();
                         box.write('initFirst', true);
                         Get.to(
-                          const GameBoard(
-/*                             title: 'Test App',
- */
-                              ),
+                          const LoginScreen(),
                           transition: Transition.circularReveal,
                           duration: const Duration(milliseconds: 1000),
                         );

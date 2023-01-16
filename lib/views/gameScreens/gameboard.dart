@@ -21,6 +21,9 @@ class _GameBoardState extends State<GameBoard> {
   final _isVisible = true;
   @override
   void initState() {
+    setState(() {
+      _mainController.fetchUserDetails();
+    });
     super.initState();
   }
 

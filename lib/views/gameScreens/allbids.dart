@@ -19,8 +19,16 @@ class _AllBidsState extends State<AllBids> {
   final HomeController bidController = Get.find<HomeController>();
   @override
   void initState() {
-    bidController.fetchPlaceBids(
-        'catId', 'mobile', 'sortBy', 'sortTo', 'lstart', 'lend', 'searchKey');
+    setState(() {
+      bidController.fetchPlaceBids(
+          '',
+          Constant.box.read('mobile') ?? '0123456789',
+          'date',
+          'desc',
+          '50',
+          '0',
+          '');
+    });
     super.initState();
   }
 
@@ -42,18 +50,12 @@ class _AllBidsState extends State<AllBids> {
                       const Text('data'),
                       GestureDetector(
                         onTap: (() {
-                          bidController.fetchPlaceBids(
-                              'catId',
-                              'mobile',
-                              'sortBy',
-                              'sortTo',
-                              'lstart',
-                              'lend',
-                              'searchKey');
+                          showBids();
                         }),
                         child: Container(
                           margin: const EdgeInsets.symmetric(vertical: 2.0),
-                          width: 140,
+                          width: 120,
+                          height: 30,
                           padding: const EdgeInsets.all(2.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
@@ -85,7 +87,7 @@ class _AllBidsState extends State<AllBids> {
             ),
             Container(
                 color: bottomBarBg,
-                margin: const EdgeInsets.all(2.0),
+                margin: const EdgeInsets.symmetric(vertical: 2.0),
                 child: buildDataTable()),
           ],
         ),
@@ -94,10 +96,11 @@ class _AllBidsState extends State<AllBids> {
   }
 
   Widget buildDataTable() {
-    final columns = ['DateTime', 'Game Title', 'Bid Type', 'Amount'];
+    final columns = ['Date', 'Time', 'Matches', 'Bidtype', 'Amnt'];
     return Obx(
       () => DataTable(
-          columnSpacing: 10,
+          border: TableBorder.all(width: 0.5, color: Colors.white60),
+          columnSpacing: Get.width * .02,
           sortAscending: isAscending,
           sortColumnIndex: sortColumnIndex,
           columns: getColumns(columns),
@@ -107,7 +110,11 @@ class _AllBidsState extends State<AllBids> {
 
   List<DataColumn> getColumns(List<String> columns) => columns
       .map((String column) => DataColumn(
-            label: Text(column, style: const TextStyle(fontSize: 12)),
+            label: Text(
+              column,
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
             onSort: onSort,
           ))
       .toList();
@@ -115,7 +122,9 @@ class _AllBidsState extends State<AllBids> {
   List<DataRow> getRows(List<BidsList> bidsList) =>
       bidsList.map((BidsList bidsList) {
         final cells = [
-          'D${bidsList.date}\nT${bidsList.time}',
+          /* 'D${bidsList.date}\nT${bidsList.time}', */
+          bidsList.date,
+          bidsList.time,
           bidsList.game,
           bidsList.patti,
           bidsList.amount
@@ -126,7 +135,8 @@ class _AllBidsState extends State<AllBids> {
   List<DataCell> getCells(List<dynamic> cells) => cells
       .map((data) => DataCell(Text(
             '$data',
-            style: const TextStyle(fontSize: 12),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 10.5),
           )))
       .toList();
 
@@ -136,11 +146,14 @@ class _AllBidsState extends State<AllBids> {
           .sort(((a, b) => compareString(ascending, a.date, b.date)));
     } else if (columnIndex == 1) {
       bidController.bidsList
-          .sort(((a, b) => compareString(ascending, a.game, b.game)));
+          .sort(((a, b) => compareString(ascending, a.time, b.time)));
     } else if (columnIndex == 2) {
       bidController.bidsList
-          .sort(((a, b) => compareString(ascending, a.patti, b.patti)));
+          .sort(((a, b) => compareString(ascending, a.game, b.game)));
     } else if (columnIndex == 3) {
+      bidController.bidsList
+          .sort(((a, b) => compareString(ascending, a.patti, b.patti)));
+    } else if (columnIndex == 4) {
       bidController.bidsList
           .sort(((a, b) => compareString(ascending, a.amount, b.amount)));
     }
@@ -152,4 +165,15 @@ class _AllBidsState extends State<AllBids> {
 
   int compareString(bool ascending, String v1, String v2) =>
       ascending ? v1.compareTo(v2) : v2.compareTo(v1);
+
+  void showBids() {
+    bidController.fetchPlaceBids(
+        '',
+        Constant.box.read('mobile') ?? '0123456789',
+        'date',
+        'desc',
+        '50',
+        '0',
+        '');
+  }
 }

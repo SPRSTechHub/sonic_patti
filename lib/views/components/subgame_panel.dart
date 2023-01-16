@@ -88,7 +88,6 @@ class _ListofSubGamesState extends State<ListofSubGames> {
         } else {
           showModalB(widget.matchId);
         }
-        print(widget.matchId);
       }),
       child: SizedBox(
         height: 100,

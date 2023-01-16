@@ -14,6 +14,7 @@ import 'utils/color_schemes.g.dart';
 import 'views/obscreen/screen_one.dart';
 
 bool? initFirst;
+bool? isLogin;
 
 /* Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,

@@ -54,7 +54,7 @@ class _SubGamesState extends State<SubGames> {
                     child: CircularProgressIndicator(),
                   );
                 } else {
-                  if (gameController.catLists.isNotEmpty) {
+                  if (gameController.gameLists.isNotEmpty) {
                     return AnimationLimiter(
                       child: ListView.builder(
                           shrinkWrap: true,
@@ -69,7 +69,7 @@ class _SubGamesState extends State<SubGames> {
                                 verticalOffset: 50.0,
                                 child: FadeInAnimation(
                                   child: ListofSubGames(
-                                      matchId: gameData.gameId,
+                                      matchId: gameData.matchId,
                                       matchTime: gameData.matchTime,
                                       gameTitle: gameData.gameTitle,
                                       matchIcon: gameData.matchIcon,
