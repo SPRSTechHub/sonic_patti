@@ -100,12 +100,7 @@ class RemoteApi {
 
   // Sign In api call
   static Future<dynamic>? signInCall(
-      String action,
-      String? mobile,
-      String? password,
-      String? fullname,
-      String? referid,
-      String? token) async {
+      String action, String? mobile, String? password, String? token) async {
     Map<String, String> headers = {
       "Content-type": "application/x-www-form-urlencoded",
       'Accept': 'application/json',
@@ -114,7 +109,8 @@ class RemoteApi {
     var postData = {
       'action': action,
       'mobile': mobile,
-      //'searchKey': searchKey,
+      'password': password,
+      'devkey': token
     };
 
     final response =
@@ -122,14 +118,7 @@ class RemoteApi {
 
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
-      print(resp);
-      /* if (resp['status'] == 0) {
-        var jsonString = jsonEncode(resp['data']);
-        print(jsonString);
-        return jsonString;
-      } else {
-        return null;
-      } */
+      return resp;
     } else {
       return null;
     }

@@ -36,7 +36,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
   Timer? timer;
   bool liveStat = false;
 
-  late final mTime = widget.matchTime ?? '00:00';
+  late final mTime = widget.matchTime;
   late final currentTime = DateTime.now();
   late final startTime = DateTime(
       DateTime.now().year,

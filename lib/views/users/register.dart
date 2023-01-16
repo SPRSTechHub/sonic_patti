@@ -249,31 +249,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             if (formKey.currentState!.validate()) {
                               var fullname = fullnameCtltxt.text;
                               var mobile = mobileCtltxt.text;
                               var password = passwordCtltxt.text;
                               var referid = referCtltxt.text;
-                              var response = authController.signUpFunction(
-                                  fullname, mobile, password, referid, token);
-                              print(response);
-                              /*  if (response['status'] == 0) {
-                                Get.snackbar('', response['message'],
-                                    duration: const Duration(seconds: 1),
-                                    shouldIconPulse: true,
-                                    backgroundColor: Colors.blueAccent);
-                              } else if (register['status'] == 1) {
-                                Get.snackbar('', register['message'],
-                                    duration: const Duration(seconds: 1),
-                                    shouldIconPulse: true,
-                                    backgroundColor: Colors.redAccent);
+                              var response =
+                                  await authController.signUpFunction(fullname,
+                                      mobile, password, referid, token);
+                              if (response['status'] == 0) {
+                                setState(() {
+                                  Constant().showSuccessSnack(
+                                      response['message'], context);
+                                  Get.to(const LoginScreen(),
+                                      transition: Transition.upToDown);
+                                });
+                              } else if (response['status'] == 1) {
+                                setState(() {
+                                  Constant().showAlertSnack(
+                                      response['message'], context);
+                                });
                               } else {
-                                Get.snackbar('', 'Error detected!',
-                                    duration: const Duration(seconds: 1),
-                                    shouldIconPulse: true,
-                                    backgroundColor: Colors.blueGrey);
-                              } */
+                                setState(() {
+                                  Constant().showAlertSnack(
+                                      'Error detected!', context);
+                                });
+                              }
                             }
                           },
                           child: Container(
@@ -301,15 +303,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 158,
-                      height: 45,
-                      decoration: AppStyles.registerBG,
-                      child: Center(
-                        child: Text(
-                          'SOCIAL LOGIN',
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.kLoginText,
+                    GestureDetector(
+                      onTap: (() {
+                        setState(() {
+                          Constant()
+                              .showAlert('Comming soon!', context, navBgDark);
+                        });
+                      }),
+                      child: Container(
+                        width: 158,
+                        height: 45,
+                        decoration: AppStyles.registerBG,
+                        child: Center(
+                          child: Text(
+                            'SOCIAL LOGIN',
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.kLoginText,
+                          ),
                         ),
                       ),
                     ),

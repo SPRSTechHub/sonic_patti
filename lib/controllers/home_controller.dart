@@ -48,8 +48,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    //callTimer();
-    //checkLogin();
+    fetchBalance();
     fetchCatagories();
     super.onInit();
   }
@@ -66,6 +65,16 @@ class HomeController extends GetxController {
     scrollController.dispose();
   }
 
+//check User Balance
+  void fetchBalance() async {
+    String? uwbal = Constant.box.read('uwbal');
+    if (uwbal != null) {
+      var getBal = await RemoteApi.fetchCatagory('game_cat', 'monday');
+      if (getBal != null) {
+        Constant.box.write('uwbal', getBal);
+      }
+    }
+  }
 //Check Authenticity
 
 /*   String matchID = Constant.box.read('matchID');

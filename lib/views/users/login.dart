@@ -1,6 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sonic_patti/controllers/auth_controller.dart';
 import 'package:sonic_patti/controllers/cmc.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
@@ -14,19 +15,23 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isLogin = false;
+  final token = Constant.box.read('fcmToken') ?? false;
   late TextEditingController textController;
   final formKey = GlobalKey<FormState>();
   final mobileCtltxt = TextEditingController();
   final passwordCtltxt = TextEditingController();
-  bool isLogin = false;
+  late bool passwordVisibility;
   final ConnectionManagerController netController =
       Get.find<ConnectionManagerController>();
+  final AuthController authController = Get.find<AuthController>();
 
   @override
   void initState() {
+    passwordVisibility = false;
     isLogin = Constant.box.read('isLogin') ?? false;
-    final token = Constant.box.read('fcmToken') ?? false;
-    print(token);
+
+    //print(token);
 
     if (isLogin == true) {
       Get.to(const GameBoard());
@@ -134,9 +139,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter some text';
+                                return 'Mobile Number required!';
+                              } else if (value.length != 10) {
+                                return '10 digit Mobile Number!';
+                              } else {
+                                return null;
                               }
-                              return null;
                             },
                           ),
                         ),
@@ -149,10 +157,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               const Duration(milliseconds: 2000),
                               () => setState(() {}),
                             ),
-                            obscureText: true,
+                            obscureText: !passwordVisibility,
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: 'Set Your Password',
+                              labelText: 'Your Password',
+                              hintText: 'Enter Password here',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                   color: Color(0x00000000),
@@ -170,45 +179,48 @@ class _LoginScreenState extends State<LoginScreen> {
                               filled: true,
                               fillColor: const Color(0x3CE0E3E7),
                               prefixIcon: Icon(
-                                Icons.password,
-                                color: Colors.blueGrey.shade100,
+                                Icons.key_off_outlined,
+                                color: AppColors.kInputColor,
                               ),
-                              suffixIcon: passwordCtltxt.text.isNotEmpty
-                                  ? InkWell(
-                                      onTap: () => setState(
-                                        () => passwordCtltxt.clear(),
-                                      ),
-                                      child: const Icon(
-                                        Icons.clear,
-                                        color: Color(0xFFFB0D0D),
-                                        size: 22,
-                                      ),
-                                    )
-                                  : null,
+                              suffixIcon: InkWell(
+                                onTap: () => setState(
+                                  () =>
+                                      passwordVisibility = !passwordVisibility,
+                                ),
+                                focusNode: FocusNode(skipTraversal: true),
+                                child: Icon(
+                                  passwordVisibility
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                  color: const Color(0xFF757575),
+                                ),
+                              ),
                             ),
-                            style: const TextStyle(),
-                            keyboardType: TextInputType.text,
+                            style: const TextStyle(fontSize: 16),
+                            keyboardType: TextInputType.visiblePassword,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Password missing!';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                         GestureDetector(
                           onTap: () async {
                             if (formKey.currentState!.validate()) {
-                              setState(() {
-                                Get.snackbar(
-                                    'Alert!', 'Please enter all details!',
-                                    duration: const Duration(seconds: 3),
-                                    backgroundColor: bgColor1,
-                                    snackPosition: SnackPosition.BOTTOM);
-                              });
-                              // to close this
-                              //Navigator.of(context).pop();
-                              var mobileNo = mobileCtltxt.text;
-                              var passwordT = passwordCtltxt.text;
-                            } else {
-                              setState(() {
-                                //hide Spinner
-                                // Navigator.of(context).pop();
-                              });
+                              var mobile = mobileCtltxt.text;
+                              var password = passwordCtltxt.text;
+                              var response = await authController
+                                  .signInFunction(mobile, password, token);
+                              if (response == true) {
+                                setState(() {
+                                  Get.to(
+                                    const GameBoard(),
+                                    transition: Transition.fadeIn,
+                                  );
+                                });
+                              }
                             }
                           },
                           child: Container(
@@ -233,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(

@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
@@ -13,7 +14,7 @@ class TopAppBar extends StatefulWidget {
 
 class _TopAppBarState extends State<TopAppBar> {
   bool shadowColor = false;
-
+  final uwbal = Constant.box.read('uwbal');
   @override
   void initState() {
     super.initState();
@@ -55,6 +56,21 @@ class _TopAppBarState extends State<TopAppBar> {
       leading: setLeading(),
       title: const Text('Sonic Patti'),
       actions: <Widget>[
+        Badge(
+          position: BadgePosition.bottomEnd(bottom: -4, end: -4),
+          elevation: 0,
+          shape: BadgeShape.circle,
+          badgeContent: Text(
+            '₹ ${uwbal ?? 0}',
+            style: const TextStyle(fontSize: 10),
+          ),
+          badgeColor: Colors.red,
+          borderSide: const BorderSide(color: Colors.black),
+          child: const Icon(
+            Icons.person,
+            size: 30,
+          ),
+        ),
         IconButton(
           icon: Icon(
             Icons.account_balance_wallet_outlined,

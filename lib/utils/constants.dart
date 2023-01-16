@@ -17,7 +17,6 @@ const Color appBarText = Color(0xFFFFEDEA);
 const Color bottomBarHeader = Color(0xFF001F24);
 const Color bottomBarBg = Color(0xFF0B2722);
 
-//ColorScheme.fromSeed(seedColor: brandColor); // Color(0xff690005);
 Color navBgDark = darkColorScheme.surface;
 Color navBgLight = lightColorScheme.surface;
 
@@ -199,4 +198,56 @@ class AppStyles {
 class Constant {
   // Data Storage
   static final box = GetStorage();
+  showSuccessSnack(String? data, context) {
+    final SnackBar snakbar = SnackBar(
+      content: Text(
+        data!,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.blueAccent,
+      elevation: 10,
+      behavior: SnackBarBehavior.floating,
+      margin: const EdgeInsets.all(5),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snakbar);
+  }
+
+  showAlertSnack(String? data, context) {
+    final SnackBar snakbar = SnackBar(
+      content: Text(data!),
+      backgroundColor: Colors.redAccent,
+      elevation: 10,
+      behavior: SnackBarBehavior.floating,
+      margin: const EdgeInsets.all(5),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snakbar);
+  }
+
+  showAlert(String? msg, context, Color? colorD) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => Dialog(
+        child: Container(
+          padding: const EdgeInsets.all(12.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: colorD ?? navBgDark),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(msg!),
+              const SizedBox(height: 10),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
