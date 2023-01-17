@@ -40,6 +40,9 @@ const double appmargin = 10.0;
 const isLogin = false;
 
 class AppColors {
+  static var kAppTextColor = GetStorage().read('IS_DARK_MODE')
+      ? const Color(0xffFAFF00)
+      : const Color(0xffFAFF00);
   var kPrimaryBoxBackground = GetStorage().read('IS_DARK_MODE')
       ? const Color(0xff002328)
       : const Color(0xff002328);
@@ -101,15 +104,55 @@ class AppTextStyles {
       fontWeight: FontWeight.normal,
       height: 1);
 
-  static var kAtmCardBalance = GoogleFonts.josefinSans(
+  static var kAtmCardBalanceText = GoogleFonts.josefinSans(
+      color: Colors.white70,
+      fontSize: 16,
+      letterSpacing: 0,
+      fontWeight: FontWeight.normal,
+      height: 1);
+  static var kAtmCardBalance = GoogleFonts.kameron(
       color: Colors.white70,
       fontSize: 20,
       letterSpacing: 0,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.bold,
+      height: 1);
+  static var kYellowBtnTitle = GoogleFonts.inter(
+      color: Color.fromRGBO(41, 36, 0, 1),
+      fontSize: 16,
+      letterSpacing: 0,
+      fontWeight: FontWeight.bold,
       height: 1);
 }
 
 class AppStyles {
+  static var yellowBtn = BoxDecoration(
+    borderRadius: BorderRadius.circular(8),
+    gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color.fromRGBO(142, 111, 0, 1),
+          Color.fromRGBO(249, 255, 0, 1),
+          Color.fromRGBO(142, 111, 0, 1)
+        ]),
+  );
+  static var buttonBg = BoxDecoration(
+    borderRadius: BorderRadius.circular(12),
+    boxShadow: const [
+      BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.45),
+          offset: Offset(0, 3),
+          blurRadius: 2)
+    ],
+    gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          const Color(0xffE3E1D5).withOpacity(0.6),
+          const Color(0xff9AF0FF),
+        ]),
+  );
+
   static var backgrounds = const BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.topLeft,

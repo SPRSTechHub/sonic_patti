@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 
 class TransactionsScreen extends StatefulWidget {
@@ -132,22 +133,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                         width: 102,
                         height: 36,
                         padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.45),
-                                offset: Offset(0, 3),
-                                blurRadius: 2)
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                const Color(0xffE3E1D5).withOpacity(0.6),
-                                const Color(0xff9AF0FF),
-                              ]),
-                        ),
+                        decoration: AppStyles.buttonBg,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [

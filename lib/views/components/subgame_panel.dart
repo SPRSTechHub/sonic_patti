@@ -279,17 +279,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 width: 186,
                                 height: 72,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color.fromRGBO(142, 111, 0, 1),
-                                        Color.fromRGBO(249, 255, 0, 1),
-                                        Color.fromRGBO(142, 111, 0, 1)
-                                      ]),
-                                ),
+                                decoration: AppStyles.yellowBtn,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -325,17 +315,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 width: 186,
                                 height: 72,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color.fromRGBO(142, 111, 0, 1),
-                                        Color.fromRGBO(249, 255, 0, 1),
-                                        Color.fromRGBO(142, 111, 0, 1)
-                                      ]),
-                                ),
+                                decoration: AppStyles.yellowBtn,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -385,17 +365,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 height: 72,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color.fromRGBO(142, 111, 0, 1),
-                                        Color.fromRGBO(249, 255, 0, 1),
-                                        Color.fromRGBO(142, 111, 0, 1)
-                                      ]),
-                                ),
+                                decoration: AppStyles.yellowBtn,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -433,17 +403,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 height: 72,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color.fromRGBO(142, 111, 0, 1),
-                                        Color.fromRGBO(249, 255, 0, 1),
-                                        Color.fromRGBO(142, 111, 0, 1)
-                                      ]),
-                                ),
+                                decoration: AppStyles.yellowBtn,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -481,17 +441,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 height: 72,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color.fromRGBO(142, 111, 0, 1),
-                                        Color.fromRGBO(249, 255, 0, 1),
-                                        Color.fromRGBO(142, 111, 0, 1)
-                                      ]),
-                                ),
+                                decoration: AppStyles.yellowBtn,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -535,17 +485,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                               height: 72,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Color.fromRGBO(142, 111, 0, 1),
-                                      Color.fromRGBO(249, 255, 0, 1),
-                                      Color.fromRGBO(142, 111, 0, 1)
-                                    ]),
-                              ),
+                              decoration: AppStyles.yellowBtn,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -575,17 +515,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                               height: 72,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Color.fromRGBO(142, 111, 0, 1),
-                                      Color.fromRGBO(249, 255, 0, 1),
-                                      Color.fromRGBO(142, 111, 0, 1)
-                                    ]),
-                              ),
+                              decoration: AppStyles.yellowBtn,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -615,17 +545,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                               height: 72,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Color.fromRGBO(142, 111, 0, 1),
-                                      Color.fromRGBO(249, 255, 0, 1),
-                                      Color.fromRGBO(142, 111, 0, 1)
-                                    ]),
-                              ),
+                              decoration: AppStyles.yellowBtn,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
