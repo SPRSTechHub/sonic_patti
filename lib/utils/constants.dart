@@ -93,6 +93,20 @@ class AppTextStyles {
       letterSpacing: 0,
       fontWeight: FontWeight.normal,
       height: 1);
+
+  static var kAtmCardTitle = GoogleFonts.jura(
+      color: Colors.white70,
+      fontSize: 20,
+      letterSpacing: 0,
+      fontWeight: FontWeight.normal,
+      height: 1);
+
+  static var kAtmCardBalance = GoogleFonts.josefinSans(
+      color: Colors.white70,
+      fontSize: 20,
+      letterSpacing: 0,
+      fontWeight: FontWeight.normal,
+      height: 1);
 }
 
 class AppStyles {

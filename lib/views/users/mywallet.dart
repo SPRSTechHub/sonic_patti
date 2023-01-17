@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 
 class MyWallet extends StatefulWidget {
@@ -23,328 +24,83 @@ class _MyWalletState extends State<MyWallet> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color(0XFF000000),
-                      offset: Offset(0, 4),
-                      blurRadius: 2)
-                ],
-                color: const Color(0xff011F23),
+              width: 390,
+              height: 340,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(22),
+                  topRight: Radius.circular(22),
+                ),
+                color: Color(0xff113726),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Expanded(
-                        child: Text(
-                          'TRANSACTION HISTORY',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Color.fromRGBO(255, 255, 255, 1),
-                              fontFamily: 'Inter',
-                              fontSize: 20,
-                              letterSpacing: 0,
-                              fontWeight: FontWeight.normal,
-                              height: 1),
-                        ),
-                      ),
-                      Container(
-                        width: 92,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.45),
-                                offset: Offset(0, 3),
-                                blurRadius: 2)
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                const Color(0xffE3E1D5).withOpacity(0.6),
-                                const Color(0xff9AF0FF),
-                              ]),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Center(
-                              child: Text(
-                                'Reload',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontFamily: 'Inter',
-                                    fontSize: 14,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
-                              ),
-                            ),
-                            Icon(
-                              Icons.refresh_outlined,
-                              color: Color(0xff3F00FD),
-                              shadows: <Shadow>[
-                                Shadow(
-                                    color: Colors.black,
-                                    blurRadius: 1.0,
-                                    offset: Offset.zero)
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 4.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Container(
-                            height: 32,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: const Color.fromRGBO(
-                                  255, 255, 255, 0.17000000178813934),
-                              border: Border.all(
-                                color: const Color.fromRGBO(255, 255, 255, 1),
-                                width: 0.5,
-                              ),
-                            )),
-                      ),
-                      Container(
-                        width: 102,
-                        height: 36,
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.45),
-                                offset: Offset(0, 3),
-                                blurRadius: 2)
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                const Color(0xffE3E1D5).withOpacity(0.6),
-                                const Color(0xff9AF0FF),
-                              ]),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Center(
-                              child: Text(
-                                'Search',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontFamily: 'Inter',
-                                    fontSize: 14,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
-                              ),
-                            ),
-                            Icon(
-                              Icons.search_off_outlined,
-                              color: Color(0xff3F00FD),
-                              shadows: <Shadow>[
-                                Shadow(
-                                    color: Colors.black,
-                                    blurRadius: 1.0,
-                                    offset: Offset.zero)
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 4.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                          child: Container(
-                        width: 102,
-                        height: 36,
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.45),
-                                offset: Offset(0, 3),
-                                blurRadius: 2)
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                const Color(0xffE3E1D5).withOpacity(0.6),
-                                const Color(0xff9AF0FF),
-                              ]),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Center(
-                              child: Text(
-                                'Search',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontFamily: 'Inter',
-                                    fontSize: 14,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
-                              ),
-                            ),
-                            Icon(
-                              Icons.search_off_outlined,
-                              color: Color(0xff3F00FD),
-                              shadows: <Shadow>[
-                                Shadow(
-                                    color: Colors.black,
-                                    blurRadius: 1.0,
-                                    offset: Offset.zero)
-                              ],
-                            ),
-                          ],
-                        ),
-                      )),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      Container(
-                        width: 102,
-                        height: 36,
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.45),
-                                offset: Offset(0, 3),
-                                blurRadius: 2)
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                const Color(0xffE3E1D5).withOpacity(0.6),
-                                const Color(0xff9AF0FF),
-                              ]),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Center(
-                              child: Text(
-                                'Search',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontFamily: 'Inter',
-                                    fontSize: 14,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
-                              ),
-                            ),
-                            Icon(
-                              Icons.search_off_outlined,
-                              color: Color(0xff3F00FD),
-                              shadows: <Shadow>[
-                                Shadow(
-                                    color: Colors.black,
-                                    blurRadius: 1.0,
-                                    offset: Offset.zero)
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      Expanded(
-                          child: Container(
-                        width: 102,
-                        height: 36,
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.45),
-                                offset: Offset(0, 3),
-                                blurRadius: 2)
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                const Color(0xffE3E1D5).withOpacity(0.6),
-                                const Color(0xff9AF0FF),
-                              ]),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Center(
-                              child: Text(
-                                'Search',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontFamily: 'Inter',
-                                    fontSize: 14,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1),
-                              ),
-                            ),
-                            Icon(
-                              Icons.search_off_outlined,
-                              color: Color(0xff3F00FD),
-                              shadows: <Shadow>[
-                                Shadow(
-                                    color: Colors.black,
-                                    blurRadius: 1.0,
-                                    offset: Offset.zero)
-                              ],
-                            ),
-                          ],
-                        ),
-                      )),
-                    ],
-                  ),
-                ],
-              ),
+              child: const BuildATMCard(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BuildATMCard extends StatelessWidget {
+  const BuildATMCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 330,
+      height: 150,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+          bottomLeft: Radius.circular(12),
+          bottomRight: Radius.circular(12),
+        ),
+        gradient: LinearGradient(
+            begin: Alignment(0.8173059225082397, 0.1653572916984558),
+            end: Alignment(-0.1653572916984558, 0.16886486113071442),
+            colors: [
+              Color.fromRGBO(255, 234, 0, 1),
+              Color.fromRGBO(128, 118, 0, 1)
+            ]),
+      ),
+      child: Container(
+        width: 330,
+        height: 150,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+            bottomLeft: Radius.circular(12),
+            bottomRight: Radius.circular(12),
+          ),
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.25),
+                offset: Offset(0, 4),
+                blurRadius: 4)
+          ],
+          gradient: LinearGradient(
+              begin: Alignment(0.8421556353569031, 0.160120889544487),
+              end: Alignment(-0.160120889544487, 0.17399908602237701),
+              colors: [
+                Color.fromRGBO(55, 49, 0, 0.9800000190734863),
+                Color.fromRGBO(32, 28, 0, 1),
+              ]),
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'JHONS MIKE',
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.kAtmCardTitle,
+                ),
+              ],
             )
           ],
         ),
