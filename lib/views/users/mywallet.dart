@@ -76,7 +76,7 @@ class _MyWalletState extends State<MyWallet> {
                       ),
                     ),
                   ),
-                  BuildATMCard(),
+                  const BuildATMCard(),
                   const SizedBox(
                     height: 10,
                   ),
@@ -181,9 +181,9 @@ class _MyWalletState extends State<MyWallet> {
                             height: 72,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(18),
-                              color: Color.fromRGBO(0, 34, 40, 1),
+                              color: const Color.fromRGBO(0, 34, 40, 1),
                               border: Border.all(
-                                color: Color.fromRGBO(0, 0, 0, 1),
+                                color: const Color.fromRGBO(0, 0, 0, 1),
                                 width: 5,
                               ),
                             ),
@@ -314,7 +314,7 @@ class _MyWalletState extends State<MyWallet> {
                                   decoration: AppStyles.yellowBtn,
                                   child: Center(
                                     child: Text(
-                                      'EARN COINS',
+                                      'REDEAM COINS',
                                       textAlign: TextAlign.center,
                                       style: AppTextStyles.kYellowBtnTitle,
                                     ),

@@ -7,6 +7,7 @@ import 'package:sonic_patti/views/components/sidenav.dart';
 import 'package:sonic_patti/views/gameScreens/all_games.dart';
 import 'package:sonic_patti/views/gameScreens/allbids.dart';
 import 'package:sonic_patti/views/gameScreens/results.dart';
+import 'package:sonic_patti/views/users/mywallet.dart';
 import 'package:sonic_patti/views/users/profileScreen.dart';
 
 class GameBoard extends StatefulWidget {
@@ -42,15 +43,19 @@ class _GameBoardState extends State<GameBoard> {
         child: TopAppBar(),
       ),
       body: buildBody(),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           _mainController.fetchCatagories();
+          Get.to(const MyWallet(), transition: Transition.leftToRightWithFade);
         },
-        elevation: _isVisible ? 0.0 : null,
-        label: const Text('Fund'),
-        icon: const Icon(Icons.add),
-        /*   foregroundColor: fabText,
-        backgroundColor: fabBg, */
+        elevation: _isVisible ? 8.0 : null,
+        child: const Icon(
+          Icons.bolt_outlined,
+          size: 24,
+          shadows: <Shadow>[
+            Shadow(color: Colors.white, blurRadius: 6.0, offset: Offset.zero)
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       bottomNavigationBar:
