@@ -8,18 +8,6 @@
       "name": "sonic_patti_flutter",
       "request": "launch",
       "type": "dart"
-    },
-    {
-      "name": "sonic_patti_flutter (profile mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "sonic_patti_flutter (release mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
     }
   ]
 }

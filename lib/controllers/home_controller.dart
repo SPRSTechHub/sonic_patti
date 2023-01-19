@@ -152,22 +152,6 @@ class HomeController extends GetxController {
     }
   }
 
-  //checkBidVal();
-
-  /*
-        "{
-    action: betplace,
-    day: monday,
-    matchId:FFGC1,
-    betType: SingleDigit/SinglePanna/DoublePanna/TripplePanna/cp,
-    betVal:betnumbers (ie: 123),
-    betAmnt: 'bet amount in INR 0.00',
-    mobile:'user mobile no',
-    date:'DD-MM-YYYY',
-    time:HH:MM (it will be match time in hour in 24, minutes)
-}"
-*/
-
   void changeTabIndex(int index) {
     tabIndex.value = index;
   }

@@ -250,6 +250,23 @@ class AppStyles {
           Color.fromRGBO(0, 0, 0, 0.44999998807907104)
         ]),
   );
+  static var detailsProfileBg = BoxDecoration(
+    borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+    boxShadow: [
+      BoxShadow(
+          color: const Color(0xff000000).withOpacity(0.4),
+          offset: const Offset(0, -6),
+          blurRadius: 2),
+    ],
+    gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          const Color(0xffD0FBE0),
+          const Color(0xff9AF0FF).withOpacity(0.8)
+        ]),
+  );
 }
 
 class Constant {

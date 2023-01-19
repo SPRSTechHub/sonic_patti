@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sonic_patti/controllers/home_controller.dart';
+import 'package:sonic_patti/views/gameScreens/gameboard.dart';
+import 'package:sonic_patti/views/users/mywallet.dart';
 
 class SideNav extends StatefulWidget {
   const SideNav({super.key});
@@ -8,6 +12,7 @@ class SideNav extends StatefulWidget {
 }
 
 class _SideNavState extends State<SideNav> {
+  final HomeController _mainController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -100,6 +105,11 @@ class _SideNavState extends State<SideNav> {
             title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
+              setState(() {
+                _mainController.changeTabIndex(0);
+                _mainController.tabIndex.value = 0;
+                Get.to(const GameBoard());
+              });
             },
           ),
           const Divider(thickness: 1),
@@ -108,6 +118,10 @@ class _SideNavState extends State<SideNav> {
             title: const Text('My Profile'),
             onTap: () {
               Navigator.pop(context);
+              setState(() {
+                _mainController.changeTabIndex(1);
+                Get.to(const GameBoard());
+              });
             },
           ),
           const Divider(thickness: 1),
@@ -132,6 +146,7 @@ class _SideNavState extends State<SideNav> {
             title: const Text('My Wallet'),
             onTap: () {
               Navigator.pop(context);
+              Get.to(const MyWallet());
             },
           ),
           const Divider(thickness: 1),

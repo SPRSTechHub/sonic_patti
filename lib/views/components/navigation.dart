@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,8 +8,10 @@ import '../../utils/constants.dart';
 
 class navBar extends StatefulWidget {
   const navBar({
+    super.key,
     required this.isElevated,
     required this.isVisible,
+    required int index,
   });
 
   final bool isElevated;

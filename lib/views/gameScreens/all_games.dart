@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sonic_patti/views/components/catagories_panel.dart';
+import 'package:sonic_patti/views/earnscreen/earnland.dart';
 
 import '../../controllers/home_controller.dart';
 import '../../utils/constants.dart';
@@ -15,6 +16,9 @@ class AllGames extends StatefulWidget {
 
 class _AllGamesState extends State<AllGames> {
   final HomeController _mainController = Get.find<HomeController>();
+
+  static const List<Widget> fruits = <Widget>[Text('Play'), Text('Earn')];
+  final List<bool> _selectedFruits = <bool>[false, true];
   @override
   void initState() {
     super.initState();
@@ -95,12 +99,12 @@ class _AllGamesState extends State<AllGames> {
             Center(
               child: Container(
                 height: 42,
-                width: 180,
+                width: 150,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: const [
                     BoxShadow(
-                        color: Color.fromRGBO(0, 0, 0, 0.30000001192092896),
+                        color: Color.fromRGBO(0, 0, 0, 0.30),
                         offset: Offset(4, 6),
                         blurRadius: 8)
                   ],
@@ -113,20 +117,24 @@ class _AllGamesState extends State<AllGames> {
                     ],
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: const [
-                    Text('PLAY'),
-                    VerticalDivider(
-                      thickness: 2,
-                      indent: 4,
-                      endIndent: 4,
-                      color: Colors.black54,
-                    ),
-                    Text('EARN'),
-                  ],
+                child: ToggleButtons(
+                  direction: Axis.horizontal,
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  selectedBorderColor: fabBg,
+                  selectedColor: Colors.white,
+                  fillColor: bgColor1,
+                  constraints:
+                      const BoxConstraints(minHeight: 41.5, minWidth: 73.5),
+                  isSelected: _selectedFruits,
+                  children: fruits,
+                  onPressed: (int index) {
+                    setState(() {
+                      if (index != 0) {
+                        Get.to(const EarningBoard(),
+                            transition: Transition.fade);
+                      }
+                    });
+                  },
                 ),
               ),
             ),

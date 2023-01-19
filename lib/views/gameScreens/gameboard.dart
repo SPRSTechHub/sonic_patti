@@ -58,9 +58,17 @@ class _GameBoardState extends State<GameBoard> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-      bottomNavigationBar:
-          navBar(isElevated: true, isVisible: _mainController.isVisible.value),
+      bottomNavigationBar: nav(),
       drawer: const SideNav(),
+    );
+  }
+
+  Widget nav() {
+    return Obx(
+      () => navBar(
+          index: _mainController.tabIndex.value,
+          isElevated: true,
+          isVisible: _mainController.isVisible.value),
     );
   }
 

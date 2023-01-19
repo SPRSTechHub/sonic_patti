@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
 import 'package:sonic_patti/views/users/notifications.dart';
 
@@ -31,7 +32,7 @@ class _TopAppBarState extends State<TopAppBar> {
           ],
         ),
         onPressed: () {
-          Get.back();
+          Get.to(const GameBoard(), transition: Transition.native);
         },
       );
     } else {
