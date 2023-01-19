@@ -11,6 +11,12 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
+  void initState() {
+    print(Constant.box.read('IS_DARK_MODE'));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
@@ -71,32 +77,116 @@ class _ProfileState extends State<Profile> {
           Container(
             padding: const EdgeInsets.all(8.0),
             alignment: Alignment.topLeft,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
+            child: ListView(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(8),
               children: <Widget>[
-                Container(
-                  width: Get.width,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color:
-                        const Color.fromRGBO(245, 245, 245, 0.1599999964237213),
-                  ),
-                  child: const Text(
-                    'CONTENTS',
-                    textAlign: TextAlign.left,
+                Material(
+                  color: bgColor1.withOpacity(.3),
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(8),
+                  child: SwitchListTile(
+                    title: const Text('PROFILE UPDATE'),
+                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        Constant.box.write('IS_DARK_MODE', value);
+                      });
+                    },
                   ),
                 ),
-                const Text(
-                  'CONTENTS',
-                  textAlign: TextAlign.left,
+                const SizedBox(
+                  height: 10,
                 ),
-                const Text(
-                  'CONTENTS',
-                  textAlign: TextAlign.left,
-                )
+                Material(
+                  color: bgColor1.withOpacity(.3),
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(8),
+                  child: SwitchListTile(
+                    title: const Text('ACCOUNT UPDATE'),
+                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        Constant.box.write('IS_DARK_MODE', value);
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Material(
+                  color: bgColor1.withOpacity(.3),
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(8),
+                  child: SwitchListTile(
+                    title: Text(
+                        'APP THEME MODE: ${Constant.box.read('IS_DARK_MODE') ? 'DARK' : 'LIGHT'}'),
+                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        Constant.box.write('IS_DARK_MODE', value);
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Material(
+                  color: bgColor1.withOpacity(.3),
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(8),
+                  child: SwitchListTile(
+                    title: Text(
+                        'NOTIFICATIONS: ${Constant.box.read('IS_DARK_MODE') ? 'YES' : 'NO'}'),
+                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        Constant.box.write('IS_DARK_MODE', value);
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Material(
+                  color: bgColor1.withOpacity(.3),
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(8),
+                  child: SwitchListTile(
+                    title: Text(
+                        'PASSCODE LOCK: ${Constant.box.read('IS_DARK_MODE') ? 'YES' : 'NO'}'),
+                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        Constant.box.write('IS_DARK_MODE', value);
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Material(
+                  color: bgColor1.withOpacity(.3),
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(8),
+                  child: SwitchListTile(
+                    title: const Text('APP UPDATE'),
+                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        Constant.box.write('IS_DARK_MODE', value);
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           ),
@@ -105,3 +195,87 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
+
+
+
+/*
+     SizedBox(
+            height: 68,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 48,
+                  padding: const EdgeInsets.all(4.0),
+                  decoration: AppStyles.buttonBg,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.verified_user_outlined,
+                        size: 28,
+                        color: Color(0xff3F00FD),
+                        shadows: <Shadow>[
+                          Shadow(
+                              color: Colors.black,
+                              blurRadius: 1.0,
+                              offset: Offset.zero)
+                        ],
+                      ),
+                      Center(
+                        child: Text(
+                          'PROFILE UPDATE',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontFamily: 'Inter',
+                              fontSize: 14,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.bold,
+                              height: 1),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 48,
+                  padding: const EdgeInsets.all(4.0),
+                  decoration: AppStyles.buttonBg,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.verified_user_outlined,
+                        size: 28,
+                        color: Color(0xff3F00FD),
+                        shadows: <Shadow>[
+                          Shadow(
+                              color: Colors.black,
+                              blurRadius: 1.0,
+                              offset: Offset.zero)
+                        ],
+                      ),
+                      Center(
+                        child: Text(
+                          'FRIENDS',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontFamily: 'Inter',
+                              fontSize: 14,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.bold,
+                              height: 1),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+      */

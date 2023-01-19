@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/users/login.dart';
@@ -32,9 +31,11 @@ void main() async {
   final fcmToken = await FirebaseMessaging.instance.getToken();
   await GetStorage.init();
   initFirst = GetStorage().read('initFirst');
-  Get.isDarkMode
-      ? GetStorage().write('IS_DARK_MODE', false)
-      : GetStorage().write('IS_DARK_MODE', true);
+  if (Constant.box.read('IS_DARK_MODE') == null) {
+    Get.isDarkMode
+        ? GetStorage().write('IS_DARK_MODE', false)
+        : GetStorage().write('IS_DARK_MODE', true);
+  }
 
   GetStorage().write('fcmToken', fcmToken ?? false);
   //FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

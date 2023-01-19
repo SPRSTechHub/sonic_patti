@@ -11,7 +11,9 @@ const Color black = Colors.black;
 const Color bgColor1 = Color(0xff312B4F);
 const Color bgColor2 = Color(0xffAA8F00);
 
-const Color appBarBg = Color(0xff93000A);
+Color appBarBg = darkColorScheme.surface;
+Color appBarBgLight = lightColorScheme.surface;
+
 const Color appBarText = Color(0xFFFFEDEA);
 
 const Color bottomBarHeader = Color(0xFF001F24);
