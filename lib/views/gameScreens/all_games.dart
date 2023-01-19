@@ -27,64 +27,107 @@ class _AllGamesState extends State<AllGames> {
       color: AppColors().kPrimaryBoxBackground,
       child: SingleChildScrollView(
         controller: _mainController.scrollController,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 4,
+        child: Stack(
+          fit: StackFit.loose,
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 4,
+                ),
+                SizedBox(
+                  height: 180,
+                  width: Get.width,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return buildCard(index);
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          width: 6,
+                        );
+                      },
+                      itemCount: 5),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 32,
+                  width: Get.width,
+                  color: Colors.red,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 700,
+                  child: Center(
+                    child: Obx(() {
+                      if (_mainController.isDataProcessing.value == true) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        if (_mainController.catLists.isNotEmpty) {
+                          return const ListofGames();
+                        } else {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Lottie.asset(
+                                'assets/anim/loading1.json',
+                                fit: BoxFit.fill,
+                              ),
+                              const Text('Games are loading ....'),
+                            ],
+                          );
+                        }
+                      }
+                    }),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 180,
-              width: Get.width,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return buildCard(index);
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      width: 6,
-                    );
-                  },
-                  itemCount: 5),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 32,
-              width: Get.width,
-              color: Colors.red,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 700,
-              child: Center(
-                child: Obx(() {
-                  if (_mainController.isDataProcessing.value == true) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    if (_mainController.catLists.isNotEmpty) {
-                      return const ListofGames();
-                    } else {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Lottie.asset(
-                            'assets/anim/loading1.json',
-                            fit: BoxFit.fill,
-                          ),
-                          const Text('Games are loading ....'),
-                        ],
-                      );
-                    }
-                  }
-                }),
+            Center(
+              child: Container(
+                height: 42,
+                width: 180,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromRGBO(0, 0, 0, 0.30000001192092896),
+                        offset: Offset(4, 6),
+                        blurRadius: 8)
+                  ],
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromRGBO(221, 200, 0, 1),
+                      Color.fromRGBO(255, 0, 0, 1)
+                    ],
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: const [
+                    Text('PLAY'),
+                    VerticalDivider(
+                      thickness: 2,
+                      indent: 4,
+                      endIndent: 4,
+                      color: Colors.black54,
+                    ),
+                    Text('EARN'),
+                  ],
+                ),
               ),
             ),
           ],

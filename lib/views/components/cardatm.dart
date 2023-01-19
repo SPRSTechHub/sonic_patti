@@ -33,7 +33,7 @@ class BuildATMCard extends StatelessWidget {
                 offset: Offset(0, 4),
                 blurRadius: 4)
           ],
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
               begin: Alignment(0.8421556353569031, 0.160120889544487),
               end: Alignment(-0.160120889544487, 0.17399908602237701),
               colors: [
@@ -76,12 +76,12 @@ class BuildATMCard extends StatelessWidget {
                   size: 24,
                   color: AppColors.kAppTextColor,
                 ),
-                Icon(
+                const Icon(
                   Icons.payment_outlined,
                   size: 24,
                   color: Color(0xff3700FF),
                 ),
-                Icon(
+                const Icon(
                   Icons.join_full,
                   size: 24,
                   color: Color(0xffFF0000),
@@ -96,7 +96,7 @@ class BuildATMCard extends StatelessWidget {
                   'BALANCE',
                   textAlign: TextAlign.left,
                   style: AppTextStyles.kAtmCardBalanceText
-                      .copyWith(color: Color(0xFFFFC700)),
+                      .copyWith(color: const Color(0xFFFFC700)),
                 ),
                 Text('₹ 99999.00',
                     textAlign: TextAlign.left,
@@ -122,12 +122,12 @@ class BuildATMCard extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: AppTextStyles.kAtmCardTitle.copyWith(
                       fontSize: 32,
-                      color: Color.fromRGBO(255, 255, 255, 0.1),
+                      color: const Color.fromRGBO(255, 255, 255, 0.1),
                     )),
                 const SizedBox(
                   width: 20,
                 ),
-                Icon(
+                const Icon(
                   Icons.qr_code_2_outlined,
                   size: 24,
                   color: white,

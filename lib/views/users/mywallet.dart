@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/cardatm.dart';
+import 'package:sonic_patti/views/components/cardslides.dart';
 import 'package:sonic_patti/views/pymnts/transactions.dart';
 
 class MyWallet extends StatefulWidget {
@@ -77,41 +78,250 @@ class _MyWalletState extends State<MyWallet> {
                     ),
                   ),
                   const BuildATMCard(),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 6.0),
                       child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () => openMoneyModal('user'),
-                        child: WalletButtons('Add Cash', Icons.wallet),
-                      ),
-                      GestureDetector(
-                        onTap: () => Get.to(TransactionsScreen(),
-                            transition: Transition.downToUp),
-                        child:
-                            WalletButtons('Withdraw', Icons.outbond_outlined),
-                      ),
-                      GestureDetector(
-                        onTap: () => Get.to(TransactionsScreen(),
-                            transition: Transition.downToUp),
-                        child: WalletButtons(
-                            'Transfer', Icons.play_for_work_outlined),
-                      ),
-                      GestureDetector(
-                        onTap: () => Get.to(TransactionsScreen(),
-                            transition: Transition.downToUp),
-                        child: WalletButtons(
-                            'History', Icons.auto_stories_outlined),
-                      ),
-                    ],
-                  )),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: GestureDetector(
+                              onTap: () => Get.to(const TransactionsScreen(),
+                                  transition: Transition.downToUp),
+                              child: walletButtons(
+                                  'Withdraw', Icons.outbond_outlined),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: GestureDetector(
+                              onTap: () => Get.to(const TransactionsScreen(),
+                                  transition: Transition.downToUp),
+                              child: walletButtons(
+                                  'Transfer', Icons.play_for_work_outlined),
+                            ),
+                          ),
+                          /*       
+                                GestureDetector(
+                            onTap: () => Get.to(const TransactionsScreen(),
+                                transition: Transition.downToUp),
+                            child: walletButtons(
+                                'Transfer', Icons.play_for_work_outlined),
+                          ), GestureDetector(
+                            onTap: () => Get.to(const TransactionsScreen(),
+                                transition: Transition.downToUp),
+                            child: walletButtons(
+                                'History', Icons.auto_stories_outlined),
+                          ),
+ */
+                        ],
+                      )),
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            addMoney(),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              width: Get.width,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(22),
+                  topRight: Radius.circular(22),
+                ),
+                color: Color(0xff113726),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 180,
+                    width: Get.width,
+                    child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return buildCard(index);
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            width: 2,
+                          );
+                        },
+                        itemCount: 5),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget addMoney() {
+    return Center(
+      child: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            Container(
+              width: Get.width * .65,
+              height: 72,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                color: const Color.fromRGBO(0, 34, 40, 1),
+                border: Border.all(
+                  color: const Color.fromRGBO(0, 0, 0, 1),
+                  width: 5,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.all(4),
+                child: TextFormField(
+                  controller: amounCtltxt,
+                  onChanged: (_) => EasyDebounce.debounce(
+                    'textController',
+                    const Duration(milliseconds: 2000),
+                    () => setState(() {}),
+                  ),
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    labelText: 'ENTER AMOUNT',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    filled: true,
+                    fillColor: const Color(0x3CE0E3E7),
+                    prefixIcon: Icon(
+                      Icons.currency_rupee,
+                      color: Colors.blueGrey.shade100,
+                    ),
+                    suffixIcon: amounCtltxt.text.isNotEmpty
+                        ? InkWell(
+                            onTap: () => setState(
+                              () => amounCtltxt.clear(),
+                            ),
+                            child: const Icon(
+                              Icons.clear,
+                              color: Color(0xFFFB0D0D),
+                              size: 22,
+                            ),
+                          )
+                        : null,
+                  ),
+                  style: const TextStyle(fontSize: 20),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Mobile Number required!';
+                    } else if (value.length != 10) {
+                      return '10 digit Mobile Number!';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 158,
+                    height: 45,
+                    decoration: AppStyles.yellowBtn,
+                    child: Center(
+                      child: Text(
+                        'OFFLINE',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.kYellowBtnTitle,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 158,
+                    height: 45,
+                    decoration: AppStyles.yellowBtn,
+                    child: Center(
+                      child: Text(
+                        'ONLINE',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.kYellowBtnTitle,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 158,
+                    height: 45,
+                    decoration: AppStyles.yellowBtn,
+                    child: Center(
+                      child: Text(
+                        'REQUEST FRIEND',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.kYellowBtnTitle,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 158,
+                    height: 45,
+                    decoration: AppStyles.yellowBtn,
+                    child: Center(
+                      child: Text(
+                        'REDEAM COINS',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.kYellowBtnTitle,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
@@ -171,162 +381,7 @@ class _MyWalletState extends State<MyWallet> {
                 Flexible(
                   flex: 1,
                   fit: FlexFit.tight,
-                  child: Center(
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          Container(
-                            width: Get.width * .65,
-                            height: 72,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18),
-                              color: const Color.fromRGBO(0, 34, 40, 1),
-                              border: Border.all(
-                                color: const Color.fromRGBO(0, 0, 0, 1),
-                                width: 5,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.all(4),
-                              child: TextFormField(
-                                controller: amounCtltxt,
-                                onChanged: (_) => EasyDebounce.debounce(
-                                  'textController',
-                                  const Duration(milliseconds: 2000),
-                                  () => setState(() {}),
-                                ),
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'ENTER AMOUNT',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  filled: true,
-                                  fillColor: const Color(0x3CE0E3E7),
-                                  prefixIcon: Icon(
-                                    Icons.currency_rupee,
-                                    color: Colors.blueGrey.shade100,
-                                  ),
-                                  suffixIcon: amounCtltxt.text.isNotEmpty
-                                      ? InkWell(
-                                          onTap: () => setState(
-                                            () => amounCtltxt.clear(),
-                                          ),
-                                          child: const Icon(
-                                            Icons.clear,
-                                            color: Color(0xFFFB0D0D),
-                                            size: 22,
-                                          ),
-                                        )
-                                      : null,
-                                ),
-                                style: const TextStyle(fontSize: 20),
-                                keyboardType: TextInputType.number,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Mobile Number required!';
-                                  } else if (value.length != 10) {
-                                    return '10 digit Mobile Number!';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: 158,
-                                  height: 45,
-                                  decoration: AppStyles.yellowBtn,
-                                  child: Center(
-                                    child: Text(
-                                      'OFFLINE',
-                                      textAlign: TextAlign.center,
-                                      style: AppTextStyles.kYellowBtnTitle,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: 158,
-                                  height: 45,
-                                  decoration: AppStyles.yellowBtn,
-                                  child: Center(
-                                    child: Text(
-                                      'ONLINE',
-                                      textAlign: TextAlign.center,
-                                      style: AppTextStyles.kYellowBtnTitle,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: 158,
-                                  height: 45,
-                                  decoration: AppStyles.yellowBtn,
-                                  child: Center(
-                                    child: Text(
-                                      'REQUEST FRIEND',
-                                      textAlign: TextAlign.center,
-                                      style: AppTextStyles.kYellowBtnTitle,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: 158,
-                                  height: 45,
-                                  decoration: AppStyles.yellowBtn,
-                                  child: Center(
-                                    child: Text(
-                                      'REDEAM COINS',
-                                      textAlign: TextAlign.center,
-                                      style: AppTextStyles.kYellowBtnTitle,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: Text('data'),
                 ),
               ],
             ),
@@ -334,9 +389,8 @@ class _MyWalletState extends State<MyWallet> {
         });
   }
 
-  WalletButtons(String? btntext, IconData listOfIcons) {
+  walletButtons(String? btntext, IconData listOfIcons) {
     return Container(
-      width: 68,
       height: 68,
       padding: const EdgeInsets.all(4.0),
       decoration: AppStyles.buttonBg,
@@ -347,8 +401,8 @@ class _MyWalletState extends State<MyWallet> {
           Icon(
             listOfIcons,
             size: 28,
-            color: Color(0xff3F00FD),
-            shadows: <Shadow>[
+            color: const Color(0xff3F00FD),
+            shadows: const <Shadow>[
               Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
             ],
           ),
@@ -356,7 +410,7 @@ class _MyWalletState extends State<MyWallet> {
             child: Text(
               btntext!,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color.fromRGBO(0, 0, 0, 1),
                   fontFamily: 'Inter',
                   fontSize: 14,
