@@ -26,9 +26,10 @@ class _navBarState extends State<navBar> {
     Icons.widgets_outlined,
     Icons.person_outline,
     Icons.gavel,
-    Icons.military_tech_outlined
+    Icons.military_tech_outlined,
+    Icons.group_add_outlined,
   ];
-  List<String> listOfTexts = ['Home', 'Profile', 'My Bid', 'Results'];
+  List<String> listOfTexts = ['Home', 'Profile', 'My Bid', 'Results', 'Refer'];
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +44,11 @@ class _navBarState extends State<navBar> {
           child: Row(
             children: [
               SizedBox(
-                width: Get.width * .7,
+                width: Get.width * .8,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: 4,
+                  itemCount: 5,
                   padding: const EdgeInsets.symmetric(horizontal: 2.0),
                   itemBuilder: (context, index) => InkWell(
                     onTap: () {
@@ -70,12 +71,12 @@ class _navBarState extends State<navBar> {
                                 bottom: index == controller.tabIndex.value
                                     ? 0
                                     : Get.width * .042,
-                                right: Get.width * .0211,
-                                left: Get.width * .0211,
+                                right: Get.width * .0120,
+                                left: Get.width * .0120,
                               ),
-                              width: (Get.width * .7) * .188,
+                              width: (Get.width * .8) * .162,
                               height: index == controller.tabIndex.value
-                                  ? Get.width * .014
+                                  ? Get.width * .016
                                   : 0,
                               decoration: const BoxDecoration(
                                 color: navHighlighter,
@@ -87,10 +88,10 @@ class _navBarState extends State<navBar> {
                             Container(
                               margin: EdgeInsets.only(
                                 top: 6,
-                                right: Get.width * .0211,
-                                left: Get.width * .0211,
+                                right: Get.width * .0120,
+                                left: Get.width * .0120,
                               ),
-                              width: (Get.width * .7) * .188,
+                              width: (Get.width * .8) * .162,
                               child: Column(
                                 children: [
                                   Icon(
@@ -122,7 +123,7 @@ class _navBarState extends State<navBar> {
                 ),
               ),
               SizedBox(
-                width: Get.width * .3,
+                width: Get.width * .2,
               )
             ],
           ),

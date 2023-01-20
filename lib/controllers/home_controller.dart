@@ -82,8 +82,6 @@ class HomeController extends GetxController {
   }
 
 //Check Authenticity
-/* String matchID = Constant.box.read('matchID');
-  String betType = Constant.box.read('betType'); */
 
   addBid(String bidVal, String bidamnt) {
     final index = bids.indexWhere((element) => element.bidNum == bidVal);

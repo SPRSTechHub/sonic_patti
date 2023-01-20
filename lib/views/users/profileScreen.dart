@@ -61,6 +61,23 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               Positioned(
+                top: 70,
+                left: Get.width * .54,
+                child: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.add_a_photo_outlined,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    onPressed: () {
+                      print('Add phot func');
+                    },
+                  ),
+                ),
+              ),
+              Positioned(
                   top: 180,
                   left: Get.width * .42,
                   child: Text(Constant.box.read('userid'),
@@ -73,6 +90,35 @@ class _ProfileState extends State<Profile> {
                       textAlign: TextAlign.left,
                       style: AppTextStyles.kAtmCardBalanceText)),
             ]),
+          ),
+          SizedBox(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 18.0),
+                  decoration: AppStyles.buttonBgRound,
+                  child: Text(
+                    'EDIT PROFILE',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.kYellowBtnTitle,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 18.0),
+                  decoration: AppStyles.buttonBgRound,
+                  child: Text(
+                    'BANK DETAILS',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.kYellowBtnTitle,
+                  ),
+                ),
+              ],
+            ),
           ),
           Container(
             padding: const EdgeInsets.all(8.0),
@@ -195,87 +241,3 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
-
-
-
-/*
-     SizedBox(
-            height: 68,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 48,
-                  padding: const EdgeInsets.all(4.0),
-                  decoration: AppStyles.buttonBg,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.verified_user_outlined,
-                        size: 28,
-                        color: Color(0xff3F00FD),
-                        shadows: <Shadow>[
-                          Shadow(
-                              color: Colors.black,
-                              blurRadius: 1.0,
-                              offset: Offset.zero)
-                        ],
-                      ),
-                      Center(
-                        child: Text(
-                          'PROFILE UPDATE',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Inter',
-                              fontSize: 14,
-                              letterSpacing: 0,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 48,
-                  padding: const EdgeInsets.all(4.0),
-                  decoration: AppStyles.buttonBg,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.verified_user_outlined,
-                        size: 28,
-                        color: Color(0xff3F00FD),
-                        shadows: <Shadow>[
-                          Shadow(
-                              color: Colors.black,
-                              blurRadius: 1.0,
-                              offset: Offset.zero)
-                        ],
-                      ),
-                      Center(
-                        child: Text(
-                          'FRIENDS',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Inter',
-                              fontSize: 14,
-                              letterSpacing: 0,
-                              fontWeight: FontWeight.bold,
-                              height: 1),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-      */

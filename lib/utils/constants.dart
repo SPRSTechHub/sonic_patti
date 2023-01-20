@@ -81,6 +81,13 @@ class AppTextStyles {
 
   static var kTextStyleWithFont1 = GoogleFonts.cairo;
 
+  static var kReferText = GoogleFonts.itim(
+      color: const Color.fromRGBO(255, 255, 255, 1),
+      fontSize: 30,
+      letterSpacing: 0,
+      fontWeight: FontWeight.normal,
+      height: 1);
+
   var kTextStyleTwelveWithGreyColor = GoogleFonts.montserrat(
     fontSize: 12,
   );
@@ -119,7 +126,7 @@ class AppTextStyles {
       fontWeight: FontWeight.bold,
       height: 1);
   static var kYellowBtnTitle = GoogleFonts.inter(
-      color: Color.fromRGBO(41, 36, 0, 1),
+      color: const Color.fromRGBO(41, 36, 0, 1),
       fontSize: 16,
       letterSpacing: 0,
       fontWeight: FontWeight.bold,
@@ -140,6 +147,22 @@ class AppStyles {
   );
   static var buttonBg = BoxDecoration(
     borderRadius: BorderRadius.circular(12),
+    boxShadow: const [
+      BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.45),
+          offset: Offset(0, 3),
+          blurRadius: 2)
+    ],
+    gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          const Color(0xffE3E1D5).withOpacity(0.6),
+          const Color(0xff9AF0FF),
+        ]),
+  );
+  static var buttonBgRound = BoxDecoration(
+    borderRadius: BorderRadius.circular(28),
     boxShadow: const [
       BoxShadow(
           color: Color.fromRGBO(0, 0, 0, 0.45),

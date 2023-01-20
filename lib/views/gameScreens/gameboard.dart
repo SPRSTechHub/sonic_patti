@@ -9,6 +9,7 @@ import 'package:sonic_patti/views/gameScreens/allbids.dart';
 import 'package:sonic_patti/views/gameScreens/results.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
 import 'package:sonic_patti/views/users/profileScreen.dart';
+import 'package:sonic_patti/views/users/referearn.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -75,7 +76,13 @@ class _GameBoardState extends State<GameBoard> {
   Widget buildBody() {
     return Obx(() => IndexedStack(
           index: _mainController.tabIndex.value,
-          children: const [AllGames(), Profile(), AllBids(), Results()],
+          children: const [
+            AllGames(),
+            Profile(),
+            AllBids(),
+            Results(),
+            MyReferral(),
+          ],
         ));
   }
 }

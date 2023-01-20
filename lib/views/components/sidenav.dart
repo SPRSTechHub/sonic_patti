@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
+import 'package:sonic_patti/views/gameScreens/results.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
+import 'package:sonic_patti/views/users/referearn.dart';
 
 class SideNav extends StatefulWidget {
   const SideNav({super.key});
@@ -120,7 +122,6 @@ class _SideNavState extends State<SideNav> {
               Navigator.pop(context);
               setState(() {
                 _mainController.changeTabIndex(1);
-                Get.to(const GameBoard());
               });
             },
           ),
@@ -130,6 +131,9 @@ class _SideNavState extends State<SideNav> {
             title: const Text('Refer & Earn'),
             onTap: () {
               Navigator.pop(context);
+              setState(() {
+                _mainController.changeTabIndex(4);
+              });
             },
           ),
           const Divider(thickness: 1),
