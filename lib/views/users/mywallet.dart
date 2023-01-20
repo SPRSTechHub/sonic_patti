@@ -5,6 +5,7 @@ import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/cardatm.dart';
 import 'package:sonic_patti/views/components/cardslides.dart';
+import 'package:sonic_patti/views/pymnts/pymnt_methods.dart';
 import 'package:sonic_patti/views/pymnts/transactions.dart';
 
 class MyWallet extends StatefulWidget {
@@ -268,7 +269,10 @@ class _MyWalletState extends State<MyWallet> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(const PaymentMethods(),
+                        transition: Transition.downToUp);
+                  },
                   child: Container(
                     width: 158,
                     height: 45,
