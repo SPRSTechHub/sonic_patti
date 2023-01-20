@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
@@ -170,9 +168,9 @@ class _MyReferralState extends State<MyReferral> {
         const SizedBox(
           height: 10,
         ),
-        Container(
-          child: const Text(
-              'We will  add more details for referrals income here soon'),
+        const SizedBox(
+          child:
+              Text('We will  add more details for referrals income here soon'),
         )
       ],
     ));

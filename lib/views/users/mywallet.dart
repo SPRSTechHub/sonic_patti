@@ -5,6 +5,7 @@ import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/cardatm.dart';
 import 'package:sonic_patti/views/components/cardslides.dart';
+import 'package:sonic_patti/views/pymnts/offline_pymnt_method.dart';
 import 'package:sonic_patti/views/pymnts/pymnt_methods.dart';
 import 'package:sonic_patti/views/pymnts/transactions.dart';
 
@@ -254,7 +255,10 @@ class _MyWalletState extends State<MyWallet> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(const OfflinePaymentMethod(),
+                        transition: Transition.downToUp);
+                  },
                   child: Container(
                     width: 158,
                     height: 45,
