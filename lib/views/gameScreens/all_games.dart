@@ -27,10 +27,9 @@ class _AllGamesState extends State<AllGames> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors().kPrimaryBoxBackground,
-      child: SingleChildScrollView(
-        controller: _mainController.scrollController,
+    return SingleChildScrollView(
+      controller: _mainController.scrollController,
+      child: SizedBox(
         child: Stack(
           fit: StackFit.loose,
           children: <Widget>[
@@ -120,7 +119,7 @@ class _AllGamesState extends State<AllGames> {
                 child: ToggleButtons(
                   direction: Axis.horizontal,
                   borderRadius: const BorderRadius.all(Radius.circular(30)),
-                  selectedBorderColor: fabBg,
+                  selectedBorderColor: Theme.of(context).colorScheme.primary,
                   selectedColor: Colors.white,
                   fillColor: bgColor1,
                   constraints:

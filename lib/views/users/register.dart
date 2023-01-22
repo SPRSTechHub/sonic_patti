@@ -306,8 +306,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     GestureDetector(
                       onTap: (() {
                         setState(() {
-                          Constant()
-                              .showAlert('Comming soon!', context, navBgDark);
+                          Constant().showAlert('Comming soon!', context,
+                              Theme.of(context).colorScheme.surface);
                         });
                       }),
                       child: Container(

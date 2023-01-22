@@ -40,7 +40,7 @@ class _AllBidsState extends State<AllBids> {
         child: Column(
           children: [
             Container(
-              color: appBarBg,
+              color: Colors.transparent,
               child: Column(
                 children: [
                   const Text('BET HISTORY'),

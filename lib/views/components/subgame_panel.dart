@@ -85,6 +85,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
       onTap: (() {
         if (widget.live == 'no') {
           Get.snackbar('Alert', 'This Game is not Live now');
+          showModalB(widget.matchId);
         } else {
           showModalB(widget.matchId);
         }
@@ -279,13 +280,13 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 width: 186,
                                 height: 72,
-                                decoration: AppStyles.yellowBtn,
+                                decoration: AppStyles.betBtn,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Image(
+                                  children: <Widget>[
+                                    const Image(
                                       width: 48,
                                       height: 48,
                                       image:
@@ -294,14 +295,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                     Text(
                                       'SINGLE DIGIT',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                          height: 1),
+                                      style: AppTextStyles.kBetTextHeading,
                                     ),
                                   ],
                                 ),
@@ -315,13 +309,13 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 width: 186,
                                 height: 72,
-                                decoration: AppStyles.yellowBtn,
+                                decoration: AppStyles.betBtn,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Image(
+                                  children: <Widget>[
+                                    const Image(
                                       width: 60,
                                       height: 48,
                                       image: AssetImage(
@@ -330,14 +324,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                     Text(
                                       'JODI DIGIT',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                          height: 1),
+                                      style: AppTextStyles.kBetTextHeading,
                                     ),
                                   ],
                                 ),
@@ -352,8 +339,8 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             GestureDetector(
                               onTap: (() {
@@ -361,35 +348,31 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 Get.to(PannaBet(matchId: param),
                                     transition: Transition.downToUp);
                               }),
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                height: 72,
-                                decoration: AppStyles.yellowBtn,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Image(
-                                      width: 48,
-                                      height: 48,
-                                      image: AssetImage(
-                                          'assets/images/single.png'),
-                                    ),
-                                    Text(
-                                      'SINGLE \n PANNA',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                          height: 1),
-                                    ),
-                                  ],
+                              child: Flexible(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  height: 100,
+                                  decoration: AppStyles.betBtn,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      const Image(
+                                        width: 42,
+                                        height: 60,
+                                        image: AssetImage(
+                                            'assets/images/single.png'),
+                                      ),
+                                      Text(
+                                        'SINGLE \n PANNA',
+                                        textAlign: TextAlign.center,
+                                        style: AppTextStyles.kBetTextHeading,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -399,35 +382,31 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 Get.to(PannaBet(matchId: param),
                                     transition: Transition.downToUp);
                               }),
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                height: 72,
-                                decoration: AppStyles.yellowBtn,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Image(
-                                      width: 48,
-                                      height: 48,
-                                      image: AssetImage(
-                                          'assets/images/double.png'),
-                                    ),
-                                    Text(
-                                      'DOUBLE \n PANNA',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                          height: 1),
-                                    ),
-                                  ],
+                              child: Flexible(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  height: 100,
+                                  decoration: AppStyles.betBtn,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      const Image(
+                                        width: 42,
+                                        height: 60,
+                                        image: AssetImage(
+                                            'assets/images/double.png'),
+                                      ),
+                                      Text(
+                                        'DOUBLE \n PANNA',
+                                        textAlign: TextAlign.center,
+                                        style: AppTextStyles.kBetTextHeading,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -437,35 +416,31 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 Get.to(PannaBet(matchId: param),
                                     transition: Transition.downToUp);
                               }),
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                height: 72,
-                                decoration: AppStyles.yellowBtn,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Image(
-                                      width: 48,
-                                      height: 48,
-                                      image: AssetImage(
-                                          'assets/images/tripple.png'),
-                                    ),
-                                    Text(
-                                      'TRIPPLE \n PANNA',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                          height: 1),
-                                    ),
-                                  ],
+                              child: Flexible(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  height: 100,
+                                  decoration: AppStyles.betBtn,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      const Image(
+                                        width: 42,
+                                        height: 60,
+                                        image: AssetImage(
+                                            'assets/images/tripple.png'),
+                                      ),
+                                      Text(
+                                        'TRIPPLE \n PANNA',
+                                        textAlign: TextAlign.center,
+                                        style: AppTextStyles.kBetTextHeading,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -481,94 +456,82 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              height: 72,
-                              decoration: AppStyles.yellowBtn,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Image(
-                                    width: 48,
-                                    height: 48,
-                                    image:
-                                        AssetImage('assets/images/single.png'),
-                                  ),
-                                  Text(
-                                    'HALF \n MILAN',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  ),
-                                ],
+                            Flexible(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 100,
+                                decoration: AppStyles.betBtn,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    const Image(
+                                      width: 42,
+                                      height: 60,
+                                      image: AssetImage(
+                                          'assets/images/single.png'),
+                                    ),
+                                    Text(
+                                      'HALF \n MILAN',
+                                      textAlign: TextAlign.center,
+                                      style: AppTextStyles.kBetTextHeading,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              height: 72,
-                              decoration: AppStyles.yellowBtn,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Image(
-                                    width: 48,
-                                    height: 48,
-                                    image:
-                                        AssetImage('assets/images/double.png'),
-                                  ),
-                                  Text(
-                                    'FULL \n MILAN',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  ),
-                                ],
+                            Flexible(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 100,
+                                decoration: AppStyles.betBtn,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    const Image(
+                                      width: 42,
+                                      height: 60,
+                                      image: AssetImage(
+                                          'assets/images/double.png'),
+                                    ),
+                                    Text(
+                                      'FULL \n MILAN',
+                                      textAlign: TextAlign.center,
+                                      style: AppTextStyles.kBetTextHeading,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              height: 72,
-                              decoration: AppStyles.yellowBtn,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Image(
-                                    width: 48,
-                                    height: 48,
-                                    image:
-                                        AssetImage('assets/images/tripple.png'),
-                                  ),
-                                  Text(
-                                    'CP \n BID',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  ),
-                                ],
+                            Flexible(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 100,
+                                decoration: AppStyles.betBtn,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    const Image(
+                                      width: 42,
+                                      height: 60,
+                                      image: AssetImage(
+                                          'assets/images/tripple.png'),
+                                    ),
+                                    Text(
+                                      'CP \n BID',
+                                      textAlign: TextAlign.center,
+                                      style: AppTextStyles.kBetTextHeading,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

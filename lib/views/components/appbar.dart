@@ -118,8 +118,8 @@ class _TopAppBarState extends State<TopAppBar> {
         ),
       ],
       scrolledUnderElevation: 4.0,
-      shadowColor: shadowColor ? appBarBg : appBarBgLight,
-      backgroundColor: Get.isDarkMode ? appBarBg : appBarBgLight,
+      shadowColor: Theme.of(context).colorScheme.surfaceTint,
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 }

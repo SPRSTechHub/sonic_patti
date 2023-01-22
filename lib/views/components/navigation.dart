@@ -78,9 +78,9 @@ class _navBarState extends State<navBar> {
                               height: index == controller.tabIndex.value
                                   ? Get.width * .016
                                   : 0,
-                              decoration: const BoxDecoration(
-                                color: navHighlighter,
-                                borderRadius: BorderRadius.vertical(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: const BorderRadius.vertical(
                                   bottom: Radius.circular(10),
                                 ),
                               ),
@@ -104,12 +104,31 @@ class _navBarState extends State<navBar> {
                                           offset: Offset.zero)
                                     ],
                                     color: index == controller.tabIndex.value
-                                        ? navHighlighter
-                                        : null,
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .onSurface
+                                            .withOpacity(0.4),
                                   ),
                                   Text(
                                     listOfTexts[index],
-                                    style: const TextStyle(fontSize: 10),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight:
+                                          index == controller.tabIndex.value
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                      color: index == controller.tabIndex.value
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .onSurface
+                                              .withOpacity(0.4),
+                                    ),
                                   ),
                                 ],
                               ),

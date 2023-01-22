@@ -261,7 +261,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     InkWell(
-                      focusColor: fabBg,
+                      focusColor: Theme.of(context).colorScheme.primary,
                       onTap: (() => Get.to(const RegisterScreen(),
                           transition: Transition.fadeIn)),
                       child: Container(

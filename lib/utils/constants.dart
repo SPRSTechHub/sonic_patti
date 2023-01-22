@@ -11,22 +11,11 @@ const Color black = Colors.black;
 const Color bgColor1 = Color(0xff312B4F);
 const Color bgColor2 = Color(0xffAA8F00);
 
-Color appBarBg = darkColorScheme.surface;
-Color appBarBgLight = lightColorScheme.surface;
-
-const Color appBarText = Color(0xFFFFEDEA);
-
 const Color bottomBarHeader = Color(0xFF001F24);
 const Color bottomBarBg = Color(0xFF0B2722);
 
-Color navBgDark = darkColorScheme.surface;
-Color navBgLight = lightColorScheme.surface;
-
 const Color navText = Color(0xffFFEDEA);
-const Color navHighlighter = Color(0xffE4C542);
 
-const Color fabBg = Color(0xFF0062A1);
-const Color fabText = Color(0xffFFEDEA);
 // heading for ob screen
 const String ht1 = 'Play';
 const String ht2 = 'Bid';
@@ -45,9 +34,10 @@ class AppColors {
   static var kAppTextColor = GetStorage().read('IS_DARK_MODE')
       ? const Color(0xffFAFF00)
       : const Color(0xffFAFF00);
-  var kPrimaryBoxBackground = GetStorage().read('IS_DARK_MODE')
-      ? const Color(0xff002328)
-      : const Color(0xff002328);
+
+  static var kPrimaryBoxBackground = GetStorage().read('IS_DARK_MODE')
+      ? darkColorScheme.background
+      : lightColorScheme.background;
 
   var kBlackColor = Colors.black;
 
@@ -131,9 +121,24 @@ class AppTextStyles {
       letterSpacing: 0,
       fontWeight: FontWeight.bold,
       height: 1);
+
+  static var kBetTextHeading = GoogleFonts.inter(
+      color: const Color.fromRGBO(255, 255, 255, 1),
+      letterSpacing: 0,
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+      height: 1);
 }
 
 class AppStyles {
+  static var betBtn = BoxDecoration(
+    borderRadius: BorderRadius.circular(8),
+    color: const Color(0xFF014A56),
+    boxShadow: const [
+      BoxShadow(color: Color(0xff0096AE), offset: Offset(2, 2), blurRadius: 2)
+    ],
+  );
+
   static var yellowBtn = BoxDecoration(
     borderRadius: BorderRadius.circular(8),
     gradient: const LinearGradient(
@@ -330,7 +335,7 @@ class Constant {
           padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: colorD ?? navBgDark),
+              color: colorD ?? darkColorScheme.surface),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,

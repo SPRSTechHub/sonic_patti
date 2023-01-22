@@ -26,7 +26,7 @@ class _EarningBoardState extends State<EarningBoard> {
     return Scaffold(
       appBar: AppBar(actions: []),
       body: Container(
-        color: AppColors().kPrimaryBoxBackground,
+        color: AppColors.kPrimaryBoxBackground,
         child: SingleChildScrollView(
           child: Stack(
             fit: StackFit.loose,
@@ -82,7 +82,7 @@ class _EarningBoardState extends State<EarningBoard> {
                   child: ToggleButtons(
                     direction: Axis.horizontal,
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    selectedBorderColor: fabBg,
+                    selectedBorderColor: Theme.of(context).colorScheme.primary,
                     selectedColor: Colors.white,
                     fillColor: bgColor1,
                     constraints:
