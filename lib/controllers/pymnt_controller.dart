@@ -40,6 +40,8 @@ class PaymentController extends GetxController {
           }
         }
       }
+    } else if (amount != null && mobile != null && pgMod == 'csfr_pg') {
+      var r = makePaymentByCsfr(amount);
     }
   }
 

@@ -242,8 +242,22 @@ class _MyWalletState extends State<MyWallet> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(const OfflinePaymentMethod(),
-                        transition: Transition.downToUp);
+                    if (formKey.currentState!.validate()) {
+                      var amount = int.parse(amounCtltxt.text);
+                      var minDepo = Constant.box.read('minDepo') ?? 0;
+                      if (amount >= int.parse(minDepo)) {
+                        Get.to(OfflinePaymentMethod(amount: amount.toString()),
+                            binding: ControllerBinding(),
+                            transition: Transition.downToUp);
+                      } else {
+                        Get.snackbar(
+                          'Alert',
+                          'Minimum Deposite should be: $minDepo',
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.red,
+                        );
+                      }
+                    }
                   },
                   child: Container(
                     width: 158,
