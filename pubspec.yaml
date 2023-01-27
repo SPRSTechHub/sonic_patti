@@ -31,7 +31,7 @@ environment:
 dependencies:
   animated_splash_screen: ^1.3.0
   animations: ^2.0.7
-  badges: ^2.0.3
+  badges: ^3.0.2
   connectivity_plus: ^3.0.2
   cupertino_icons: ^1.0.2
   dynamic_color: ^1.5.4
@@ -41,6 +41,7 @@ dependencies:
   firebase_messaging: ^14.2.1
   flutter:
     sdk: flutter
+  flutter_cashfree_pg_sdk: ^2.0.4+7
   flutter_countdown_timer: ^4.1.0
   flutter_inset_box_shadow: ^1.0.8
   flutter_launcher_icons: ^0.11.0
@@ -50,7 +51,7 @@ dependencies:
   fluttericon: ^2.0.0
   get: ^4.6.5
   get_storage: ^2.0.3
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.0
   http: ^0.13.5
   internet_connection_checker: ^1.0.0+1
   intl: ^0.18.0

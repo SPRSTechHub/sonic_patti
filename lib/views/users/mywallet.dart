@@ -1,6 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sonic_patti/services/api.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/cardatm.dart';
@@ -238,9 +239,7 @@ class _MyWalletState extends State<MyWallet> {
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Mobile Number required!';
-                    } else if (value.length != 10) {
-                      return '10 digit Mobile Number!';
+                      return 'Enter Amount!';
                     } else {
                       return null;
                     }
@@ -273,9 +272,22 @@ class _MyWalletState extends State<MyWallet> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Get.to(const PaymentMethods(),
-                        transition: Transition.downToUp);
+                  onTap: () async {
+                    if (formKey.currentState!.validate()) {
+                      var amount = int.parse(amounCtltxt.text);
+                      var minDepo = Constant.box.read('minDepo') ?? 0;
+                      if (amount >= int.parse(minDepo)) {
+                        Get.to(PaymentMethods(amount: amount),
+                            transition: Transition.downToUp);
+                      } else {
+                        Get.snackbar(
+                          'Alert',
+                          'Minimum Deposite should be: $minDepo',
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.red,
+                        );
+                      }
+                    }
                   },
                   child: Container(
                     width: 158,

@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
 class PaymentMethods extends StatefulWidget {
-  const PaymentMethods({super.key});
-
+  PaymentMethods({super.key, required this.amount});
+  int amount;
   @override
   State<PaymentMethods> createState() => _PaymentMethodsState();
 }
@@ -43,7 +43,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                 style: TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 1),
                     fontFamily: 'Inter',
-                    fontSize: 20,
+                    fontSize: 14,
                     letterSpacing: 0,
                     fontWeight: FontWeight.normal,
                     height: 1),

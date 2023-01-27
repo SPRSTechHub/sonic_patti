@@ -37,9 +37,7 @@ class AuthController extends GetxController {
               backgroundColor: bottomBarBg,
               icon: const Icon(Icons.check),
               duration: const Duration(seconds: 5));
-
           // On Successfull Login Update preferences
-
           Constant.box.write('isLogin', true);
           Constant.box.write('imgurl', getLogin['imgurl']);
           Constant.box.write('mobile', getLogin['mobile'] ?? mobile);

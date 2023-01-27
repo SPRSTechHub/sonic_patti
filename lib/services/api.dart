@@ -91,6 +91,21 @@ class RemoteApi {
     }
   }
 
+//Minimum Deposite Check
+  static Future<dynamic>? findWhat(String action, String? param) async {
+    var postData = {'action': action, 'params': param};
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      return resp;
+    } else {
+      return null;
+    }
+  }
+
 // Sign Up api call
   static Future<dynamic>? signUpCall(
       String action,

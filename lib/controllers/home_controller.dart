@@ -35,14 +35,14 @@ class HomeController extends GetxController {
     Constant.box.read('isLogin') ?? false;
   }
 
-  callTimer() {
+  /* callTimer() {
     final periodicTimer = Timer.periodic(
       const Duration(seconds: 5),
       (timer) {
         Get.snackbar('title', 'message1');
       },
     );
-  }
+  } */
 
   @override
   void onInit() {
@@ -89,6 +89,10 @@ class HomeController extends GetxController {
               .write('uwbal', userDetails['result']['wallet']['bal_amnt'] ?? 0);
           Constant.box.write(
               'referId', userDetails['result']['profile']['refer_id'] ?? '');
+          Constant.box.write(
+              'minDepo', userDetails['result']['wallet']['minDepo'] ?? 0);
+          Constant.box.write('minWithdraw',
+              userDetails['result']['wallet']['minWithdraw'] ?? 0);
         }
       }
     }
