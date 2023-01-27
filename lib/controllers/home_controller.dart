@@ -35,15 +35,6 @@ class HomeController extends GetxController {
     Constant.box.read('isLogin') ?? false;
   }
 
-  /* callTimer() {
-    final periodicTimer = Timer.periodic(
-      const Duration(seconds: 5),
-      (timer) {
-        Get.snackbar('title', 'message1');
-      },
-    );
-  } */
-
   @override
   void onInit() {
     fetchUserDetails();
@@ -99,7 +90,6 @@ class HomeController extends GetxController {
   }
 
 //Check Authenticity
-
   addBid(String bidVal, String bidamnt) {
     final index = bids.indexWhere((element) => element.bidNum == bidVal);
     if (index >= 0) {
@@ -206,7 +196,6 @@ class HomeController extends GetxController {
   }
 
   //get Bids Lists
-
   fetchPlaceBids(String catId, String mobile, String? sortBy, String? sortTo,
       String? lstart, String? lend, String? searchKey) async {
     /*  if(searchKey != ''){

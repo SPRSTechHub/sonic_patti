@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
+import 'package:sonic_patti/models/pg_model.dart';
 import 'package:sonic_patti/services/api.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
 
 class PaymentController extends GetxController {
   //var cday = DateFormat('EEEE').format(currentTime).obs;
-
+  var pgLists = <PgmClass>[].obs;
   var isDataProcessing = false.obs;
 
 //makePayment
-  Future<dynamic> makePaymentByAllUpi(amount) async {
+  Future<dynamic> makePaymentByAllUpi(amount, String? pgMod) async {
     String? mobile = Constant.box.read('mobile');
     final token = Constant.box.read('fcmToken') ?? false;
 
@@ -61,19 +62,31 @@ class PaymentController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
   }
 
   @override
   void onReady() {
-    // TODO: implement onReady
+    fetchPmtMethod();
     super.onReady();
+  }
+
+  fetchPmtMethod() async {
+    try {
+      isDataProcessing(true);
+      var methods = await RemoteApi.fetchPmtg('pay_methods');
+      pgLists.clear();
+      if (methods != null) {
+        isDataProcessing(false);
+        pgLists.assignAll(methods);
+      }
+    } finally {
+      isDataProcessing(false);
+    }
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
   }
 }

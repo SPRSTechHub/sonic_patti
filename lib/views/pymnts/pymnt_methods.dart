@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sonic_patti/controllers/pymnt_controller.dart';
+import 'package:sonic_patti/services/api.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
@@ -71,235 +74,139 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                   height: 1),
             ),
             Container(
-              decoration: AppStyles.subGametopTimeBG,
-              padding: const EdgeInsets.all(8.0),
-              alignment: Alignment.topLeft,
-              child: ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(8),
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 60,
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
-                          SizedBox(
-                            width: 80,
-                            height: 40,
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.elliptical(90, 90)),
-                              child: Image(
-                                  width: 80,
-                                  height: 28,
-                                  image:
-                                      AssetImage("assets/images/upi_logo.png")),
-                            ),
-                          ),
-                          Text(
-                            'PAY BY UPI',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Inter',
-                                fontSize: 20,
-                                letterSpacing: 0,
-                                fontWeight: FontWeight.normal,
-                                height: 1),
-                          ),
-                          Icon(Icons.arrow_right_alt_outlined,
-                              color: Color(0xffE4E0EE)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    height: 10,
-                    thickness: .5,
-                    indent: 0,
-                    endIndent: 0,
-                    color: Colors.greenAccent,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 60,
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
-                          SizedBox(
-                            width: 80,
-                            height: 40,
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.elliptical(90, 90)),
-                              child: Image(
-                                  width: 80,
-                                  height: 28,
-                                  image:
-                                      AssetImage("assets/images/nb_logo.png")),
-                            ),
-                          ),
-                          Text(
-                            'PAY BY NET BANKING',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Inter',
-                                fontSize: 20,
-                                letterSpacing: 0,
-                                fontWeight: FontWeight.normal,
-                                height: 1),
-                          ),
-                          Icon(Icons.arrow_right_alt_outlined,
-                              color: Color(0xffE4E0EE)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    height: 10,
-                    thickness: .5,
-                    indent: 0,
-                    endIndent: 0,
-                    color: Colors.greenAccent,
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      var amnt = widget.amount;
-                      if (amnt > 0) {
-                        var resp = paymentController.makePaymentByCsfr(amnt);
-
-                        /*  if (resp == true) {
-                          setState(() {
-                            Get.to(
-                              const CashFreeScreen(),
-                              transition: Transition.fadeIn,
-                            );
-                          });
-                        } */
-                        ////////////
-                        /*  if (Constant.box.read('cf_order_id') != null) {
-                          Get.to(const CashFreeScreen());
-                        } else {
-                          var resp = _payController.makePayment(amnt);
-                          if (resp == true) {
-                            setState(() {
-                              Get.to(
-                                const CashFreeScreen(),
-                                transition: Transition.fadeIn,
+                decoration: AppStyles.subGametopTimeBG,
+                padding: const EdgeInsets.all(8.0),
+                alignment: Alignment.topLeft,
+                child: Obx(() {
+                  if (paymentController.isDataProcessing.value == true) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    if (paymentController.pgLists.isNotEmpty) {
+                      return AnimationLimiter(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: ((context, index) {
+                              var pgData = paymentController.pgLists[index];
+                              return AnimationConfiguration.staggeredList(
+                                position: index,
+                                duration: const Duration(milliseconds: 575),
+                                delay: const Duration(milliseconds: 175),
+                                child: SlideAnimation(
+                                  verticalOffset: 50.0,
+                                  child: FadeInAnimation(
+                                    child: Card(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 6.0),
+                                      elevation: 4.0,
+                                      color: pgData.pgStatus == '1'
+                                          ? Colors.transparent
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .surfaceTint,
+                                      child: ListTile(
+                                        onTap: () async {
+                                          if (pgData.pgStatus == '0') {
+                                            var amnt = widget.amount;
+                                            if (amnt > 0) {
+                                              var resp = paymentController
+                                                  .makePaymentByAllUpi(
+                                                      amnt, pgData.pgMod);
+                                            }
+                                          } else {
+                                            Get.snackbar(
+                                                'Alert', 'Coming soon....',
+                                                backgroundColor:
+                                                    Colors.redAccent,
+                                                snackPosition:
+                                                    SnackPosition.BOTTOM);
+                                          }
+                                        },
+                                        splashColor: Colors.redAccent,
+                                        leading: SizedBox(
+                                          width: 100,
+                                          height: 48,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.elliptical(10, 10)),
+                                            child: Image.network(
+                                              '${RemoteApi.url}/../uploads/payqr/${pgData.pgUrl}',
+                                              fit: BoxFit.fill,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Container(
+                                                  color: Colors.amber,
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    pgData.pgName,
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        title: Text(
+                                          pgData.pgName,
+                                          style: AppTextStyles.kSubGameTitle,
+                                        ),
+                                        trailing: pgData.pgStatus == '1'
+                                            ? const Icon(Icons.close_outlined,
+                                                color: Color(0xffE4E0EE))
+                                            : badges.Badge(
+                                                position:
+                                                    badges.BadgePosition.topEnd(
+                                                        top: -10, end: -20),
+                                                showBadge: true,
+                                                ignorePointer: false,
+                                                onTap: () {},
+                                                badgeContent: const Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 10),
+                                                badgeAnimation: const badges
+                                                    .BadgeAnimation.rotation(
+                                                  animationDuration:
+                                                      Duration(seconds: 3),
+                                                  colorChangeAnimationDuration:
+                                                      Duration(
+                                                          milliseconds: 500),
+                                                  loopAnimation: false,
+                                                  curve: Curves.fastOutSlowIn,
+                                                  colorChangeAnimationCurve:
+                                                      Curves.easeInCubic,
+                                                ),
+                                                child: const Icon(
+                                                    Icons
+                                                        .arrow_right_alt_outlined,
+                                                    color: Color(0xffE4E0EE)),
+                                              ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               );
-                            });
-                          }
-                        } */
-                        //////////////
-                      }
-                    },
-                    child: Container(
-                      color: Colors.amber,
-                      height: 60,
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            }),
+                            itemCount: paymentController.pgLists.length),
+                      );
+                    } else {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const SizedBox(
-                            width: 80,
-                            height: 60,
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.elliptical(10, 10)),
-                              child: Image(
-                                  width: 80,
-                                  height: 48,
-                                  image:
-                                      AssetImage("assets/images/cf_logo.png")),
-                            ),
+                          Lottie.asset(
+                            'assets/anim/loading1.json',
+                            fit: BoxFit.fill,
                           ),
-                          const Text(
-                            'Quick Pay',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Inter',
-                                fontSize: 20,
-                                letterSpacing: 0,
-                                fontWeight: FontWeight.normal,
-                                height: 1),
-                          ),
-                          badges.Badge(
-                            position:
-                                badges.BadgePosition.topEnd(top: -10, end: -20),
-                            showBadge: true,
-                            ignorePointer: false,
-                            onTap: () {},
-                            badgeContent: const Icon(Icons.check,
-                                color: Colors.white, size: 10),
-                            badgeAnimation:
-                                const badges.BadgeAnimation.rotation(
-                              animationDuration: Duration(seconds: 3),
-                              colorChangeAnimationDuration:
-                                  Duration(milliseconds: 500),
-                              loopAnimation: false,
-                              curve: Curves.fastOutSlowIn,
-                              colorChangeAnimationCurve: Curves.easeInCubic,
-                            ),
-                            child: const Icon(Icons.arrow_right_alt_outlined,
-                                color: Color(0xffE4E0EE)),
-                          ),
+                          const Text('Games are loading ....'),
                         ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    height: 10,
-                    thickness: .5,
-                    indent: 0,
-                    endIndent: 0,
-                    color: Colors.greenAccent,
-                  ),
-                  Container(
-                    height: 60,
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        SizedBox(
-                          width: 80,
-                          height: 40,
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.elliptical(90, 90)),
-                            child: Image(
-                                width: 80,
-                                height: 28,
-                                image:
-                                    AssetImage("assets/images/phnp_logo.png")),
-                          ),
-                        ),
-                        Text(
-                          'PAY BY PHONPE',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Color.fromRGBO(255, 255, 255, 1),
-                              fontFamily: 'Inter',
-                              fontSize: 20,
-                              letterSpacing: 0,
-                              fontWeight: FontWeight.normal,
-                              height: 1),
-                        ),
-                        Icon(Icons.arrow_right_alt_outlined,
-                            color: Color(0xffE4E0EE)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                      );
+                    }
+                  }
+                })),
             const SizedBox(
               height: 6,
             ),
@@ -323,3 +230,5 @@ class _PaymentMethodsState extends State<PaymentMethods> {
     );
   }
 }
+
+class ListofSubPg {}

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
+import 'package:sonic_patti/models/pg_model.dart';
 import '../models/catagory_model.dart';
 
 class RemoteApi {
@@ -214,6 +215,25 @@ class RemoteApi {
       }
     } else {
       throw Exception('Failed to submit data.');
+    }
+  }
+
+  static Future<List<PgmClass>?> fetchPmtg(String action) async {
+    var postData = {'action': action};
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      if (resp['status'] == 0) {
+        var jsonString = jsonEncode(resp['message']);
+        return pgmClassFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } else {
+      return null;
     }
   }
 }
