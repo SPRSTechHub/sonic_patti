@@ -30,9 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     passwordVisibility = false;
     isLogin = Constant.box.read('isLogin') ?? false;
-
-    //print(token);
-
     if (isLogin == true) {
       Get.to(const GameBoard());
     }

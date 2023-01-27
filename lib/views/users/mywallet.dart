@@ -1,7 +1,8 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/services/api.dart';
+import 'package:sonic_patti/controllers/controller_binding.dart';
+import 'package:sonic_patti/controllers/pymnt_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/cardatm.dart';
@@ -21,7 +22,6 @@ class _MyWalletState extends State<MyWallet> {
   late TextEditingController textController;
   final formKey = GlobalKey<FormState>();
   final amounCtltxt = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -109,19 +109,6 @@ class _MyWalletState extends State<MyWallet> {
                                   'Transfer', Icons.play_for_work_outlined),
                             ),
                           ),
-                          /*       
-                                GestureDetector(
-                            onTap: () => Get.to(const TransactionsScreen(),
-                                transition: Transition.downToUp),
-                            child: walletButtons(
-                                'Transfer', Icons.play_for_work_outlined),
-                          ), GestureDetector(
-                            onTap: () => Get.to(const TransactionsScreen(),
-                                transition: Transition.downToUp),
-                            child: walletButtons(
-                                'History', Icons.auto_stories_outlined),
-                          ),
- */
                         ],
                       )),
                 ],
@@ -278,6 +265,7 @@ class _MyWalletState extends State<MyWallet> {
                       var minDepo = Constant.box.read('minDepo') ?? 0;
                       if (amount >= int.parse(minDepo)) {
                         Get.to(PaymentMethods(amount: amount),
+                            binding: ControllerBinding(),
                             transition: Transition.downToUp);
                       } else {
                         Get.snackbar(

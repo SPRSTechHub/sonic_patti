@@ -106,6 +106,30 @@ class RemoteApi {
     }
   }
 
+//Make Payment Order
+
+  static Future<dynamic>? createPymntOrder(
+      String action, mobile, amount, trtype, pmgateway, token) async {
+    var postData = {
+      'action': action,
+      'mobile': mobile,
+      'amount': amount,
+      'trtype': trtype,
+      'pmgateway': pmgateway,
+      'deviceKey': token
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      return resp;
+    } else {
+      return null;
+    }
+  }
+
 // Sign Up api call
   static Future<dynamic>? signUpCall(
       String action,
