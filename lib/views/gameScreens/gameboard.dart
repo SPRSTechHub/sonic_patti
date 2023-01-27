@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/navigation.dart';
 import 'package:sonic_patti/views/components/sidenav.dart';
@@ -35,7 +34,8 @@ class _GameBoardState extends State<GameBoard> {
     super.dispose();
   }
 
-  double? scrolledUnderElevation;
+  //double? scrolledUnderElevation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

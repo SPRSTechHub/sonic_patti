@@ -1,8 +1,6 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
 import 'package:sonic_patti/views/users/notifications.dart';
 
@@ -32,7 +30,8 @@ class _TopAppBarState extends State<TopAppBar> {
           ],
         ),
         onPressed: () {
-          Get.to(const GameBoard(), transition: Transition.native);
+          Navigator.pop(context);
+          // Get.to(const GameBoard(), transition: Transition.native);
         },
       );
     } else {
@@ -83,12 +82,19 @@ class _TopAppBarState extends State<TopAppBar> {
           ),
         ),
         Badge(
-          stackFit: StackFit.loose,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          smallSize: 10,
+          padding: const EdgeInsets.all(2.0),
+          alignment: AlignmentDirectional.center,
+
+          /* stackFit: StackFit.loose,
           position: BadgePosition.topEnd(top: 8, end: 4),
           elevation: 6,
           shape: BadgeShape.circle,
           badgeContent: null,
           borderSide: const BorderSide(color: Colors.black),
+           */
           child: IconButton(
             icon: Icon(
               Icons.notification_add,

@@ -128,6 +128,13 @@ class AppTextStyles {
       fontSize: 14,
       fontWeight: FontWeight.bold,
       height: 1);
+  //////////////////////////////////
+  static var kEarnTitleHeading = GoogleFonts.prompt(
+      color: Colors.white,
+      fontSize: 18,
+      letterSpacing: 0,
+      fontWeight: FontWeight.normal,
+      height: 1);
 }
 
 class AppStyles {

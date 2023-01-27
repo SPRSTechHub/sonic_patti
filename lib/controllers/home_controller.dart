@@ -63,6 +63,19 @@ class HomeController extends GetxController {
     scrollController.dispose();
   }
 
+//Scroll Controlling//
+  scrollCtlr() {
+    scrollController.addListener(() {
+      final ScrollDirection direction =
+          scrollController.position.userScrollDirection;
+      if (direction == ScrollDirection.forward) {
+        isVisible.value = true;
+      } else if (direction == ScrollDirection.reverse) {
+        isVisible.value = false;
+      }
+    });
+  }
+
 //check User Balance
   fetchUserDetails() async {
     var uwbal = Constant.box.read('uwbal');
@@ -208,18 +221,5 @@ class HomeController extends GetxController {
     } finally {
       isBidListsProcessing(false);
     }
-  }
-
-  //Scroll Controlling//
-  scrollCtlr() {
-    scrollController.addListener(() {
-      final ScrollDirection direction =
-          scrollController.position.userScrollDirection;
-      if (direction == ScrollDirection.forward) {
-        isVisible.value = true;
-      } else if (direction == ScrollDirection.reverse) {
-        isVisible.value = false;
-      }
-    });
   }
 }

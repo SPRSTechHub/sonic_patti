@@ -149,7 +149,7 @@ class _MyReferralState extends State<MyReferral> {
                         ),
                         label: const Text('Share'),
                       ),
-                      ElevatedButton.icon(
+                      /*   ElevatedButton.icon(
                         onPressed: () {},
                         /* style:, */
                         icon: const Icon(
@@ -157,7 +157,7 @@ class _MyReferralState extends State<MyReferral> {
                           color: Colors.green,
                         ),
                         label: const Text('WhatsApp'),
-                      )
+                      ) */
                     ],
                   ),
                 )
