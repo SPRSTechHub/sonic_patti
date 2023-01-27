@@ -108,7 +108,7 @@ class RemoteApi {
   }
 
 //Make Payment Order
-
+/* Upi India */
   static Future<dynamic>? createPymntOrder(
       String action, mobile, amount, trtype, pmgateway, token) async {
     var postData = {
@@ -118,6 +118,30 @@ class RemoteApi {
       'trtype': trtype,
       'pmgateway': pmgateway,
       'deviceKey': token
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      return resp;
+    } else {
+      return null;
+    }
+  }
+
+  static Future<dynamic>? chkPymntOrder(String action, mobile, ordId, amnt,
+      txnId, resCode, txnRef, approvalRef) async {
+    var postData = {
+      'action': action,
+      'mobile': mobile,
+      'ordId': ordId,
+      'amount': amnt,
+      'txnId': txnId,
+      'resCode': resCode,
+      'txnRef': txnRef,
+      'approvalRef': approvalRef
     };
 
     final response =
