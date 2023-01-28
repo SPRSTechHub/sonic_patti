@@ -13,7 +13,6 @@ import 'package:sonic_patti/views/users/referearn.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
-
   @override
   State<GameBoard> createState() => _GameBoardState();
 }
@@ -47,7 +46,7 @@ class _GameBoardState extends State<GameBoard> {
       body: buildBody(),
       floatingActionButton: FloatingActionButton(
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.inverseSurface,
         onPressed: () {
           _mainController.fetchCatagories();
           Get.to(const MyWallet(), transition: Transition.leftToRightWithFade);

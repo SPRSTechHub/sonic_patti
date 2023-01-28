@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
+import 'package:sonic_patti/models/market_ratio.dart';
 import 'package:sonic_patti/models/pg_model.dart';
 import '../models/catagory_model.dart';
 
@@ -93,15 +94,13 @@ class RemoteApi {
   }
 
 //Minimum Deposite Check
-  static Future<dynamic>? findWhat(String action, String? param) async {
-    var postData = {'action': action, 'params': param};
-
+  static Future<MktClass?> fetchMarket(String action, String? catId) async {
+    var postData = {'action': action, 'cat_id': catId};
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
-      return resp;
+      return MktClass.fromJson(resp['data']);
     } else {
       return null;
     }

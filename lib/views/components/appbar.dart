@@ -54,7 +54,12 @@ class _TopAppBarState extends State<TopAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       leading: setLeading(),
-      title: const Text('Sonic Patti'),
+      title: Text(
+        'Sonic Patti',
+        style: AppTextStyles.kAtmCardBalance.copyWith(
+            color: Theme.of(context).colorScheme.secondary,
+            fontWeight: FontWeight.bold),
+      ),
       actions: <Widget>[
         GestureDetector(
           onTap: (() {
@@ -67,7 +72,7 @@ class _TopAppBarState extends State<TopAppBar> {
             children: [
               Icon(
                 Icons.account_balance_wallet_outlined,
-                size: Get.width * .068,
+                size: Get.width * .060,
                 color: Theme.of(context).colorScheme.primary,
                 shadows: const <Shadow>[
                   Shadow(
@@ -76,7 +81,11 @@ class _TopAppBarState extends State<TopAppBar> {
               ),
               Text(
                 '₹ ${uwbal ?? 0}',
-                style: const TextStyle(fontSize: 10),
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontFamily: 'inter',
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'color_schemes.g.dart';
@@ -10,10 +12,8 @@ const Color white = Colors.white;
 const Color black = Colors.black;
 const Color bgColor1 = Color(0xff312B4F);
 const Color bgColor2 = Color(0xffAA8F00);
-
 const Color bottomBarHeader = Color(0xFF001F24);
 const Color bottomBarBg = Color(0xFF0B2722);
-
 const Color navText = Color(0xffFFEDEA);
 
 // heading for ob screen
@@ -41,9 +41,15 @@ class AppColors {
 
   var kBlackColor = Colors.black;
 
-  static var kListCardGradient = GetStorage().read('IS_DARK_MODE')
-      ? const [Color(0xff294E3B), Color(0xff00363D)]
-      : const [Color.fromRGBO(41, 78, 59, 1), Color.fromRGBO(0, 54, 61, 1)];
+  static var kListCardGradient = Get.isDarkMode
+      ? [
+          ThemeData.dark().colorScheme.secondaryContainer,
+          ThemeData.dark().colorScheme.surface
+        ]
+      : [
+          ThemeData.light().colorScheme.error,
+          ThemeData.light().colorScheme.tertiary
+        ];
 
   static var kDigitGradient = GetStorage().read('IS_DARK_MODE')
       ? const [Color(0xff224839), Color(0xff002328)]
@@ -78,9 +84,12 @@ class AppTextStyles {
       fontWeight: FontWeight.normal,
       height: 1);
 
-  var kTextStyleTwelveWithGreyColor = GoogleFonts.montserrat(
-    fontSize: 12,
-  );
+  static var kGameheading2 = GoogleFonts.montserrat(
+      fontSize: 10,
+      color: Colors.white,
+      letterSpacing: 0,
+      fontWeight: FontWeight.bold,
+      height: .5);
 
   static var kSubGameTitle = GoogleFonts.montserrat(
       color: const Color.fromRGBO(255, 255, 255, 1),
@@ -128,7 +137,14 @@ class AppTextStyles {
       fontSize: 14,
       fontWeight: FontWeight.bold,
       height: 1);
-  //////////////////////////////////
+
+  static var kMktRtio = GoogleFonts.inter(
+      color: Colors.black,
+      letterSpacing: 0,
+      fontSize: 10,
+      fontWeight: FontWeight.bold,
+      height: 1);
+
   static var kEarnTitleHeading = GoogleFonts.prompt(
       color: Colors.white,
       fontSize: 18,

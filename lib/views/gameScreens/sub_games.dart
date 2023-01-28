@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
+import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/subgame_panel.dart';
 
 import '../components/appbar.dart';
@@ -20,14 +22,17 @@ class _SubGamesState extends State<SubGames> {
 
   @override
   void initState() {
+    if (!mounted) return;
+
     if (widget.catId != '') {
       setState(() {
         gameController.fetchGameLists(widget.catId!);
+        gameController.fetchMarket(widget.catId!);
       });
     } else {
       Get.back();
     }
-    setState(() {});
+    // setState(() {});
     super.initState();
   }
 
@@ -43,11 +48,132 @@ class _SubGamesState extends State<SubGames> {
         child: Column(
           children: [
             Container(
-              color: Colors.amber,
-              height: 120,
+              margin: const EdgeInsets.all(10),
+              height: 220,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              child: Obx(() {
+                if (gameController.isDataProcessing.value == true) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  if (gameController.mktList.isNotEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'MARKET RATE CHART',
+                            style: AppTextStyles.kBetTextHeading
+                                .copyWith(color: Colors.black),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text('SINGLE DIGIT',
+                                  textAlign: TextAlign.left,
+                                  style: AppTextStyles.kMktRtio),
+                              Text(gameController.mktList[0].sd ?? '0.00'),
+                            ],
+                          ),
+                          const Divider(
+                            height: 1,
+                            indent: 10,
+                            endIndent: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'SINGLE PANNA',
+                                textAlign: TextAlign.left,
+                                style: AppTextStyles.kMktRtio,
+                              ),
+                              Text(gameController.mktList[0].sp ?? '0.00'),
+                            ],
+                          ),
+                          const Divider(
+                            height: 1,
+                            indent: 10,
+                            endIndent: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'DOUBLE PANNA',
+                                style: AppTextStyles.kMktRtio,
+                              ),
+                              Text(gameController.mktList[0].dp ?? '0.00'),
+                            ],
+                          ),
+                          const Divider(
+                            height: 1,
+                            indent: 10,
+                            endIndent: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'TRIPPLE PANNA',
+                                style: AppTextStyles.kMktRtio,
+                              ),
+                              Text(gameController.mktList[0].tp ?? '0.00'),
+                            ],
+                          ),
+                          const Divider(
+                            height: 1,
+                            indent: 10,
+                            endIndent: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'CP MATCHED',
+                                style: AppTextStyles.kMktRtio,
+                              ),
+                              Text(gameController.mktList[0].cp ?? '0.00'),
+                            ],
+                          ),
+                          const Divider(
+                            height: 1,
+                            indent: 10,
+                            endIndent: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'JODI MATCHED',
+                                style: AppTextStyles.kMktRtio,
+                              ),
+                              Text(gameController.mktList[0].jodi ?? '0.00'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }
+              }),
             ),
             SizedBox(
-              /*  height: 800, */
               child: Obx(() {
                 if (gameController.isDataProcessing.value == true) {
                   return const Center(

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sonic_patti/views/components/catagories_panel.dart';
 import 'package:sonic_patti/views/earnscreen/earnland.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 import '../../controllers/home_controller.dart';
 import '../../utils/constants.dart';
@@ -60,8 +61,16 @@ class _AllGamesState extends State<AllGames> {
                 ),
                 Container(
                   height: 32,
-                  width: Get.width,
                   color: Colors.red,
+                  child: TextScroll(
+                    'Hey! I\'m a RTL text, check me out. Hey! I\'m a RTL text, check me out. Hey! I\'m a RTL text, check me out. ',
+                    style: AppTextStyles.kSubGameTitle
+                        .copyWith(fontSize: 12, height: 2.5),
+                    mode: TextScrollMode.bouncing,
+                    velocity: const Velocity(pixelsPerSecond: Offset(30, 0)),
+                    delayBefore: const Duration(milliseconds: 500),
+                    selectable: true,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -150,11 +159,9 @@ class _AllGamesState extends State<AllGames> {
         margin: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-                color: Colors.black54.withOpacity(0.3),
-                offset: const Offset(5, 7),
-                blurRadius: 0.3)
+                color: Colors.blueGrey, offset: Offset(6, 4), blurRadius: 6),
           ],
           image: DecorationImage(
             colorFilter: ColorFilter.mode(

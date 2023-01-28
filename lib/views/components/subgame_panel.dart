@@ -49,9 +49,11 @@ class _ListofSubGamesState extends State<ListofSubGames> {
   void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (seconds > 0) {
-        setState(() {
-          seconds--;
-        });
+        if (mounted) {
+          setState(() {
+            seconds--;
+          });
+        }
       } else {
         stopTimer();
       }
@@ -76,6 +78,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
 
   @override
   void dispose() {
+    if (!mounted) return;
     super.dispose();
   }
 

@@ -54,7 +54,8 @@ class _navBarState extends State<navBar> {
           color: Theme.of(context).colorScheme.surface,
           elevation: widget.isElevated ? null : 0.0,
           notchMargin: 4.0,
-          child: SizedBox(
+          child: Container(
+            color: Theme.of(context).colorScheme.surface,
             width: Get.width,
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -116,10 +117,7 @@ class _navBarState extends State<navBar> {
                                 ],
                                 color: index == controller.tabIndex.value
                                     ? Theme.of(context).colorScheme.secondary
-                                    : Theme.of(context)
-                                        .colorScheme
-                                        .onSurface
-                                        .withOpacity(0.4),
+                                    : Theme.of(context).colorScheme.onPrimary,
                               ),
                               Text(
                                 listOfTexts[index],
@@ -130,10 +128,7 @@ class _navBarState extends State<navBar> {
                                       : FontWeight.normal,
                                   color: index == controller.tabIndex.value
                                       ? Theme.of(context).colorScheme.secondary
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSurface
-                                          .withOpacity(0.4),
+                                      : Theme.of(context).colorScheme.onPrimary,
                                 ),
                               ),
                             ],

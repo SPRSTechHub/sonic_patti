@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:sonic_patti/utils/constants.dart';
 
 import '../../controllers/home_controller.dart';
 import '../gameScreens/sub_games.dart';
@@ -34,7 +35,6 @@ class _ListofGamesState extends State<ListofGames> {
                     onTap: (() {
                       Get.to(SubGames(catId: catData.catId),
                           transition: Transition.zoom);
-                      //print(catData.catId);
                     }),
                     child: Container(
                       height: 220,
@@ -96,26 +96,33 @@ class _ListofGamesState extends State<ListofGames> {
                             fit: FlexFit.tight,
                             flex: 1,
                             child: Container(
-                              //alignment: Alignment.bottomCenter,
-                              /*  height: 70, */
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 4.0),
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(12),
                                   bottomRight: Radius.circular(12),
                                 ),
-                                color: Color.fromRGBO(21, 55, 34, 0.90),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inverseSurface,
                               ),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(catData.catTitle,
-                                      textAlign: TextAlign.left),
-                                  Text("imageHero$index",
-                                      textAlign: TextAlign.left)
+                                  Text(
+                                    catData.catTitle,
+                                    textAlign: TextAlign.left,
+                                    style: AppTextStyles.kSubGameTitle
+                                        .copyWith(fontSize: 14),
+                                  ),
+                                  Text(
+                                    "imageHero$index",
+                                    textAlign: TextAlign.left,
+                                    style: AppTextStyles.kGameheading2,
+                                  )
                                 ],
                               ),
                             ),

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
+import 'package:sonic_patti/models/market_ratio.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
 import '../models/catagory_model.dart';
@@ -22,6 +23,7 @@ class HomeController extends GetxController {
   var catLists = <Catlists>[].obs;
   var isDataProcessing = false.obs;
   var gameLists = <GameLists>[].obs;
+  var mktList = <MktClass>[].obs;
   var isGameDataProcessing = false.obs;
   var isBidListsProcessing = false.obs;
   var bidsList = <BidsList>[].obs;
@@ -189,6 +191,18 @@ class HomeController extends GetxController {
       if (games != null) {
         isGameDataProcessing(false);
         gameLists.assignAll(games);
+      }
+    } finally {
+      isGameDataProcessing(false);
+    }
+  }
+
+  Future<dynamic> fetchMarket(gameId) async {
+    try {
+      var market = await RemoteApi.fetchMarket('market_ratio', gameId);
+      if (market != null) {
+        mktList.clear();
+        mktList.add(market);
       }
     } finally {
       isGameDataProcessing(false);
