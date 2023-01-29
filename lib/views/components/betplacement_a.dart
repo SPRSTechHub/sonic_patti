@@ -67,29 +67,19 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     'GAME TITLE',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        fontFamily: 'Inter',
-                        fontSize: 20,
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
+                    style: AppTextStyles.kBetTextHeading.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary),
                   ),
                   Text(
                     'BET END TIME',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        fontFamily: 'Inter',
-                        fontSize: 20,
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
-                  )
+                    style: AppTextStyles.kBetTextHeading.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary),
+                  ),
                 ],
               ),
             ),
@@ -102,13 +92,14 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                     child: numberBox(),
                   ),
                   const SizedBox(
-                    height: 6.0,
+                    height: 10.0,
                   ),
                   Container(
                     height: 60,
+                    padding: const EdgeInsets.only(left: 10.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: const Color.fromRGBO(0, 31, 36, 1),
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     child: Row(
                       children: [
@@ -172,7 +163,6 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                     onTap: (() {
                       var bidNum = GetStorage().read('bidNum');
                       var biDAmnt = amountText.text;
-
                       if (bidNum == '' || biDAmnt == '') {
                         Get.snackbar('Alert', 'Select your number & amount!');
                       } else if (int.parse(biDAmnt) > 0) {
@@ -189,13 +179,7 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                       padding: const EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color.fromRGBO(225, 221, 0, 1),
-                              Color.fromRGBO(168, 146, 0, 1)
-                            ]),
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                       child: const Text(
                         'ADD BID IN LIST',
@@ -240,11 +224,14 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                             itemBuilder: ((context, index) {
                               var bidData = _mainController.bids[index];
                               return Container(
-                                height: 58,
+                                height: 32,
                                 width: Get.width,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0),
                                 decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onInverseSurface,
                                   border: Border(
                                     bottom: BorderSide(
                                         width: 1.0,
@@ -307,13 +294,7 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
                       padding: const EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color.fromRGBO(225, 221, 0, 1),
-                              Color.fromRGBO(168, 146, 0, 1)
-                            ]),
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                       child: const Text(
                         'PLACE BID NOW',
@@ -366,17 +347,9 @@ class _SingleDigitBetState extends State<SingleDigitBet> {
         height: 58,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: const Color.fromRGBO(0, 0, 0, 1),
-            width: 1,
-          ),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: _currentIndex == number
-                ? AppColors.kDigitGradientSelected
-                : AppColors.kListCardGradient,
-          ),
+          color: _currentIndex == number
+              ? Theme.of(context).colorScheme.onPrimaryContainer
+              : Theme.of(context).colorScheme.secondary,
         ),
         child: Center(
           child: Text(

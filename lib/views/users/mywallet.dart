@@ -49,12 +49,12 @@ class _MyWalletState extends State<MyWallet> {
             Container(
               width: Get.width,
               height: 340,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(22),
                   bottomRight: Radius.circular(22),
                 ),
-                color: Color(0xff113726),
+                color: Theme.of(context).colorScheme.surface,
               ),
               child: Column(
                 children: [
@@ -123,13 +123,7 @@ class _MyWalletState extends State<MyWallet> {
             ),
             Container(
               width: Get.width,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(22),
-                  topRight: Radius.circular(22),
-                ),
-                color: Color(0xff113726),
-              ),
+              color: Theme.of(context).colorScheme.onInverseSurface,
               child: Column(
                 children: [
                   SizedBox(
@@ -170,7 +164,7 @@ class _MyWalletState extends State<MyWallet> {
               height: 72,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                color: const Color.fromRGBO(0, 34, 40, 1),
+                color: Theme.of(context).colorScheme.surface,
                 border: Border.all(
                   color: const Color.fromRGBO(0, 0, 0, 1),
                   width: 5,
@@ -222,7 +216,7 @@ class _MyWalletState extends State<MyWallet> {
                           )
                         : null,
                   ),
-                  style: const TextStyle(fontSize: 20),
+                  style: AppTextStyles.kAtmCardBalance.copyWith(fontSize: 20),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -262,12 +256,15 @@ class _MyWalletState extends State<MyWallet> {
                   child: Container(
                     width: 158,
                     height: 45,
-                    decoration: AppStyles.yellowBtn,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Center(
                       child: Text(
                         'OFFLINE',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.kYellowBtnTitle,
+                        style: AppTextStyles.kYellowBtnTitle.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
                       ),
                     ),
                   ),
@@ -294,12 +291,15 @@ class _MyWalletState extends State<MyWallet> {
                   child: Container(
                     width: 158,
                     height: 45,
-                    decoration: AppStyles.yellowBtn,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Center(
                       child: Text(
                         'ONLINE',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.kYellowBtnTitle,
+                        style: AppTextStyles.kYellowBtnTitle.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
                       ),
                     ),
                   ),
@@ -317,12 +317,15 @@ class _MyWalletState extends State<MyWallet> {
                   child: Container(
                     width: 158,
                     height: 45,
-                    decoration: AppStyles.yellowBtn,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Center(
                       child: Text(
                         'REQUEST FRIEND',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.kYellowBtnTitle,
+                        style: AppTextStyles.kYellowBtnTitle.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
                       ),
                     ),
                   ),
@@ -332,12 +335,15 @@ class _MyWalletState extends State<MyWallet> {
                   child: Container(
                     width: 158,
                     height: 45,
-                    decoration: AppStyles.yellowBtn,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Center(
                       child: Text(
                         'REDEAM COINS',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.kYellowBtnTitle,
+                        style: AppTextStyles.kYellowBtnTitle.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
                       ),
                     ),
                   ),

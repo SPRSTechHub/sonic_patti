@@ -88,9 +88,9 @@ class _ListofSubGamesState extends State<ListofSubGames> {
       onTap: (() {
         if (widget.live == 'no') {
           Get.snackbar('Alert', 'This Game is not Live now');
-          showModalB(widget.matchId);
+          showModalB(widget.matchId, context);
         } else {
-          showModalB(widget.matchId);
+          showModalB(widget.matchId, context);
         }
       }),
       child: SizedBox(
@@ -193,6 +193,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
             Align(
               alignment: Alignment.topCenter,
               child: Container(
+                  margin: const EdgeInsets.only(top: 4),
                   width: 120,
                   height: 24,
                   decoration: AppStyles.subGametopTimeBG),
@@ -200,7 +201,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
             Align(
                 alignment: Alignment.topCenter,
                 child: Container(
-                  margin: const EdgeInsets.only(top: 8.0),
+                  margin: const EdgeInsets.only(top: 10.0),
                   child: Text(
                     widget.matchTime,
                     textAlign: TextAlign.left,
@@ -213,9 +214,9 @@ class _ListofSubGamesState extends State<ListofSubGames> {
     );
   }
 
-  showModalB(param) {
-    return showModalBottomSheet(
-        backgroundColor: bottomBarBg,
+  showModalB(param, BuildContext context) {
+    return showModalBottomSheet<void>(
+        backgroundColor: Theme.of(context).colorScheme.background,
         context: context,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -241,7 +242,10 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(flex: 2, child: Text('Select Bet Type')),
+                      Expanded(
+                          flex: 2,
+                          child: Text('Select Bet Type',
+                              style: AppTextStyles.kEarnTitleHeading)),
                       IconButton(
                         onPressed: (() => Get.back()),
                         icon: const Icon(
@@ -279,11 +283,22 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                     transition: Transition.downToUp);
                               },
                               child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 6.0),
                                 width: 186,
                                 height: 72,
-                                decoration: AppStyles.betBtn,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Theme.of(context).colorScheme.surface,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                        offset: const Offset(.5, .5),
+                                        blurRadius: 1)
+                                  ],
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -308,11 +323,22 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                               onTap: () =>
                                   Get.snackbar('Alert', 'Working on it....'),
                               child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 6.0),
                                 width: 186,
                                 height: 72,
-                                decoration: AppStyles.betBtn,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Theme.of(context).colorScheme.surface,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                        offset: const Offset(.5, .5),
+                                        blurRadius: 1)
+                                  ],
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -354,9 +380,21 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                               child: Flexible(
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                      horizontal: 8.0, vertical: 6.0),
                                   height: 100,
-                                  decoration: AppStyles.betBtn,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
+                                          offset: const Offset(.5, .5),
+                                          blurRadius: 1)
+                                    ],
+                                  ),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -388,9 +426,21 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                               child: Flexible(
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                      horizontal: 8.0, vertical: 6.0),
                                   height: 100,
-                                  decoration: AppStyles.betBtn,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
+                                          offset: const Offset(.5, .5),
+                                          blurRadius: 1)
+                                    ],
+                                  ),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -422,9 +472,21 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                               child: Flexible(
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                      horizontal: 8.0, vertical: 6.0),
                                   height: 100,
-                                  decoration: AppStyles.betBtn,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
+                                          offset: const Offset(.5, .5),
+                                          blurRadius: 1)
+                                    ],
+                                  ),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -461,10 +523,21 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                           children: [
                             Flexible(
                               child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 6.0),
                                 height: 100,
-                                decoration: AppStyles.betBtn,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Theme.of(context).colorScheme.surface,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                        offset: const Offset(.5, .5),
+                                        blurRadius: 1)
+                                  ],
+                                ),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -487,10 +560,21 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                             ),
                             Flexible(
                               child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 6.0),
                                 height: 100,
-                                decoration: AppStyles.betBtn,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Theme.of(context).colorScheme.surface,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                        offset: const Offset(.5, .5),
+                                        blurRadius: 1)
+                                  ],
+                                ),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -513,10 +597,21 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                             ),
                             Flexible(
                               child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 6.0),
                                 height: 100,
-                                decoration: AppStyles.betBtn,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Theme.of(context).colorScheme.surface,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                        offset: const Offset(.5, .5),
+                                        blurRadius: 1)
+                                  ],
+                                ),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
