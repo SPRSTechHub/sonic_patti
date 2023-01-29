@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sonic_patti/controllers/controller_binding.dart';
 import 'package:sonic_patti/models/pg_model.dart';
 import 'package:sonic_patti/services/api.dart';
@@ -10,6 +12,7 @@ import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
 class PaymentController extends GetxController {
   var pgLists = <PgmClass>[].obs;
   var isDataProcessing = false.obs;
+  var cday = DateFormat('EEEE').format(currentTime).obs;
 //makePayment
   Future<dynamic> makePaymentByAllUpi(amount, String? pgMod) async {
     String? mobile = Constant.box.read('mobile');
@@ -21,9 +24,6 @@ class PaymentController extends GetxController {
       if (createOrder != null) {
         if (createOrder['status'] == 0) {
           if (createOrder['data'] != '') {
-            // Constant.box.write('receiverUpiId',createOrder['data']['receiverUpiId']);
-            // Constant.box.write('receiverName',createOrder['data']['receiverName']);
-            print(createOrder['data']);
             double amnt = amount.toDouble();
             Get.to(
               AllUpi(
@@ -64,8 +64,6 @@ class PaymentController extends GetxController {
     }
   }
 
-//
-
   Future<dynamic> makePaymentByCsfr(amount) async {
     String? mobile = Constant.box.read('mobile');
     final token = Constant.box.read('fcmToken') ?? false;
@@ -87,6 +85,26 @@ class PaymentController extends GetxController {
             return false;
           }
         }
+      }
+    }
+  }
+
+  Future<dynamic> makePaymentOffline(amount, image, token) async {
+    var date = DateFormat('dd-MM-yyyy').format(currentTime);
+    var mob = Constant.box.read('mobile');
+    var statusUpdate = await RemoteApi.makePaymentOffline(
+        'add_money_offline', mob, date, amount, image, token);
+    if (statusUpdate != null) {
+      if (statusUpdate['status'] == 0) {
+        Get.snackbar('Status',
+            'Your image uploaded successfully, Wait for few minutes to check from our end',
+            snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
+        return true;
+      } else if (statusUpdate['status'] == 1) {
+        Get.snackbar('Status', statusUpdate['message'],
+            snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
+      } else {
+        return false;
       }
     }
   }

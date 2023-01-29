@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sonic_patti/controllers/pymnt_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
 class OfflinePaymentMethod extends StatefulWidget {
@@ -15,7 +16,7 @@ class OfflinePaymentMethod extends StatefulWidget {
 class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
   XFile? image;
   final ImagePicker picker = ImagePicker();
-  //we can upload image from camera or from gallery based on parameter
+  final PaymentController _paymentController = Get.find<PaymentController>();
   Future getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
     setState(() {
@@ -72,7 +73,12 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          title: const Text('Offline Deposite'),
+          title: Text(
+            'Offline Deposite',
+            style: AppTextStyles.kAtmCardBalance.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold),
+          ),
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -80,11 +86,14 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                const SizedBox(
+                  height: 6.0,
+                ),
+                Text(
                   'USE THIS QR TO PAY',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
+                      color: Theme.of(context).colorScheme.tertiary,
                       fontSize: 20,
                       letterSpacing: 0,
                       fontWeight: FontWeight.bold,
@@ -93,48 +102,75 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                 const SizedBox(
                   height: 6.0,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10.0),
-                  width: 347,
-                  height: 223,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: const Color.fromRGBO(217, 217, 217, 1),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: const Image(
-                      height: 160,
-                      width: 160,
-                      image: AssetImage("assets/images/pay_qr.png"),
-                      fit: BoxFit.contain,
-                    ),
+                SizedBox(
+                  height: 300,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        top: 200,
+                        child: Container(
+                          alignment: Alignment.bottomCenter,
+                          width: 330,
+                          height: 55,
+                          padding: const EdgeInsets.all(4.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                          child: Text(
+                            '9768327053@ybl',
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.kSubGameTitle.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 16),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          width: 347,
+                          height: 223,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(0, 0, 0, 0.25),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 4)
+                            ],
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.background,
+                              width: 4,
+                            ),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: const Image(
+                              height: 160,
+                              width: 160,
+                              image: AssetImage("assets/images/pay_qr.png"),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
-                  height: 6.0,
-                ),
-                const Text(
-                  '9768327053@ybl',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontFamily: 'Inter',
-                      fontSize: 12,
-                      letterSpacing: 0,
-                      fontWeight: FontWeight.normal,
-                      height: 1),
-                ),
-                const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Container(
                   padding: const EdgeInsets.all(8.0),
-                  width: 351,
-                  height: 148,
+                  width: 350,
+                  height: 150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: const Color.fromRGBO(217, 217, 217, 0.1),
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -162,8 +198,7 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Inter',
                                 fontSize: 12,
-                                letterSpacing:
-                                    0 /*percentages not used in flutter. defaulting to zero*/,
+                                letterSpacing: 0,
                                 fontWeight: FontWeight.normal,
                                 height: 1),
                           ),
@@ -174,8 +209,7 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Inter',
                                 fontSize: 12,
-                                letterSpacing:
-                                    0 /*percentages not used in flutter. defaulting to zero*/,
+                                letterSpacing: 0,
                                 fontWeight: FontWeight.normal,
                                 height: 1),
                           ),
@@ -200,7 +234,11 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                         height: 130,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: const Color.fromRGBO(217, 217, 217, 1),
+                          color: Theme.of(context).colorScheme.background,
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 4,
+                          ),
                         ),
                         child: image != null
                             ? Padding(
@@ -234,13 +272,22 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
-                    if (image!.path == '') {
-                      print(File(image!.path));
+                    final token = Constant.box.read('fcmToken') ?? false;
+                    if (image != null && widget.amount != null) {
+                      //print(File(image!.path));
+                      File? file = File(image!.path);
+                      _paymentController.makePaymentOffline(
+                          widget.amount, file.path, token);
+                    } else {
+                      const snackBar = SnackBar(
+                        content: Text('No image selected! upload now'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },
                   style: ButtonStyle(
                       padding:
-                          MaterialStateProperty.all(const EdgeInsets.all(20)),
+                          MaterialStateProperty.all(const EdgeInsets.all(12)),
                       backgroundColor:
                           MaterialStateProperty.resolveWith((states) {
                         if (states.contains(MaterialState.pressed)) {

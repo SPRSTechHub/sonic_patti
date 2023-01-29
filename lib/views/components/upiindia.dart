@@ -193,8 +193,8 @@ class _AllUpiState extends State<AllUpi> {
                   _checkTxnStatus(status);
                   if (status == UpiPaymentStatus.SUCCESS) {
                     paymentController.successCallBack(
-                        widget.transactionRefId!,
-                        widget.amount!,
+                        widget.transactionRefId,
+                        widget.amount,
                         txnId,
                         resCode,
                         txnRef,

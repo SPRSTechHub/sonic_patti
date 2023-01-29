@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
@@ -104,6 +106,31 @@ class RemoteApi {
     } else {
       return null;
     }
+  }
+
+// Makae Offline Payment
+  static Future<dynamic>? makePaymentOffline(
+      String action, String? mobile, date, amount, image, token) async {
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.fields['action'] = action;
+    request.fields['mobile'] = mobile!;
+    request.fields['amount'] = amount;
+    request.fields['deviceKey'] = token;
+    var pic = await http.MultipartFile.fromPath("image", image);
+    request.files.add(pic);
+    await request.send().then((result) {
+      http.Response.fromStream(result).then((response) {
+        var message = jsonDecode(response.body);
+        if (message['status'] != null) {
+          print(message);
+          return message;
+        } else {
+          return null;
+        }
+      });
+    }).onError((error, stackTrace) {
+      return null;
+    });
   }
 
 //Make Payment Order
