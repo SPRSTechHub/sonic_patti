@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/betplacement_a.dart';
@@ -264,11 +265,9 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                   ),
                 ),
                 Flexible(
-                  flex: 1,
-                  fit: FlexFit.tight,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -288,7 +287,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 width: 186,
                                 height: 72,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(4),
                                   color: Theme.of(context).colorScheme.surface,
                                   boxShadow: [
                                     BoxShadow(
@@ -328,7 +327,7 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                 width: 186,
                                 height: 72,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(4),
                                   color: Theme.of(context).colorScheme.surface,
                                   boxShadow: [
                                     BoxShadow(
@@ -362,28 +361,31 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: (() {
-                                Get.back();
-                                Get.to(PannaBet(matchId: param),
-                                    transition: Transition.downToUp);
-                              }),
-                              child: Flexible(
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        height: 250,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GridView.count(
+                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 4,
+                            crossAxisCount: 3,
+                            childAspectRatio: (1 / .9),
+                            shrinkWrap: true,
+                            children: [
+                              GestureDetector(
+                                onTap: (() {
+                                  Get.back();
+                                  Get.to(PannaBet(matchId: param),
+                                      transition: Transition.downToUp);
+                                }),
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0, vertical: 6.0),
                                   height: 100,
+                                  width: Get.width / 3,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(4),
                                     color:
                                         Theme.of(context).colorScheme.surface,
                                     boxShadow: [
@@ -416,20 +418,19 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                   ),
                                 ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: (() {
-                                Get.back();
-                                Get.to(PannaBet(matchId: param),
-                                    transition: Transition.downToUp);
-                              }),
-                              child: Flexible(
+                              GestureDetector(
+                                onTap: (() {
+                                  Get.back();
+                                  Get.to(PannaBet(matchId: param),
+                                      transition: Transition.downToUp);
+                                }),
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0, vertical: 6.0),
                                   height: 100,
+                                  width: Get.width / 3,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(4),
                                     color:
                                         Theme.of(context).colorScheme.surface,
                                     boxShadow: [
@@ -462,20 +463,19 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                   ),
                                 ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: (() {
-                                Get.back();
-                                Get.to(PannaBet(matchId: param),
-                                    transition: Transition.downToUp);
-                              }),
-                              child: Flexible(
+                              GestureDetector(
+                                onTap: (() {
+                                  Get.back();
+                                  Get.to(PannaBet(matchId: param),
+                                      transition: Transition.downToUp);
+                                }),
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0, vertical: 6.0),
                                   height: 100,
+                                  width: Get.width / 3,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(4),
                                     color:
                                         Theme.of(context).colorScheme.surface,
                                     boxShadow: [
@@ -508,26 +508,12 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Container(
+                              Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0, vertical: 6.0),
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(4),
                                   color: Theme.of(context).colorScheme.surface,
                                   boxShadow: [
                                     BoxShadow(
@@ -557,14 +543,12 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                   ],
                                 ),
                               ),
-                            ),
-                            Flexible(
-                              child: Container(
+                              Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0, vertical: 6.0),
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(4),
                                   color: Theme.of(context).colorScheme.surface,
                                   boxShadow: [
                                     BoxShadow(
@@ -594,14 +578,12 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                   ],
                                 ),
                               ),
-                            ),
-                            Flexible(
-                              child: Container(
+                              Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0, vertical: 6.0),
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(4),
                                   color: Theme.of(context).colorScheme.surface,
                                   boxShadow: [
                                     BoxShadow(
@@ -631,13 +613,13 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                      const SizedBox(
+                      /*    const SizedBox(
                         height: 10,
-                      ),
+                      ), */
                       const Text('MORE BIDS ADDED HERE ....'),
                     ],
                   ),

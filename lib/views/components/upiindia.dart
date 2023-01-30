@@ -53,11 +53,11 @@ class _AllUpiState extends State<AllUpi> {
   Future<UpiResponse> initiateTransaction(UpiApp app) async {
     return _upiIndia.startTransaction(
       app: app,
-      receiverUpiId: widget.receiverUpiId!,
-      receiverName: widget.receiverName!,
-      transactionRefId: widget.transactionRefId!,
-      transactionNote: widget.transactionNote!,
-      amount: widget.amount!.toDouble(),
+      receiverUpiId: widget.receiverUpiId,
+      receiverName: widget.receiverName,
+      transactionRefId: widget.transactionRefId,
+      transactionNote: widget.transactionNote,
+      amount: widget.amount.toDouble(),
     );
   }
 

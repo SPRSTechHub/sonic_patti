@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
-import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/utils/constants.dart';
@@ -66,29 +64,19 @@ class _PannaBetState extends State<PannaBet> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     'GAME TITLE',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        fontFamily: 'Inter',
-                        fontSize: 20,
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
+                    style: AppTextStyles.kBetTextHeading.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary),
                   ),
                   Text(
                     'BET END TIME',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        fontFamily: 'Inter',
-                        fontSize: 20,
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
-                  )
+                    style: AppTextStyles.kBetTextHeading.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary),
+                  ),
                 ],
               ),
             ),
@@ -102,9 +90,10 @@ class _PannaBetState extends State<PannaBet> {
                   ),
                   Container(
                     height: 60,
+                    padding: const EdgeInsets.only(left: 10.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: const Color.fromRGBO(0, 31, 36, 1),
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     child: Row(
                       children: [
@@ -125,7 +114,7 @@ class _PannaBetState extends State<PannaBet> {
                         Expanded(
                           flex: 1,
                           child: Container(
-                            height: 273,
+                            height: 270,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: const Color(0xff00161A),
@@ -134,7 +123,6 @@ class _PannaBetState extends State<PannaBet> {
                                   offset: const Offset(-4, 4),
                                   blurRadius: 3,
                                   color: Colors.black.withOpacity(0.8),
-                                  inset: true,
                                 ),
                               ],
                             ),
@@ -146,7 +134,7 @@ class _PannaBetState extends State<PannaBet> {
                                 maxLines: 1,
                                 textAlign: TextAlign.right,
                                 style: const TextStyle(
-                                    fontSize: 22.0,
+                                    fontSize: 20.0,
                                     height: 1.0,
                                     color: Colors.amber),
                                 decoration: const InputDecoration(
@@ -167,9 +155,10 @@ class _PannaBetState extends State<PannaBet> {
                   ),
                   Container(
                     height: 60,
+                    padding: const EdgeInsets.only(left: 10.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: const Color.fromRGBO(0, 31, 36, 1),
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     child: Row(
                       children: [
@@ -190,7 +179,7 @@ class _PannaBetState extends State<PannaBet> {
                         Expanded(
                           flex: 1,
                           child: Container(
-                            height: 273,
+                            height: 270,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: const Color(0xff00161A),
@@ -199,7 +188,6 @@ class _PannaBetState extends State<PannaBet> {
                                   offset: const Offset(-4, 4),
                                   blurRadius: 3,
                                   color: Colors.black.withOpacity(0.8),
-                                  inset: true,
                                 ),
                               ],
                             ),
@@ -211,7 +199,7 @@ class _PannaBetState extends State<PannaBet> {
                                 maxLines: 1,
                                 textAlign: TextAlign.right,
                                 style: const TextStyle(
-                                    fontSize: 22.0,
+                                    fontSize: 20.0,
                                     height: 1.0,
                                     color: Colors.amber),
                                 decoration: const InputDecoration(
@@ -300,11 +288,14 @@ class _PannaBetState extends State<PannaBet> {
                             itemBuilder: ((context, index) {
                               var bidData = _mainController.bids[index];
                               return Container(
-                                height: 58,
+                                height: 32,
                                 width: Get.width,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0),
                                 decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onInverseSurface,
                                   border: Border(
                                     bottom: BorderSide(
                                         width: 1.0,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
 class MyReferral extends StatefulWidget {
@@ -10,6 +13,8 @@ class MyReferral extends StatefulWidget {
 }
 
 class _MyReferralState extends State<MyReferral> {
+  final HomeController _mainController = Get.find<HomeController>();
+
   @override
   void initState() {
     super.initState();
@@ -133,7 +138,6 @@ class _MyReferralState extends State<MyReferral> {
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {},
-                        /* style:, */
                         icon: const Icon(
                           Icons.telegram_outlined,
                           color: Colors.green,
@@ -142,22 +146,22 @@ class _MyReferralState extends State<MyReferral> {
                       ),
                       ElevatedButton.icon(
                         onPressed: () {},
-                        /* style:, */
                         icon: const Icon(
                           Icons.share_outlined,
                           color: Colors.green,
                         ),
                         label: const Text('Share'),
                       ),
-                      /*   ElevatedButton.icon(
-                        onPressed: () {},
-                        /* style:, */
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          _onShare(context);
+                        },
                         icon: const Icon(
-                          Icons.whatsapp_outlined,
+                          Icons.whatshot_sharp,
                           color: Colors.green,
                         ),
                         label: const Text('WhatsApp'),
-                      ) */
+                      )
                     ],
                   ),
                 )
@@ -174,5 +178,19 @@ class _MyReferralState extends State<MyReferral> {
         )
       ],
     ));
+  }
+
+  void _onShare(BuildContext context) async {
+    final box = context.findRenderObject() as RenderBox?;
+    var referinfo = _mainController.fetchAppLink();
+    print(referinfo['status']);
+    if (_mainController.referDetails.value != '') {
+      print(_mainController.referDetails.value);
+      //return Obx(() => Text(_mainController.referDetails.value));
+    }
+    /* await Share.share(
+        'Hey download & start playing Sonic with this Referid & get Joining Bonus. \nLink: https://digitalsprs.fun',
+        subject: 'Sonic Patti',
+        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size); */
   }
 }

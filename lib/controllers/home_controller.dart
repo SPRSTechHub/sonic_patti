@@ -13,6 +13,7 @@ import '../models/catagory_model.dart';
 import '../services/api.dart';
 
 class HomeController extends GetxController {
+  RxBool referDetails = false.obs;
   RxBool permissions = false.obs;
   RxBool isLogin = false.obs;
   var tabIndex = 0.obs;
@@ -74,9 +75,14 @@ class HomeController extends GetxController {
     var uwbal = Constant.box.read('uwbal');
     bool isLogin = Constant.box.read('isLogin');
     String? mobile = Constant.box.read('mobile');
+    String? token = Constant.box.read('fcmToken') ?? '';
     if (uwbal != null && isLogin == true && mobile != null) {
-      var userDetails = await RemoteApi.getUser('get_user', mobile);
+      var userDetails = await RemoteApi.getUser('get_user', mobile, token);
       if (userDetails != null) {
+        if (userDetails['ckDev'] != 0) {
+          Get.snackbar('Alert', 'New Device detected!',
+              backgroundColor: Colors.black, colorText: Colors.red);
+        }
         if (userDetails['status'] == 0) {
           Constant.box
               .write('uwbal', userDetails['result']['wallet']['bal_amnt'] ?? 0);
@@ -87,6 +93,21 @@ class HomeController extends GetxController {
           Constant.box.write('minWithdraw',
               userDetails['result']['wallet']['minWithdraw'] ?? 0);
         }
+      }
+    }
+  }
+
+//getapplink
+  fetchAppLink() async {
+    String? token = Constant.box.read('fcmToken') ?? '';
+    var details = await RemoteApi.getAppLink('getapplink', token);
+    if (details != null) {
+      if (details['status'] == 0) {
+        referDetails.value = details;
+        return true;
+      } else {
+        referDetails.value = false;
+        return null;
       }
     }
   }

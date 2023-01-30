@@ -10,7 +10,6 @@ import '../models/catagory_model.dart';
 
 class RemoteApi {
   static var client = http.Client();
-//  static var url = 'https://control.fatafatguru.in/api';
   static var url = 'https://console.digitalsprs.fun/api';
 
   static Map<String, String> headers = {
@@ -122,7 +121,6 @@ class RemoteApi {
       http.Response.fromStream(result).then((response) {
         var message = jsonDecode(response.body);
         if (message['status'] != null) {
-          print(message);
           return message;
         } else {
           return null;
@@ -231,9 +229,23 @@ class RemoteApi {
   }
 
 // Fetch User Details
-  static Future<dynamic>? getUser(String? action, String? mobile) async {
-    var postData = {'action': action, 'mobile': mobile};
+  static Future<dynamic>? getUser(
+      String? action, String? mobile, String? token) async {
+    var postData = {'action': action, 'mobile': mobile, 'deviceKey': token};
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
 
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      return resp;
+    } else {
+      return null;
+    }
+  }
+
+// Fetch AppLink
+  static Future<dynamic>? getAppLink(String? action, String? token) async {
+    var postData = {'action': action, 'deviceKey': token};
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
 
@@ -246,7 +258,6 @@ class RemoteApi {
   }
 
   // Bids Submissions
-
   static Future<dynamic> bidSubmission(String? bidsData) async {
     var jsonBody = {
       'action': 'betplace',

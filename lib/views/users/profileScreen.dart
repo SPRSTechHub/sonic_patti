@@ -12,7 +12,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   void initState() {
-    print(Constant.box.read('IS_DARK_MODE'));
     super.initState();
   }
 
@@ -23,16 +22,18 @@ class _ProfileState extends State<Profile> {
         children: [
           SizedBox(
             height: 230,
-            child: Stack(children: <Widget>[
+            child: Stack(alignment: Alignment.center, children: <Widget>[
               Positioned(
                 top: 0,
                 left: 0,
                 child: Container(
                   width: Get.width,
                   height: 120,
-                  decoration: BoxDecoration(
-                    color:
-                        const Color.fromRGBO(217, 217, 217, 1).withOpacity(0.6),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/profl_bg.png'),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
@@ -79,16 +80,16 @@ class _ProfileState extends State<Profile> {
               ),
               Positioned(
                   top: 180,
-                  left: Get.width * .42,
-                  child: Text(Constant.box.read('userid'),
+                  child: Text('Userid: ${Constant.box.read('userid')}',
                       textAlign: TextAlign.left,
-                      style: AppTextStyles.kAtmCardBalanceText)),
+                      style: AppTextStyles.kAtmCardBalanceText.copyWith(
+                          color: Theme.of(context).colorScheme.tertiary))),
               Positioned(
                   top: 200,
-                  left: Get.width * .42,
-                  child: Text(Constant.box.read('mobile'),
+                  child: Text('Mobile: ${Constant.box.read('mobile')}',
                       textAlign: TextAlign.left,
-                      style: AppTextStyles.kAtmCardBalanceText)),
+                      style: AppTextStyles.kAtmCardBalanceText.copyWith(
+                          color: Theme.of(context).colorScheme.tertiary))),
             ]),
           ),
           SizedBox(
@@ -129,10 +130,12 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.all(8),
               children: <Widget>[
                 Material(
-                  color: bgColor1.withOpacity(.3),
+                  color: Theme.of(context).colorScheme.secondary,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
+                    activeColor: Theme.of(context).colorScheme.tertiary,
+                    inactiveThumbColor: Theme.of(context).colorScheme.surface,
                     title: const Text('PROFILE UPDATE'),
                     value: Constant.box.read('IS_DARK_MODE') ? true : false,
                     onChanged: (bool? value) {
@@ -146,15 +149,17 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Material(
-                  color: bgColor1.withOpacity(.3),
+                  color: Theme.of(context).colorScheme.secondary,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
+                    activeColor: Theme.of(context).colorScheme.tertiary,
+                    inactiveThumbColor: Theme.of(context).colorScheme.surface,
                     title: const Text('ACCOUNT UPDATE'),
                     value: Constant.box.read('IS_DARK_MODE') ? true : false,
                     onChanged: (bool? value) {
                       setState(() {
-                        Constant.box.write('IS_DARK_MODE', value);
+                        //Constant.box.write('IS_DARK_MODE', value);
                       });
                     },
                   ),
@@ -163,16 +168,18 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Material(
-                  color: bgColor1.withOpacity(.3),
+                  color: Theme.of(context).colorScheme.secondary,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
+                    activeColor: Theme.of(context).colorScheme.tertiary,
+                    inactiveThumbColor: Theme.of(context).colorScheme.surface,
                     title: Text(
                         'APP THEME MODE: ${Constant.box.read('IS_DARK_MODE') ? 'DARK' : 'LIGHT'}'),
                     value: Constant.box.read('IS_DARK_MODE') ? true : false,
                     onChanged: (bool? value) {
                       setState(() {
-                        Constant.box.write('IS_DARK_MODE', value);
+                        //Constant.box.write('IS_DARK_MODE', value);
                       });
                     },
                   ),
@@ -181,16 +188,18 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Material(
-                  color: bgColor1.withOpacity(.3),
+                  color: Theme.of(context).colorScheme.secondary,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
+                    activeColor: Theme.of(context).colorScheme.tertiary,
+                    inactiveThumbColor: Theme.of(context).colorScheme.surface,
                     title: Text(
                         'NOTIFICATIONS: ${Constant.box.read('IS_DARK_MODE') ? 'YES' : 'NO'}'),
                     value: Constant.box.read('IS_DARK_MODE') ? true : false,
                     onChanged: (bool? value) {
                       setState(() {
-                        Constant.box.write('IS_DARK_MODE', value);
+                        //Constant.box.write('IS_DARK_MODE', value);
                       });
                     },
                   ),
@@ -199,16 +208,18 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Material(
-                  color: bgColor1.withOpacity(.3),
+                  color: Theme.of(context).colorScheme.secondary,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
+                    activeColor: Theme.of(context).colorScheme.tertiary,
+                    inactiveThumbColor: Theme.of(context).colorScheme.surface,
                     title: Text(
                         'PASSCODE LOCK: ${Constant.box.read('IS_DARK_MODE') ? 'YES' : 'NO'}'),
                     value: Constant.box.read('IS_DARK_MODE') ? true : false,
                     onChanged: (bool? value) {
                       setState(() {
-                        Constant.box.write('IS_DARK_MODE', value);
+                        //Constant.box.write('IS_DARK_MODE', value);
                       });
                     },
                   ),
@@ -217,15 +228,17 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Material(
-                  color: bgColor1.withOpacity(.3),
+                  color: Theme.of(context).colorScheme.secondary,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
+                    activeColor: Theme.of(context).colorScheme.tertiary,
+                    inactiveThumbColor: Theme.of(context).colorScheme.surface,
                     title: const Text('APP UPDATE'),
                     value: Constant.box.read('IS_DARK_MODE') ? true : false,
                     onChanged: (bool? value) {
                       setState(() {
-                        Constant.box.write('IS_DARK_MODE', value);
+                        //Constant.box.write('IS_DARK_MODE', value);
                       });
                     },
                   ),

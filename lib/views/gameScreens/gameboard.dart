@@ -33,8 +33,6 @@ class _GameBoardState extends State<GameBoard> {
     super.dispose();
   }
 
-  //double? scrolledUnderElevation;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

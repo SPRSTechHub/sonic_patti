@@ -40,53 +40,273 @@ class _AllBidsState extends State<AllBids> {
         child: Column(
           children: [
             Container(
-              color: Colors.transparent,
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: Theme.of(context).colorScheme.surface,
+              ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('BET HISTORY'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text('data'),
+                      const Expanded(
+                        child: Text(
+                          'BIDS HISTORY',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontFamily: 'Inter',
+                              fontSize: 20,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.normal,
+                              height: 1),
+                        ),
+                      ),
                       GestureDetector(
-                        onTap: (() {
-                          showBids();
-                        }),
+                        onTap: () {
+                          setState(() {
+                            bidController.fetchPlaceBids(
+                                '',
+                                Constant.box.read('mobile') ?? '0123456789',
+                                'date',
+                                'desc',
+                                '50',
+                                '0',
+                                '');
+                          });
+                        },
                         child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 2.0),
-                          width: 120,
-                          height: 30,
-                          padding: const EdgeInsets.all(2.0),
+                          width: 92,
+                          height: 36,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: const LinearGradient(
+                            borderRadius: BorderRadius.circular(22),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(0, 0, 0, 0.45),
+                                  offset: Offset(0, 3),
+                                  blurRadius: 2)
+                            ],
+                            gradient: LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  Color.fromRGBO(225, 221, 0, 1),
-                                  Color.fromRGBO(168, 146, 0, 1)
+                                  const Color(0xffE3E1D5).withOpacity(0.6),
+                                  const Color(0xff9AF0FF),
                                 ]),
                           ),
-                          child: const Text(
-                            'REFRESH',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Inter',
-                                fontSize: 16,
-                                letterSpacing: 0,
-                                fontWeight: FontWeight.normal,
-                                height: 1),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Center(
+                                child: Text(
+                                  'Reload',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(0, 0, 0, 1),
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
+                              ),
+                              Icon(
+                                Icons.refresh_outlined,
+                                color: Color(0xff3F00FD),
+                                shadows: <Shadow>[
+                                  Shadow(
+                                      color: Colors.black,
+                                      blurRadius: 1.0,
+                                      offset: Offset.zero)
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 4.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                            height: 32,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: const Color.fromRGBO(
+                                  255, 255, 255, 0.17000000178813934),
+                              border: Border.all(
+                                color: const Color.fromRGBO(255, 255, 255, 1),
+                                width: 0.5,
+                              ),
+                            )),
+                      ),
+                      Container(
+                        width: 102,
+                        height: 36,
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: AppStyles.buttonBg,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Center(
+                              child: Text(
+                                'Search',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 0, 1),
+                                    fontFamily: 'Inter',
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1),
+                              ),
+                            ),
+                            Icon(
+                              Icons.search_off_outlined,
+                              color: Color(0xff3F00FD),
+                              shadows: <Shadow>[
+                                Shadow(
+                                    color: Colors.black,
+                                    blurRadius: 1.0,
+                                    offset: Offset.zero)
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 4.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          width: 102,
+                          height: 36,
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(22),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(0, 0, 0, 0.45),
+                                  offset: Offset(0, 3),
+                                  blurRadius: 2)
+                            ],
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  const Color(0xffE3E1D5).withOpacity(0.6),
+                                  const Color(0xff9AF0FF),
+                                ]),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Icon(
+                                Icons.arrow_back_ios,
+                                color: Color(0xff3F00FD),
+                                shadows: <Shadow>[
+                                  Shadow(
+                                      color: Colors.black,
+                                      blurRadius: 1.0,
+                                      offset: Offset.zero)
+                                ],
+                              ),
+                              Center(
+                                child: Text(
+                                  'Prev',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(0, 0, 0, 1),
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
+                      Expanded(
+                          child: Container(
+                        width: 102,
+                        height: 36,
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(22),
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.45),
+                                offset: Offset(0, 3),
+                                blurRadius: 2)
+                          ],
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                const Color(0xffE3E1D5).withOpacity(0.6),
+                                const Color(0xff9AF0FF),
+                              ]),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Center(
+                              child: Text(
+                                'Next',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 0, 1),
+                                    fontFamily: 'Inter',
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1),
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xff3F00FD),
+                              shadows: <Shadow>[
+                                Shadow(
+                                    color: Colors.black,
+                                    blurRadius: 1.0,
+                                    offset: Offset.zero)
+                              ],
+                            ),
+                          ],
+                        ),
+                      )),
                     ],
                   ),
                 ],
               ),
             ),
             Container(
-                color: bottomBarBg,
+                color: Theme.of(context).colorScheme.background,
                 margin: const EdgeInsets.symmetric(vertical: 2.0),
                 child: buildDataTable()),
           ],
