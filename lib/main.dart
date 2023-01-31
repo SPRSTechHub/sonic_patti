@@ -15,19 +15,18 @@ import 'views/obscreen/screen_one.dart';
 bool? initFirst;
 bool? isLogin;
 
-/* Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-
   print("Handling a background message: ${message.messageId}");
 }
- */
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
   final fcmToken = await FirebaseMessaging.instance.getToken();
   await GetStorage.init();
   initFirst = GetStorage().read('initFirst');
@@ -38,11 +37,9 @@ void main() async {
   }
 
   GetStorage().write('fcmToken', fcmToken ?? false);
-  //FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
-
-/* Color brandColor = Color.fromARGB(255, 51, 0, 255); */
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

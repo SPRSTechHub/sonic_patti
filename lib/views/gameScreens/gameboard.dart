@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
@@ -7,6 +8,7 @@ import 'package:sonic_patti/views/components/sidenav.dart';
 import 'package:sonic_patti/views/gameScreens/all_games.dart';
 import 'package:sonic_patti/views/gameScreens/allbids.dart';
 import 'package:sonic_patti/views/gameScreens/results.dart';
+import 'package:sonic_patti/views/notifications.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
 import 'package:sonic_patti/views/users/profileScreen.dart';
 import 'package:sonic_patti/views/users/referearn.dart';
@@ -25,6 +27,19 @@ class _GameBoardState extends State<GameBoard> {
     setState(() {
       _mainController.fetchUserDetails();
     });
+    LocalNotification.initialize();
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        //print("FirebaseMessaging.onMessage.listen");
+        if (message.notification != null) {
+          /*   print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data11 ${message.data}"); */
+          LocalNotification.showNotification(message);
+        }
+      },
+    );
+
     super.initState();
   }
 
