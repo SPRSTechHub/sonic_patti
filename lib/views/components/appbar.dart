@@ -81,11 +81,9 @@ class _TopAppBarState extends State<TopAppBar> {
               ),
               Text(
                 '₹ ${uwbal ?? 0}',
-                style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontFamily: 'inter',
-                    fontWeight: FontWeight.bold),
+                style: AppTextStyles.kiconText.copyWith(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ],
           ),
@@ -96,14 +94,6 @@ class _TopAppBarState extends State<TopAppBar> {
           smallSize: 10,
           padding: const EdgeInsets.all(2.0),
           alignment: AlignmentDirectional.center,
-
-          /* stackFit: StackFit.loose,
-          position: BadgePosition.topEnd(top: 8, end: 4),
-          elevation: 6,
-          shape: BadgeShape.circle,
-          badgeContent: null,
-          borderSide: const BorderSide(color: Colors.black),
-           */
           child: IconButton(
             icon: Icon(
               Icons.notification_add,

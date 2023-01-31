@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
+import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
 
 class SideNav extends StatefulWidget {
@@ -15,13 +16,13 @@ class _SideNavState extends State<SideNav> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.blue,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +39,12 @@ class _SideNavState extends State<SideNav> {
                           height: 60,
                           image: AssetImage("assets/icon/logo_sonic.png")),
                     ),
-                    const Text('SONIC PATTI'),
+                    Text(
+                      'SONIC PATTI',
+                      style: AppTextStyles.kAtmCardBalance.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.bold),
+                    ),
                     IconButton(
                       icon: const Icon(
                         Icons.close,
@@ -57,39 +63,63 @@ class _SideNavState extends State<SideNav> {
                   children: [
                     Flexible(
                       child: Column(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.money_off_csred_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                            shadows: const <Shadow>[
+                              Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 1.0,
+                                  offset: Offset.zero)
+                            ],
                           ),
                           Text(
                             'Withdraw',
-                            style: TextStyle(fontSize: 12),
-                          )
+                            style: AppTextStyles.kiconText.copyWith(
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
                         ],
                       ),
                     ),
                     Flexible(
                       child: Column(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.wifi_channel_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                            shadows: const <Shadow>[
+                              Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 1.0,
+                                  offset: Offset.zero)
+                            ],
                           ),
                           Text(
                             'My Win',
-                            style: TextStyle(fontSize: 12),
+                            style: AppTextStyles.kiconText.copyWith(
+                                color: Theme.of(context).colorScheme.secondary),
                           )
                         ],
                       ),
                     ),
                     Flexible(
                       child: Column(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.logout_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                            shadows: const <Shadow>[
+                              Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 1.0,
+                                  offset: Offset.zero)
+                            ],
                           ),
                           Text(
                             'Sign Out',
-                            style: TextStyle(fontSize: 12),
+                            style: AppTextStyles.kiconText.copyWith(
+                                color: Theme.of(context).colorScheme.secondary),
                           )
                         ],
                       ),
@@ -100,8 +130,19 @@ class _SideNavState extends State<SideNav> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home_outlined),
-            title: const Text('Home'),
+            leading: Icon(
+              Icons.home_outlined,
+              color: Theme.of(context).colorScheme.tertiary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+              ],
+            ),
+            title: Text(
+              'Home',
+              style: AppTextStyles.kiconText
+                  .copyWith(color: Theme.of(context).colorScheme.tertiary),
+            ),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -111,8 +152,17 @@ class _SideNavState extends State<SideNav> {
           ),
           const Divider(thickness: 1),
           ListTile(
-            leading: const Icon(Icons.verified_user_outlined),
-            title: const Text('My Profile'),
+            leading: Icon(
+              Icons.verified_user_outlined,
+              color: Theme.of(context).colorScheme.tertiary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+              ],
+            ),
+            title: Text('My Profile',
+                style: AppTextStyles.kiconText
+                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -122,8 +172,17 @@ class _SideNavState extends State<SideNav> {
           ),
           const Divider(thickness: 1),
           ListTile(
-            leading: const Icon(Icons.ios_share_outlined),
-            title: const Text('Refer & Earn'),
+            leading: Icon(
+              Icons.ios_share_outlined,
+              color: Theme.of(context).colorScheme.tertiary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+              ],
+            ),
+            title: Text('Refer & Earn',
+                style: AppTextStyles.kiconText
+                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -133,16 +192,34 @@ class _SideNavState extends State<SideNav> {
           ),
           const Divider(thickness: 1),
           ListTile(
-            leading: const Icon(Icons.list_alt_outlined),
-            title: const Text('All Results'),
+            leading: Icon(
+              Icons.list_alt_outlined,
+              color: Theme.of(context).colorScheme.tertiary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+              ],
+            ),
+            title: Text('All Results',
+                style: AppTextStyles.kiconText
+                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           const Divider(thickness: 1),
           ListTile(
-            leading: const Icon(Icons.wallet_membership_outlined),
-            title: const Text('My Wallet'),
+            leading: Icon(
+              Icons.wallet_membership_outlined,
+              color: Theme.of(context).colorScheme.tertiary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+              ],
+            ),
+            title: Text('My Wallet',
+                style: AppTextStyles.kiconText
+                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
             onTap: () {
               Navigator.pop(context);
               Get.to(const MyWallet());
@@ -150,8 +227,17 @@ class _SideNavState extends State<SideNav> {
           ),
           const Divider(thickness: 1),
           ListTile(
-            leading: const Icon(Icons.support_agent_outlined),
-            title: const Text('Contact & Support'),
+            leading: Icon(
+              Icons.support_agent_outlined,
+              color: Theme.of(context).colorScheme.tertiary,
+              shadows: const <Shadow>[
+                Shadow(
+                    color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+              ],
+            ),
+            title: Text('Contact & Support',
+                style: AppTextStyles.kiconText
+                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
             onTap: () {
               Navigator.pop(context);
             },

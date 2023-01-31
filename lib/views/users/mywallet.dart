@@ -2,7 +2,6 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/controller_binding.dart';
-import 'package:sonic_patti/controllers/pymnt_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/cardatm.dart';
@@ -10,6 +9,7 @@ import 'package:sonic_patti/views/components/cardslides.dart';
 import 'package:sonic_patti/views/pymnts/offline_pymnt_method.dart';
 import 'package:sonic_patti/views/pymnts/pymnt_methods.dart';
 import 'package:sonic_patti/views/pymnts/transactions.dart';
+import 'package:sonic_patti/views/pymnts/withdrawl.dart';
 
 class MyWallet extends StatefulWidget {
   const MyWallet({super.key});
@@ -67,20 +67,15 @@ class _MyWalletState extends State<MyWallet> {
                         alignment: WrapAlignment.start,
                         children: [
                           Text(
-                            'Hello, USER',
+                            'Hello, ${Constant.box.read('fullname') ?? 'Player'}',
                             textAlign: TextAlign.center,
                             style: AppTextStyles.kAtmCardTitle,
                           ),
-                          Text(
-                            'Good Morning',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.kAtmCardTitle,
-                          )
                         ],
                       ),
                     ),
                   ),
-                  const BuildATMCard(),
+                  BuildATMCard(),
                   Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 6.0),
@@ -91,8 +86,11 @@ class _MyWalletState extends State<MyWallet> {
                           Flexible(
                             fit: FlexFit.tight,
                             child: GestureDetector(
-                              onTap: () => Get.to(const TransactionsScreen(),
-                                  transition: Transition.downToUp),
+                              onTap: () => Get.to(
+                                const WithdrawScreen(),
+                                transition: Transition.downToUp,
+                                binding: ControllerBinding(),
+                              ),
                               child: walletButtons(
                                   'Withdraw', Icons.outbond_outlined),
                             ),
@@ -104,6 +102,7 @@ class _MyWalletState extends State<MyWallet> {
                             fit: FlexFit.tight,
                             child: GestureDetector(
                               onTap: () => Get.to(const TransactionsScreen(),
+                                  binding: ControllerBinding(),
                                   transition: Transition.downToUp),
                               child: walletButtons(
                                   'Transfer', Icons.play_for_work_outlined),

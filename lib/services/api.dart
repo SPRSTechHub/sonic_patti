@@ -6,6 +6,8 @@ import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
 import 'package:sonic_patti/models/market_ratio.dart';
 import 'package:sonic_patti/models/pg_model.dart';
+import 'package:sonic_patti/models/transactions.dart';
+import 'package:sonic_patti/models/win_model.dart';
 import '../models/catagory_model.dart';
 
 class RemoteApi {
@@ -86,6 +88,79 @@ class RemoteApi {
         var jsonString = jsonEncode(resp['data']);
 
         return bidsListFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+// Winnings //
+// Bid list api call
+  static Future<List<WinModal>?> fetchWinining(
+      String action,
+      String mobile,
+      String catId,
+      String? sortBy,
+      String? sortTo,
+      String? lstart,
+      String? lend) async {
+    var postData = {
+      'action': action,
+      'mobile': mobile,
+      'catId': catId,
+      'sortBy': sortBy,
+      'sortTo': sortTo,
+      'lstart': lstart,
+      'lend': lend,
+      'searchKey': ''
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      if (resp['status'] == 0) {
+        var jsonString = jsonEncode(resp['data']);
+
+        return winModalFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+// Transactions //
+  static Future<List<TransactionsClass>?> fetchTransactionDetails(
+      String action,
+      String mobile,
+      String? sortBy,
+      String? sortTo,
+      String? lstart,
+      String? lend) async {
+    var postData = {
+      'action': action,
+      'mobile': mobile,
+      'sortBy': sortBy,
+      'sortTo': sortTo,
+      'lstart': lstart,
+      'lend': lend,
+      //'searchKey': searchKey,
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      if (resp['status'] == 0) {
+        var jsonString = jsonEncode(resp['data']);
+
+        return transactionsClassFromJson(jsonString);
       } else {
         return null;
       }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sonic_patti/controllers/controller_binding.dart';
 import 'package:sonic_patti/models/pg_model.dart';
+import 'package:sonic_patti/models/transactions.dart';
 import 'package:sonic_patti/services/api.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/upiindia.dart';
@@ -13,6 +14,11 @@ class PaymentController extends GetxController {
   var pgLists = <PgmClass>[].obs;
   var isDataProcessing = false.obs;
   var cday = DateFormat('EEEE').format(currentTime).obs;
+
+  //transactions vars
+  var isTransProcessing = false.obs;
+  var transactionsList = <TransactionsClass>[].obs;
+
 //makePayment
   Future<dynamic> makePaymentByAllUpi(amount, String? pgMod) async {
     String? mobile = Constant.box.read('mobile');
@@ -106,6 +112,27 @@ class PaymentController extends GetxController {
       } else {
         return false;
       }
+    }
+  }
+
+//get Bids Lists
+  fetchTransactionDetails(String mobile, String? sortBy, String? sortTo,
+      String? lstart, String? lend) async {
+    /*  if(searchKey != ''){
+
+    } */
+    try {
+      isTransProcessing(true);
+      var allBids = await RemoteApi.fetchTransactionDetails(
+          'trans_history', mobile, sortBy, sortTo, lstart, lend);
+      transactionsList.clear();
+      transactionsList.refresh();
+      if (allBids != null) {
+        isTransProcessing(false);
+        transactionsList.assignAll(allBids);
+      }
+    } finally {
+      isTransProcessing(false);
     }
   }
 

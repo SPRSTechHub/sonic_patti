@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'color_schemes.g.dart';
@@ -124,6 +123,7 @@ class AppTextStyles {
       letterSpacing: 0,
       fontWeight: FontWeight.bold,
       height: 1);
+
   static var kYellowBtnTitle = GoogleFonts.inter(
       color: const Color.fromRGBO(41, 36, 0, 1),
       fontSize: 16,
@@ -142,6 +142,16 @@ class AppTextStyles {
       color: Colors.black,
       letterSpacing: 0,
       fontSize: 10,
+      fontWeight: FontWeight.bold,
+      height: 1);
+
+  static var kiconText = GoogleFonts.inter(
+      shadows: const <Shadow>[
+        Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
+      ],
+      color: Colors.white,
+      fontSize: 12,
+      letterSpacing: 0,
       fontWeight: FontWeight.bold,
       height: 1);
 

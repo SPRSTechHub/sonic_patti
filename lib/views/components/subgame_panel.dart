@@ -617,9 +617,6 @@ class _ListofSubGamesState extends State<ListofSubGames> {
                           ),
                         ),
                       ),
-                      /*    const SizedBox(
-                        height: 10,
-                      ), */
                       const Text('MORE BIDS ADDED HERE ....'),
                     ],
                   ),

@@ -42,7 +42,7 @@ class _SubGamesState extends State<SubGames> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56.0),
-        child: TopAppBar(),
+        child: TopAppBar(istate: 0),
       ),
       body: SingleChildScrollView(
         child: Column(

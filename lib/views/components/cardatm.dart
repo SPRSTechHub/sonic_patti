@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
 class BuildATMCard extends StatelessWidget {
-  const BuildATMCard({super.key});
+  BuildATMCard({super.key});
+  final uwbal = Constant.box.read('uwbal');
+  final userid = Constant.box.read('userid') ?? 'XXX';
+  final fullname = Constant.box.read('fullname') ?? 'XXXX';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,16 +15,6 @@ class BuildATMCard extends StatelessWidget {
       padding: const EdgeInsets.only(right: 4.0, bottom: 8.0),
       width: Get.width,
       height: 160,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        gradient: const LinearGradient(
-            begin: Alignment(0.8173059225082397, 0.1653572916984558),
-            end: Alignment(-0.1653572916984558, 0.16886486113071442),
-            colors: [
-              Color.fromRGBO(255, 234, 0, 1),
-              Color.fromRGBO(128, 118, 0, 1)
-            ]),
-      ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
         width: Get.width,
@@ -30,16 +24,11 @@ class BuildATMCard extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.25),
-                offset: Offset(0, 4),
+                offset: Offset(0, 2),
                 blurRadius: 4)
           ],
-          gradient: const LinearGradient(
-              begin: Alignment(0.8421556353569031, 0.160120889544487),
-              end: Alignment(-0.160120889544487, 0.17399908602237701),
-              colors: [
-                Color.fromRGBO(55, 49, 0, 0.9800000190734863),
-                Color.fromRGBO(32, 28, 0, 1),
-              ]),
+          image: const DecorationImage(
+              image: AssetImage('assets/images/attm.png'), fit: BoxFit.cover),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +50,7 @@ class BuildATMCard extends StatelessWidget {
                             fontSize: 10, color: AppColors.kAppTextColor),
                       ),
                       Text(
-                        ' JHONS MIKE',
+                        ' ${fullname.toUpperCase()}',
                         textAlign: TextAlign.center,
                         style: AppTextStyles.kAtmCardTitle,
                       ),
@@ -98,10 +87,11 @@ class BuildATMCard extends StatelessWidget {
                   style: AppTextStyles.kAtmCardBalanceText
                       .copyWith(color: const Color(0xFFFFC700)),
                 ),
-                Text('₹ 99999.00',
+                Text('₹ ${int.parse(uwbal.toString()).toDouble()}',
                     textAlign: TextAlign.left,
-                    style:
-                        AppTextStyles.kAtmCardBalance.copyWith(fontSize: 32)),
+                    style: AppTextStyles.kAtmCardBalance.copyWith(
+                        fontSize: 32,
+                        color: Theme.of(context).colorScheme.onPrimary)),
                 Text(
                   '10/25',
                   textAlign: TextAlign.center,

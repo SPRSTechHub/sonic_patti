@@ -40,6 +40,10 @@ class _ListofGamesState extends State<ListofGames> {
                       height: 220,
                       margin: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.surface,
+                          width: 6,
+                        ),
                         borderRadius: BorderRadius.circular(12),
                         image: DecorationImage(
                             image: NetworkImage(
@@ -64,9 +68,9 @@ class _ListofGamesState extends State<ListofGames> {
                                   height: 18,
                                   decoration: const BoxDecoration(
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
+                                      topLeft: Radius.circular(12),
                                       topRight: Radius.circular(0),
-                                      bottomLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(12),
                                       bottomRight: Radius.circular(0),
                                     ),
                                     gradient: LinearGradient(
@@ -100,12 +104,12 @@ class _ListofGamesState extends State<ListofGames> {
                                   const EdgeInsets.symmetric(horizontal: 4.0),
                               decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
+                                  bottomLeft: Radius.circular(4),
+                                  bottomRight: Radius.circular(4),
                                 ),
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .inverseSurface,
+                                    .onInverseSurface,
                               ),
                               child: Column(
                                 mainAxisAlignment:
@@ -115,8 +119,11 @@ class _ListofGamesState extends State<ListofGames> {
                                   Text(
                                     catData.catTitle,
                                     textAlign: TextAlign.left,
-                                    style: AppTextStyles.kSubGameTitle
-                                        .copyWith(fontSize: 14),
+                                    style: AppTextStyles.kSubGameTitle.copyWith(
+                                        fontSize: 14,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onTertiaryContainer),
                                   ),
                                   Text(
                                     "imageHero$index",

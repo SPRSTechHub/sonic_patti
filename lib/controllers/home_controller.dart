@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
 import 'package:sonic_patti/models/market_ratio.dart';
+import 'package:sonic_patti/models/win_model.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
 import '../models/catagory_model.dart';
@@ -28,6 +29,8 @@ class HomeController extends GetxController {
   var isGameDataProcessing = false.obs;
   var isBidListsProcessing = false.obs;
   var bidsList = <BidsList>[].obs;
+  var isWinListsProcessing = false.obs;
+  var winList = <WinModal>[].obs;
 
   ////////////////////
   final RxList<BidsModal> bids = RxList<BidsModal>([]);
@@ -89,6 +92,8 @@ class HomeController extends GetxController {
           Constant.box.write(
               'referId', userDetails['result']['profile']['refer_id'] ?? '');
           Constant.box.write(
+              'fullname', userDetails['result']['profile']['fullname'] ?? '');
+          Constant.box.write(
               'minDepo', userDetails['result']['wallet']['minDepo'] ?? 0);
           Constant.box.write('minWithdraw',
               userDetails['result']['wallet']['minWithdraw'] ?? 0);
@@ -109,6 +114,24 @@ class HomeController extends GetxController {
         referDetails.value = false;
         return null;
       }
+    }
+  }
+
+// Check Winnings
+  fetchWinining(String catId, String mobile, String? sortBy, String? sortTo,
+      String? lstart, String? lend, String? searchKey) async {
+    try {
+      isWinListsProcessing(true);
+      var winnings = await RemoteApi.fetchWinining(
+          'win_result', mobile, catId, sortBy, sortTo, lstart, lend);
+      winList.clear();
+      winList.refresh();
+      if (winnings != null) {
+        isWinListsProcessing(false);
+        winList.assignAll(winnings);
+      }
+    } finally {
+      isWinListsProcessing(false);
     }
   }
 
