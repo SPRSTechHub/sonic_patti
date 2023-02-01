@@ -26,7 +26,7 @@ class LocalNotification {
         'sonic_gmx_channel',
         importance: Importance.max,
         priority: Priority.high,
-        //sound: RawResourceAndroidNotificationSound('alert'),
+        sound: RawResourceAndroidNotificationSound('alert'),
         enableVibration: true,
         playSound: true,
       ),

@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  analyzer: ^5.4.0
   animated_splash_screen: ^1.3.0
   animations: ^2.0.7
   badges: ^3.0.2
