@@ -4,21 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:restart_app/restart_app.dart';
-import 'package:sonic_patti/main.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
 import 'package:sonic_patti/models/market_ratio.dart';
 import 'package:sonic_patti/models/win_model.dart';
 import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/splashscreen.dart';
 import 'package:sonic_patti/views/users/login.dart';
 
 import '../models/catagory_model.dart';
 import '../services/api.dart';
 
 class HomeController extends GetxController {
-  RxBool referDetails = false.obs;
   RxBool permissions = false.obs;
   RxBool isLogin = false.obs;
   var tabIndex = 0.obs;
@@ -47,7 +43,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    fetchUserDetails();
+    //fetchUserDetails();
     fetchCatagories();
     super.onInit();
   }
@@ -90,8 +86,7 @@ class HomeController extends GetxController {
           Get.snackbar('Alert', 'New Device detected!',
               backgroundColor: Colors.black, colorText: Colors.red);
           Constant.box.write('isLogin', false);
-          Restart.restartApp();
-          //Get.off(LoginScreen());
+          Get.off(LoginScreen());
         } else {
           if (userDetails['status'] == 0) {
             Constant.box.write(
@@ -114,12 +109,11 @@ class HomeController extends GetxController {
   fetchAppLink() async {
     String? token = Constant.box.read('fcmToken') ?? '';
     var details = await RemoteApi.getAppLink('getapplink', token);
+    print(details);
     if (details != null) {
       if (details['status'] == 0) {
-        referDetails.value = details;
-        return true;
+        return details['message'];
       } else {
-        referDetails.value = false;
         return null;
       }
     }

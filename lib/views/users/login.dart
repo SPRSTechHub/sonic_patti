@@ -1,7 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
-import 'package:restart_app/restart_app.dart';
 import 'package:sonic_patti/controllers/auth_controller.dart';
 import 'package:sonic_patti/controllers/cmc.dart';
 import 'package:sonic_patti/controllers/controller_binding.dart';
@@ -218,14 +218,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               var response = await authController
                                   .signInFunction(mobile, password, token);
                               if (response == true) {
-                                setState(() {
-                                  Restart.restartApp();
-                                  /*  Get.to(
-                                    binding: ControllerBinding(),
-                                    GameBoard(),
-                                    transition: Transition.fadeIn,
-                                  ); */
-                                });
+                                await Get.deleteAll(force: true);
+                                Phoenix.rebirth(context);
+                                Get.to(
+                                  const GameBoard(),
+                                  binding: ControllerBinding(),
+                                );
                               }
                             }
                           },

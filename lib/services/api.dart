@@ -324,7 +324,6 @@ class RemoteApi {
     var postData = {'action': action, 'deviceKey': token};
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       return resp;

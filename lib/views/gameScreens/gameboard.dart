@@ -25,9 +25,9 @@ class _GameBoardState extends State<GameBoard> {
   @override
   void initState() {
     super.initState();
-    /* setState(() {
+    setState(() {
       _mainController.fetchUserDetails();
-    }); */
+    });
     LocalNotification.initialize();
     FirebaseMessaging.onMessage.listen(
       (message) {

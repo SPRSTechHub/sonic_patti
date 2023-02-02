@@ -34,17 +34,4 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
-/*   showDialogBox() {
-    return Get.defaultDialog(
-      title: "Alert",
-      content: const Text('data'),
-      onConfirm: () {
-        //getConnectivity();
-      },
-      cancelTextColor: bgColor2,
-      middleText: "Dialog made in 3 lines of code",
-      barrierDismissible: false,
-    );
-  } */
 }

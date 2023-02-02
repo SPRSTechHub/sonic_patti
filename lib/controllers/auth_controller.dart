@@ -43,10 +43,11 @@ class AuthController extends GetxController {
                   : ThemeData.light().colorScheme.surface,
               duration: const Duration(seconds: 5));
           Constant.box.write('isLogin', true);
-          Constant.box.write('imgurl', getLogin['imgurl']);
-          Constant.box.write('mobile', getLogin['mobile'] ?? mobile);
-          Constant.box.write('userid', getLogin['userid'] ?? mobile);
-          Constant.box.write('uwbal', getLogin['bal'] ?? 0);
+          Constant.box.write('imgurl', getLogin['result']['imgurl']);
+          Constant.box.write('mobile', getLogin['result']['mobile'] ?? mobile);
+          Constant.box.write('userid', getLogin['result']['userid'] ?? mobile);
+          Constant.box.write('uwbal', getLogin['result']['bal'] ?? 0);
+          print(Constant.box.read('uwbal'));
           return true;
         } else {
           Get.snackbar('Error!', 'Try again later',
