@@ -77,15 +77,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: 370,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: const Color(0xff312B4F).withOpacity(0.3),
+                    color: const Color(0xff312B4F).withOpacity(0.8),
                   ),
                   child: Form(
                     key: formKey,
                     child: Column(
                       children: [
-                        Padding(
+                        Container(
+                          height: 68,
                           padding: const EdgeInsetsDirectional.only(
-                              start: 4.0, end: 4.0, top: 14, bottom: 4.0),
+                              start: 2.0, end: 2.0, top: 14, bottom: 2.0),
                           child: TextFormField(
                             controller: fullnameCtltxt,
                             onChanged: (_) => EasyDebounce.debounce(
@@ -99,10 +100,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               'Enter Your Full Name',
                               Icon(
                                 Icons.person,
-                                color: AppColors.kInputColor,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                             ),
-                            style: const TextStyle(fontSize: 16),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                             keyboardType: TextInputType.text,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -112,8 +114,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.all(6),
+                        Container(
+                          height: 68,
+                          padding: const EdgeInsetsDirectional.only(
+                              start: 2.0, end: 2.0, top: 14, bottom: 2.0),
                           child: TextFormField(
                             controller: mobileCtltxt,
                             onChanged: (_) => EasyDebounce.debounce(
@@ -127,10 +131,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               '10 digit Mobile Number',
                               Icon(
                                 Icons.phonelink_lock,
-                                color: AppColors.kInputColor,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                             ),
-                            style: const TextStyle(fontSize: 16),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -143,8 +148,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.all(6),
+                        Container(
+                          height: 68,
+                          padding: const EdgeInsetsDirectional.only(
+                              start: 2.0, end: 2.0, top: 14, bottom: 2.0),
                           child: TextFormField(
                             controller: passwordCtltxt,
                             onChanged: (_) => EasyDebounce.debounce(
@@ -155,52 +162,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             autofocus: true,
                             obscureText: !passwordVisibility,
                             decoration: InputDecoration(
-                              filled: true,
-                              fillColor: AppColors.kInputColorBG,
                               hintText: 'Set Password',
-                              enabledBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x26101213),
-                                  width: 10,
-                                ),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
-                              ),
-                              focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x26101213),
+                              filled: true,
+                              fillColor:
+                                  Theme.of(context).colorScheme.background,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                              errorBorder: const UnderlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              errorBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                              focusedErrorBorder: const UnderlineInputBorder(
+                              focusedErrorBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
+                                borderRadius: BorderRadius.circular(30),
                               ),
                               prefixIcon: Icon(
                                 Icons.key_off_outlined,
-                                color: AppColors.kInputColor,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                               suffixIcon: InkWell(
                                 onTap: () => setState(
@@ -212,11 +208,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   passwordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
-                                  color: const Color(0xFF757575),
+                                  color: Theme.of(context).colorScheme.tertiary,
                                 ),
                               ),
                             ),
-                            style: const TextStyle(fontSize: 16),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                             keyboardType: TextInputType.visiblePassword,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -226,8 +223,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.all(4),
+                        Container(
+                          height: 68,
+                          padding: const EdgeInsetsDirectional.only(
+                              start: 2.0, end: 2.0, top: 14, bottom: 2.0),
                           child: TextFormField(
                             controller: referCtltxt,
                             onChanged: (_) => EasyDebounce.debounce(
@@ -241,10 +240,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               'Do you have any Refer id?',
                               Icon(
                                 Icons.wc,
-                                color: AppColors.kInputColor,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                             ),
-                            style: const TextStyle(fontSize: 16),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                             keyboardType: TextInputType.text,
                           ),
                         ),
@@ -382,47 +382,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
   ) {
     return InputDecoration(
       filled: true,
-      fillColor: AppColors.kInputColorBG,
+      fillColor: Theme.of(context).colorScheme.background,
       hintText: lblHnt,
-      enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: Color(0x26101213),
-          width: 10,
-        ),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(4.0),
-          topRight: Radius.circular(4.0),
-        ),
-      ),
-      focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: Color(0x26101213),
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Color(0x00000000),
           width: 1,
         ),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(4.0),
-          topRight: Radius.circular(4.0),
-        ),
+        borderRadius: BorderRadius.circular(30),
       ),
-      errorBorder: const UnderlineInputBorder(
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Color(0x00000000),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      errorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
           color: Color(0x00000000),
           width: 1,
         ),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(4.0),
-          topRight: Radius.circular(4.0),
-        ),
+        borderRadius: BorderRadius.circular(30),
       ),
-      focusedErrorBorder: const UnderlineInputBorder(
+      focusedErrorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
           color: Color(0x00000000),
           width: 1,
         ),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(4.0),
-          topRight: Radius.circular(4.0),
-        ),
+        borderRadius: BorderRadius.circular(30),
       ),
       prefixIcon: icoD,
     );

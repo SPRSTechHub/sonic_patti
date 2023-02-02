@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/auth_controller.dart';
 import 'package:sonic_patti/controllers/cmc.dart';
+import 'package:sonic_patti/controllers/controller_binding.dart';
+import 'package:sonic_patti/controllers/home_controller.dart';
+import 'package:sonic_patti/main.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/users/register.dart';
@@ -28,19 +31,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    super.initState();
     passwordVisibility = false;
     isLogin = Constant.box.read('isLogin') ?? false;
     if (isLogin == true) {
       Get.to(const GameBoard());
     }
-    super.initState();
   }
 
   @override
   void dispose() {
+    super.dispose();
     mobileCtltxt.dispose();
     passwordCtltxt.dispose();
-    super.dispose();
   }
 
   @override
@@ -114,10 +117,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               filled: true,
-                              fillColor: const Color(0x3CE0E3E7),
+                              fillColor:
+                                  Theme.of(context).colorScheme.background,
                               prefixIcon: Icon(
                                 Icons.mobile_screen_share_outlined,
-                                color: Colors.blueGrey.shade100,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                               suffixIcon: mobileCtltxt.text.isNotEmpty
                                   ? InkWell(
@@ -174,10 +178,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               filled: true,
-                              fillColor: const Color(0x3CE0E3E7),
+                              fillColor:
+                                  Theme.of(context).colorScheme.background,
                               prefixIcon: Icon(
                                 Icons.key_off_outlined,
-                                color: AppColors.kInputColor,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                               suffixIcon: InkWell(
                                 onTap: () => setState(
@@ -189,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   passwordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
-                                  color: const Color(0xFF757575),
+                                  color: Theme.of(context).colorScheme.tertiary,
                                 ),
                               ),
                             ),
@@ -213,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (response == true) {
                                 setState(() {
                                   Get.to(
-                                    const GameBoard(),
+                                    GameBoard(),
                                     transition: Transition.fadeIn,
                                   );
                                 });
