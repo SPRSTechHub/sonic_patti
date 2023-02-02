@@ -57,13 +57,6 @@ class AppColors {
   static var kDigitGradientSelected = GetStorage().read('IS_DARK_MODE')
       ? const [Color(0xff333124), Color(0xff1E1C11)]
       : const [Color(0xff333124), Color(0xff1E1C11)];
-
-  static var kInputColor = GetStorage().read('IS_DARK_MODE')
-      ? const Color(0xffffffff)
-      : const Color(0xff002328);
-  static var kInputColorBG = GetStorage().read('IS_DARK_MODE')
-      ? const Color(0xff002328)
-      : const Color(0xff002328);
 }
 
 class AppTextStyles {
