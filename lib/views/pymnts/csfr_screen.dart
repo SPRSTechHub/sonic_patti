@@ -31,7 +31,6 @@ class _CashFreeScreenState extends State<CashFreeScreen> {
   @override
   void dispose() {
     super.dispose();
-    //cfPaymentGatewayService.clear(verifyPayment, onError);
   }
 
   @override

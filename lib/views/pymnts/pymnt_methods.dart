@@ -43,7 +43,8 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                   Text(
                     'Amount Payable : Rs ${widget.amount}',
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.kAtmCardTitle,
+                    style: AppTextStyles.kAtmCardTitle.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary),
                   ),
                   TextButton(
                     onPressed: () {
@@ -52,8 +53,9 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                     },
                     child: Text(
                       'Apply Coupan',
-                      style:
-                          AppTextStyles.kBetTextHeading.copyWith(fontSize: 12),
+                      style: AppTextStyles.kBetTextHeading.copyWith(
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontSize: 12),
                     ),
                   ),
                 ],
@@ -62,19 +64,13 @@ class _PaymentMethodsState extends State<PaymentMethods> {
             const SizedBox(
               height: 12,
             ),
-            const Text(
+            Text(
               'SELECT PAYMENT MODE',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Color.fromRGBO(255, 255, 255, 1),
-                  fontFamily: 'Inter',
-                  fontSize: 14,
-                  letterSpacing: 0,
-                  fontWeight: FontWeight.normal,
-                  height: 1),
+              style: AppTextStyles.kBetTextHeading.copyWith(
+                  color: Theme.of(context).colorScheme.tertiary, fontSize: 12),
             ),
             Container(
-                decoration: AppStyles.subGametopTimeBG,
                 padding: const EdgeInsets.all(8.0),
                 alignment: Alignment.topLeft,
                 child: Obx(() {
@@ -102,10 +98,10 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                                           vertical: 6.0),
                                       elevation: 4.0,
                                       color: pgData.pgStatus == '1'
-                                          ? Colors.transparent
+                                          ? Colors.white
                                           : Theme.of(context)
                                               .colorScheme
-                                              .surfaceTint,
+                                              .tertiary,
                                       child: ListTile(
                                         onTap: () async {
                                           if (pgData.pgStatus == '0') {
@@ -218,7 +214,15 @@ class _PaymentMethodsState extends State<PaymentMethods> {
               padding: const EdgeInsets.all(12.0),
               width: Get.width,
               height: 150,
-              decoration: AppStyles.subGametopTimeBG,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(14),
+                  bottomRight: Radius.circular(14),
+                ),
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
               child: const Text('Payment Disclaimers'),
             ),
             const SizedBox(
@@ -230,5 +234,3 @@ class _PaymentMethodsState extends State<PaymentMethods> {
     );
   }
 }
-
-class ListofSubPg {}
