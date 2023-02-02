@@ -4,6 +4,9 @@ import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
 import 'package:sonic_patti/views/users/notifications.dart';
 
+import '../../controllers/controller_binding.dart';
+import '../users/login.dart';
+
 class TopAppBar extends StatefulWidget {
   const TopAppBar({super.key, this.istate});
   final int? istate;
@@ -31,7 +34,6 @@ class _TopAppBarState extends State<TopAppBar> {
         ),
         onPressed: () {
           Navigator.pop(context);
-          // Get.to(const GameBoard(), transition: Transition.native);
         },
       );
     } else {
@@ -119,6 +121,11 @@ class _TopAppBarState extends State<TopAppBar> {
           ),
           onPressed: () {
             //Logout
+            Constant.box.write('isLogin', false);
+            Get.to(
+              LoginScreen(),
+              binding: ControllerBinding(),
+            );
           },
         ),
       ],

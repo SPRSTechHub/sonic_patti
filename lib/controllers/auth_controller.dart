@@ -34,10 +34,14 @@ class AuthController extends GetxController {
           return false;
         } else if (getLogin['status'] == 0) {
           Get.snackbar('Success!', getLogin['message'],
-              backgroundColor: bottomBarBg,
+              backgroundColor: Get.isDarkMode
+                  ? ThemeData.dark().colorScheme.inverseSurface
+                  : ThemeData.light().colorScheme.onBackground,
               icon: const Icon(Icons.check),
+              colorText: Get.isDarkMode
+                  ? ThemeData.dark().colorScheme.surface
+                  : ThemeData.light().colorScheme.surface,
               duration: const Duration(seconds: 5));
-          // On Successfull Login Update preferences
           Constant.box.write('isLogin', true);
           Constant.box.write('imgurl', getLogin['imgurl']);
           Constant.box.write('mobile', getLogin['mobile'] ?? mobile);
@@ -46,16 +50,13 @@ class AuthController extends GetxController {
           return true;
         } else {
           Get.snackbar('Error!', 'Try again later',
-              backgroundColor: Colors.black38,
+              backgroundColor: ThemeData.dark().colorScheme.error,
               icon: const Icon(Icons.error),
               duration: const Duration(seconds: 5));
           return false;
         }
-        //    isGameDataProcessing(false);
       }
-    } finally {
-      //  isGameDataProcessing(false);
-    }
+    } finally {}
   }
 
   Future<dynamic> signUpFunction(
@@ -65,7 +66,6 @@ class AuthController extends GetxController {
       var response = await RemoteApi.signUpCall(
           'signup', mobile, password, fullname, referid, token);
       if (response != null) {
-        //isDataProcessing(false);
         return response;
       }
     } finally {

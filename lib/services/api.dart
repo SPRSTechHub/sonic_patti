@@ -312,6 +312,7 @@ class RemoteApi {
 
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
+      print(resp);
       return resp;
     } else {
       return null;

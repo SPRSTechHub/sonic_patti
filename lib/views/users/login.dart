@@ -1,11 +1,10 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:sonic_patti/controllers/auth_controller.dart';
 import 'package:sonic_patti/controllers/cmc.dart';
 import 'package:sonic_patti/controllers/controller_binding.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/main.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/users/register.dart';
@@ -35,7 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordVisibility = false;
     isLogin = Constant.box.read('isLogin') ?? false;
     if (isLogin == true) {
-      Get.to(const GameBoard());
+      Get.to(
+        const GameBoard(),
+        binding: ControllerBinding(),
+      );
     }
   }
 
@@ -217,10 +219,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   .signInFunction(mobile, password, token);
                               if (response == true) {
                                 setState(() {
-                                  Get.to(
+                                  Restart.restartApp();
+                                  /*  Get.to(
+                                    binding: ControllerBinding(),
                                     GameBoard(),
                                     transition: Transition.fadeIn,
-                                  );
+                                  ); */
                                 });
                               }
                             }

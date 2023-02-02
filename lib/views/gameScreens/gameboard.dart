@@ -24,9 +24,10 @@ class _GameBoardState extends State<GameBoard> {
   final _isVisible = true;
   @override
   void initState() {
-    setState(() {
+    super.initState();
+    /* setState(() {
       _mainController.fetchUserDetails();
-    });
+    }); */
     LocalNotification.initialize();
     FirebaseMessaging.onMessage.listen(
       (message) {
@@ -39,8 +40,6 @@ class _GameBoardState extends State<GameBoard> {
         }
       },
     );
-
-    super.initState();
   }
 
   @override

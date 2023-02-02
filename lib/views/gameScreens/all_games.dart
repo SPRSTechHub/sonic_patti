@@ -23,7 +23,9 @@ class _AllGamesState extends State<AllGames> {
   @override
   void initState() {
     super.initState();
-    setState(() {});
+    setState(() {
+      _mainController.fetchUserDetails();
+    });
   }
 
   @override

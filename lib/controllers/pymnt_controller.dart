@@ -6,7 +6,7 @@ import 'package:sonic_patti/models/pg_model.dart';
 import 'package:sonic_patti/models/transactions.dart';
 import 'package:sonic_patti/services/api.dart';
 import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/components/upiindia.dart';
+import 'package:sonic_patti/views/pymnts/upiindia.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
 
