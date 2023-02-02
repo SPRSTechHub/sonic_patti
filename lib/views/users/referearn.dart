@@ -137,7 +137,9 @@ class _MyReferralState extends State<MyReferral> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          _onShare(context);
+                        },
                         icon: const Icon(
                           Icons.telegram_outlined,
                           color: Colors.green,
@@ -145,7 +147,9 @@ class _MyReferralState extends State<MyReferral> {
                         label: const Text('Telegram'),
                       ),
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          _onShare(context);
+                        },
                         icon: const Icon(
                           Icons.share_outlined,
                           color: Colors.green,

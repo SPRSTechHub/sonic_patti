@@ -96,10 +96,11 @@ class PaymentController extends GetxController {
   }
 
   Future<dynamic> makePaymentOffline(amount, image, token) async {
-    var date = DateFormat('dd-MM-yyyy').format(currentTime);
+    var date = DateFormat('dd-MM-yyyy').format(DateTime.now());
     var mob = Constant.box.read('mobile');
+    var trno = mob + DateFormat('HHms').format(DateTime.now());
     var statusUpdate = await RemoteApi.makePaymentOffline(
-        'add_money_offline', mob, date, amount, image, token);
+        'add_money_offline', mob, date, trno, amount, image, token);
     if (statusUpdate != null) {
       if (statusUpdate['status'] == 0) {
         Get.snackbar('Status',
@@ -109,7 +110,10 @@ class PaymentController extends GetxController {
       } else if (statusUpdate['status'] == 1) {
         Get.snackbar('Status', statusUpdate['message'],
             snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
+        return true;
       } else {
+        Get.snackbar('Status', 'System Error!',
+            snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
         return false;
       }
     }

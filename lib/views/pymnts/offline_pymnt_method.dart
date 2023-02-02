@@ -274,10 +274,13 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                   onPressed: () {
                     final token = Constant.box.read('fcmToken') ?? false;
                     if (image != null && widget.amount != null) {
-                      //print(File(image!.path));
                       File? file = File(image!.path);
                       _paymentController.makePaymentOffline(
                           widget.amount, file.path, token);
+                      setState(() {
+                        imageCache.clear();
+                        image = null;
+                      });
                     } else {
                       const snackBar = SnackBar(
                         content: Text('No image selected! upload now'),

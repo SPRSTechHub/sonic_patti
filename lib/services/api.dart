@@ -184,26 +184,23 @@ class RemoteApi {
 
 // Makae Offline Payment
   static Future<dynamic>? makePaymentOffline(
-      String action, String? mobile, date, amount, image, token) async {
+      String action, String? mobile, date, trno, amount, image, token) async {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.fields['action'] = action;
     request.fields['mobile'] = mobile!;
     request.fields['amount'] = amount;
+    request.fields['trno'] = trno;
     request.fields['deviceKey'] = token;
     var pic = await http.MultipartFile.fromPath("image", image);
     request.files.add(pic);
-    await request.send().then((result) {
-      http.Response.fromStream(result).then((response) {
-        var message = jsonDecode(response.body);
-        if (message['status'] != null) {
-          return message;
-        } else {
-          return null;
-        }
-      });
-    }).onError((error, stackTrace) {
+    var response = await request.send();
+    final result = await http.Response.fromStream(response);
+    if (result.statusCode == 200) {
+      var resp = jsonDecode(result.body);
+      return resp;
+    } else {
       return null;
-    });
+    }
   }
 
 //Make Payment Order
