@@ -83,8 +83,12 @@ class HomeController extends GetxController {
       var userDetails = await RemoteApi.getUser('get_user', mobile, token);
       if (userDetails != null) {
         if (userDetails['ckDev'] != 0) {
-          Get.snackbar('Alert', 'New Device detected!',
-              backgroundColor: Colors.black, colorText: Colors.red);
+          Get.rawSnackbar(
+            message: 'New Device detected!',
+            backgroundColor: Get.isDarkMode
+                ? ThemeData.dark().colorScheme.error
+                : ThemeData.light().colorScheme.error,
+          );
           Constant.box.write('isLogin', false);
           Get.off(LoginScreen());
         } else {

@@ -29,13 +29,35 @@ class _GameBoardState extends State<GameBoard> {
       _mainController.fetchUserDetails();
     });
     LocalNotification.initialize();
-    FirebaseMessaging.onMessage.listen(
+    FirebaseMessaging.instance.getInitialMessage().then(
       (message) {
-        //print("FirebaseMessaging.onMessage.listen");
+        print("FirebaseMessaging.instance.getInitialMessage");
+        if (message != null) {
+          LocalNotification.showNotification(message);
+          //  print("New Notification");
+          // if (message.data['_id'] != null) {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => DemoScreen(
+          //         id: message.data['_id'],
+          //       ),
+          //     ),
+          //   );
+          // }
+        }
+      },
+    );
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) {
         if (message.notification != null) {
-          /*   print(message.notification!.title);
-          print(message.notification!.body);
-          print("message.data11 ${message.data}"); */
+          LocalNotification.showNotification(message);
+        }
+      },
+    );
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        print("FirebaseMessaging.onMessageOpenedApp.listen");
+        if (message.notification != null) {
           LocalNotification.showNotification(message);
         }
       },

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
+import 'package:sonic_patti/views/notifications.dart';
 import 'package:sonic_patti/views/users/login.dart';
 import 'controllers/controller_binding.dart';
 import 'firebase_options.dart';
@@ -18,8 +19,10 @@ bool? isLogin;
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   print("Handling a background message: ${message.messageId}");
+  LocalNotification.initialize();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
 void main() async {

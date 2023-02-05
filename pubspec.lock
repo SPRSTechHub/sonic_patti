@@ -757,6 +757,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  snackbar:
+    dependency: "direct main"
+    description:
+      name: snackbar
+      sha256: "614c81d5d73e00eac5b89931e17b7cf2f103827941e222266f36701d5afa395f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   source_span:
     dependency: transitive
     description:

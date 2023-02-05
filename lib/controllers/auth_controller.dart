@@ -27,13 +27,21 @@ class AuthController extends GetxController {
           await RemoteApi.signInCall('login', mobile, password, token);
       if (getLogin != null) {
         if (getLogin['status'] == 1) {
-          Get.snackbar('Error!', getLogin['message'],
-              backgroundColor: Colors.black38,
-              icon: const Icon(Icons.error),
-              duration: const Duration(seconds: 5));
+          Get.rawSnackbar(
+            message: getLogin['message'],
+            backgroundColor: Get.isDarkMode
+                ? ThemeData.dark().colorScheme.error
+                : ThemeData.light().colorScheme.error,
+          );
           return false;
         } else if (getLogin['status'] == 0) {
-          Get.snackbar('Success!', getLogin['message'],
+          Get.rawSnackbar(
+            message: getLogin['message'],
+            backgroundColor: Get.isDarkMode
+                ? ThemeData.dark().colorScheme.surface
+                : ThemeData.light().colorScheme.surface,
+          );
+/*           Get.snackbar('Success!', getLogin['message'],
               backgroundColor: Get.isDarkMode
                   ? ThemeData.dark().colorScheme.inverseSurface
                   : ThemeData.light().colorScheme.onBackground,
@@ -42,12 +50,12 @@ class AuthController extends GetxController {
                   ? ThemeData.dark().colorScheme.surface
                   : ThemeData.light().colorScheme.surface,
               duration: const Duration(seconds: 5));
+ */
           Constant.box.write('isLogin', true);
           Constant.box.write('imgurl', getLogin['result']['imgurl']);
           Constant.box.write('mobile', getLogin['result']['mobile'] ?? mobile);
           Constant.box.write('userid', getLogin['result']['userid'] ?? mobile);
           Constant.box.write('uwbal', getLogin['result']['bal'] ?? 0);
-          print(Constant.box.read('uwbal'));
           return true;
         } else {
           Get.snackbar('Error!', 'Try again later',
@@ -57,7 +65,9 @@ class AuthController extends GetxController {
           return false;
         }
       }
-    } finally {}
+    } finally {
+      //
+    }
   }
 
   Future<dynamic> signUpFunction(

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:snackbar/snackbar.dart';
 
 class ConnectionManagerController extends GetxController {
   late StreamSubscription subscription;
@@ -37,10 +38,10 @@ class ConnectionManagerController extends GetxController {
             await InternetConnectionChecker().hasConnection;
         if (!isDeviceConnected.value && isAlertSet == false) {
           isAlertSet.value = true;
-          Get.snackbar('Alert', 'InternetConnection Lost...');
+          Get.rawSnackbar(message: 'InternetConnection Lost...');
         } else {
           isAlertSet.value = false;
-          Get.snackbar('Alert', 'InternetConnection Connected...');
+          Get.rawSnackbar(message: 'InternetConnection Connected...');
         }
       });
 
