@@ -19,7 +19,6 @@ bool? isLogin;
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // await Firebase.initializeApp();
   print("Handling a background message: ${message.messageId}");
   LocalNotification.initialize();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
