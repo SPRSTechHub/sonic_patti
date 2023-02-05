@@ -21,6 +21,13 @@ bool? isLogin;
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
   LocalNotification.initialize();
+  FirebaseMessaging.onMessage.listen(
+    (RemoteMessage message) {
+      if (message.notification != null) {
+        LocalNotification.showNotification(message);
+      }
+    },
+  );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
@@ -29,7 +36,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
   final fcmToken = await FirebaseMessaging.instance.getToken();
   await GetStorage.init();
   initFirst = GetStorage().read('initFirst');
