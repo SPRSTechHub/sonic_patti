@@ -145,7 +145,7 @@ class AppTextStyles {
       color: Colors.white,
       fontSize: 12,
       letterSpacing: 0,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.normal,
       height: 1);
 
   static var kEarnTitleHeading = GoogleFonts.prompt(

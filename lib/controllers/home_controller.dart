@@ -116,7 +116,7 @@ class HomeController extends GetxController {
     print(details);
     if (details != null) {
       if (details['status'] == 0) {
-        return details['message'];
+        return details;
       } else {
         return null;
       }

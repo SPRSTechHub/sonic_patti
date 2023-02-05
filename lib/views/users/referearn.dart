@@ -188,14 +188,21 @@ class _MyReferralState extends State<MyReferral> {
     final boxx = context.findRenderObject() as RenderBox?;
     var referinfo = await _mainController.fetchAppLink();
     if (referinfo != null) {
-      await Share.share(
-          'Hey download & start playing Sonic with this Referid & get Joining Bonus. \nLink: https://digitalsprs.fun',
+      var rf = Constant.box.read('referId') ?? 'XX';
+      var referTxt = referinfo['message'] +
+          '\n ReferId: ' +
+          rf +
+          '\n App Link: ' +
+          referinfo['data'];
+      //Get.rawSnackbar(message: referTxt, duration: Duration(seconds: 10));
+      await Share.share(referTxt,
           subject: 'Sonic Patti',
           sharePositionOrigin: boxx!.localToGlobal(Offset.zero) & boxx.size);
     } else {
-      Get.snackbar('Status', 'Refer is not Activated for you now.',
-          backgroundColor: Theme.of(context).colorScheme.error,
-          colorText: Theme.of(context).colorScheme.primary);
+      Get.rawSnackbar(
+        message: 'Refer is not Activated for you now.',
+        backgroundColor: Theme.of(context).colorScheme.error,
+      );
     }
   }
 }

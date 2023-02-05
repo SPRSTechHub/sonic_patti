@@ -140,8 +140,8 @@ class _SideNavState extends State<SideNav> {
             ),
             title: Text(
               'Home',
-              style: AppTextStyles.kiconText
-                  .copyWith(color: Theme.of(context).colorScheme.tertiary),
+              style: AppTextStyles.kiconText.copyWith(
+                  color: Theme.of(context).colorScheme.inverseSurface),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -161,8 +161,8 @@ class _SideNavState extends State<SideNav> {
               ],
             ),
             title: Text('My Profile',
-                style: AppTextStyles.kiconText
-                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
+                style: AppTextStyles.kiconText.copyWith(
+                    color: Theme.of(context).colorScheme.inverseSurface)),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -181,8 +181,8 @@ class _SideNavState extends State<SideNav> {
               ],
             ),
             title: Text('Refer & Earn',
-                style: AppTextStyles.kiconText
-                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
+                style: AppTextStyles.kiconText.copyWith(
+                    color: Theme.of(context).colorScheme.inverseSurface)),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -201,8 +201,8 @@ class _SideNavState extends State<SideNav> {
               ],
             ),
             title: Text('All Results',
-                style: AppTextStyles.kiconText
-                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
+                style: AppTextStyles.kiconText.copyWith(
+                    color: Theme.of(context).colorScheme.inverseSurface)),
             onTap: () {
               Navigator.pop(context);
             },
@@ -218,8 +218,8 @@ class _SideNavState extends State<SideNav> {
               ],
             ),
             title: Text('My Wallet',
-                style: AppTextStyles.kiconText
-                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
+                style: AppTextStyles.kiconText.copyWith(
+                    color: Theme.of(context).colorScheme.inverseSurface)),
             onTap: () {
               Navigator.pop(context);
               Get.to(const MyWallet());
@@ -236,8 +236,8 @@ class _SideNavState extends State<SideNav> {
               ],
             ),
             title: Text('Contact & Support',
-                style: AppTextStyles.kiconText
-                    .copyWith(color: Theme.of(context).colorScheme.tertiary)),
+                style: AppTextStyles.kiconText.copyWith(
+                    color: Theme.of(context).colorScheme.inverseSurface)),
             onTap: () {
               Navigator.pop(context);
             },
