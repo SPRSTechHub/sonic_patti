@@ -42,7 +42,7 @@ dependencies:
   firebase_messaging: ^14.2.1
   flutter:
     sdk: flutter
-  flutter_cashfree_pg_sdk: ^2.0.4+7
+  flutter_cashfree_pg_sdk: ^2.0.5+8
   flutter_countdown_timer: ^4.1.0
   flutter_inset_box_shadow: ^1.0.8
   flutter_launcher_icons: ^0.11.0
@@ -53,7 +53,7 @@ dependencies:
   fluttericon: ^2.0.0
   get: ^4.6.5
   get_storage: ^2.0.3
-  google_fonts: ^4.0.0
+  google_fonts: ^4.0.3
   http: ^0.13.5
   image_picker: ^0.8.6+1
   internet_connection_checker: ^1.0.0+1
