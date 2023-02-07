@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
 import 'package:sonic_patti/models/market_ratio.dart';
@@ -17,11 +16,6 @@ import '../models/catagory_model.dart';
 import '../services/api.dart';
 
 class HomeController extends GetxController {
-  final FirebaseRemoteConfig _remoteConfig = FirebaseRemoteConfig.instance;
-
-  var version = "".obs;
-  var nversion = false.obs;
-
   RxBool permissions = false.obs;
   RxBool isLogin = false.obs;
   var tabIndex = 0.obs;
@@ -50,9 +44,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    //fetchUserDetails();
     fetchCatagories();
-    _initConfig();
     super.onInit();
   }
 
@@ -111,6 +103,13 @@ class HomeController extends GetxController {
                 'minDepo', userDetails['result']['wallet']['minDepo'] ?? 0);
             Constant.box.write('minWithdraw',
                 userDetails['result']['wallet']['minWithdraw'] ?? 0);
+            // store app details
+            Constant.box.write('appNversion',
+                userDetails['result']['appdetails']['app_version'] ?? '1.0.0');
+            Constant.box.write('appNbuild',
+                userDetails['result']['appdetails']['app_build'] ?? 1);
+            Constant.box.write('appLink',
+                userDetails['result']['appdetails']['app_link'] ?? null);
           }
         }
       }
@@ -285,37 +284,6 @@ class HomeController extends GetxController {
       }
     } finally {
       isBidListsProcessing(false);
-    }
-  }
-
-  Future<dynamic> _initConfig() async {
-    await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: const Duration(
-          seconds: 1), // a fetch will wait up to 10 seconds before timing out
-      minimumFetchInterval: const Duration(
-          seconds:
-              10), // fetch parameters will be cached for a maximum of 1 hour
-    ));
-    await _remoteConfig.setDefaults(const {
-      "nvc": "1.0.0+1",
-    });
-    _fetchConfig();
-  }
-
-  // Fetching, caching, and activating remote config
-  _fetchConfig() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = '${packageInfo.version + '+' + packageInfo.buildNumber}';
-
-    await _remoteConfig.fetchAndActivate();
-    try {
-      var nvc = _remoteConfig.getString('nvc');
-      if (version != nvc.toString()) {
-        nversion(true);
-      }
-    } catch (e) {
-      print('Unable to fetch remote config. Cached or default values will be '
-          'used');
     }
   }
 }

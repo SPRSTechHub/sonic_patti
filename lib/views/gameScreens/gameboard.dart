@@ -1,8 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_version_plus/new_version_plus.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
+import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/navigation.dart';
 import 'package:sonic_patti/views/components/sidenav.dart';
@@ -13,6 +14,7 @@ import 'package:sonic_patti/views/notifications.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
 import 'package:sonic_patti/views/users/profileScreen.dart';
 import 'package:sonic_patti/views/users/referearn.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -23,6 +25,9 @@ class GameBoard extends StatefulWidget {
 class _GameBoardState extends State<GameBoard> {
   final HomeController _mainController = Get.find<HomeController>();
   final _isVisible = true;
+  var appNV = Constant.box.read('appNversion') ?? '';
+  var appNB = Constant.box.read('appNbuild') ?? '';
+
   @override
   void initState() {
     super.initState();
@@ -111,51 +116,46 @@ class _GameBoardState extends State<GameBoard> {
     );
   }
 
-  Widget RemoteChecker() {
-    return Obx(
-      () => _mainController.nversion.value == false ? '' : showUpdate(),
-    );
+  RemoteChecker() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = '${packageInfo.version + '+' + packageInfo.buildNumber}';
+    if (version != '${appNV}+${appNB}') {
+      print('${appNV}+${appNB}');
+      showUpdate();
+    }
   }
 
   Widget buildBody() {
-    return Obx(() => IndexedStack(
-          index: _mainController.tabIndex.value,
-          children: [
-            AllGames(),
-            Profile(),
-            AllBids(),
-            Results(),
-            MyReferral(),
-          ],
-        ));
+    return Obx(
+      () => IndexedStack(
+        index: _mainController.tabIndex.value,
+        children: [AllGames(), Profile(), AllBids(), Results(), MyReferral()],
+      ),
+    );
   }
 
   showUpdate() {
     return showDialog<void>(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Basic dialog title'),
-          content: const Text('A dialog is a type of modal window that\n'
-              'appears in front of app content to\n'
-              'provide critical information, or prompt\n'
-              'for a decision to be made.'),
+          title: const Text('New Update Available!'),
+          content: const Text('A Newer version of this App\n'
+              'is available now\n'
+              'Download from www.sprs.store\n'
+              'and Enjoy more features.'),
           actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Disable'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               child: const Text('Enable'),
               onPressed: () {
+                final Uri _url = Uri.parse(
+                    Constant.box.read('appLink') ?? 'https://sprs.store');
+                print(_url);
+                _launchInBrowser(_url);
                 Navigator.of(context).pop();
               },
             ),
@@ -163,5 +163,14 @@ class _GameBoardState extends State<GameBoard> {
         );
       },
     );
+  }
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
   }
 }
