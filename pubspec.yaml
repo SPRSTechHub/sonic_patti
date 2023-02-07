@@ -38,8 +38,10 @@ dependencies:
   dynamic_color: ^1.5.4
   easy_debounce: ^2.0.3
   easy_onboard: ^1.0.3
+  firebase_analytics: ^10.1.0
   firebase_core: ^2.4.1
   firebase_messaging: ^14.2.1
+  firebase_remote_config: ^3.0.9
   flutter:
     sdk: flutter
   flutter_cashfree_pg_sdk: ^2.0.5+8
@@ -59,12 +61,12 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   intl: ^0.18.0
   lottie: ^2.2.0
+  new_version_plus: ^0.0.9
+  package_info_plus: ^3.0.2
   permission_handler: ^10.2.0
   share_plus: ^6.3.0
-  snackbar: ^1.0.2
   swipe_to: ^1.0.2
   text_scroll: ^0.1.2
-  upgrader: ^6.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0

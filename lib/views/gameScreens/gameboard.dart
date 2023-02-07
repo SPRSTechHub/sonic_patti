@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/navigation.dart';
@@ -27,6 +28,7 @@ class _GameBoardState extends State<GameBoard> {
     super.initState();
     setState(() {
       _mainController.fetchUserDetails();
+      RemoteChecker();
     });
     LocalNotification.initialize();
     FirebaseMessaging.instance.getInitialMessage().then(
@@ -109,10 +111,16 @@ class _GameBoardState extends State<GameBoard> {
     );
   }
 
+  Widget RemoteChecker() {
+    return Obx(
+      () => _mainController.nversion.value == false ? '' : showUpdate(),
+    );
+  }
+
   Widget buildBody() {
     return Obx(() => IndexedStack(
           index: _mainController.tabIndex.value,
-          children: const [
+          children: [
             AllGames(),
             Profile(),
             AllBids(),
@@ -120,5 +128,40 @@ class _GameBoardState extends State<GameBoard> {
             MyReferral(),
           ],
         ));
+  }
+
+  showUpdate() {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Basic dialog title'),
+          content: const Text('A dialog is a type of modal window that\n'
+              'appears in front of app content to\n'
+              'provide critical information, or prompt\n'
+              'for a decision to be made.'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Disable'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Enable'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
