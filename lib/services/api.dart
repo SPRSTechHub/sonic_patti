@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:sonic_patti/models/bids_modal.dart';
 import 'package:sonic_patti/models/games_model.dart';
@@ -8,11 +6,12 @@ import 'package:sonic_patti/models/market_ratio.dart';
 import 'package:sonic_patti/models/pg_model.dart';
 import 'package:sonic_patti/models/transactions.dart';
 import 'package:sonic_patti/models/win_model.dart';
+import 'package:sonic_patti/utils/constants.dart';
 import '../models/catagory_model.dart';
 
 class RemoteApi {
   static var client = http.Client();
-  static var url = 'https://console.digitalsprs.fun/api';
+  static var url = apiUrl + '/api/';
 
   static Map<String, String> headers = {
     "Content-type": "application/x-www-form-urlencoded",
@@ -22,10 +21,8 @@ class RemoteApi {
   static Future<List<Catlists>?> fetchCatagory(
       String action, String day) async {
     var postData = {'action': action, 'day': day};
-
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       if (resp['status'] == 0) {
@@ -42,10 +39,8 @@ class RemoteApi {
   static Future<List<GameLists>?> fetchGameLists(
       String action, String day, String catId) async {
     var postData = {'action': action, 'day': day, 'cat_id': catId};
-
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       if (resp['status'] == 0) {
@@ -86,7 +81,6 @@ class RemoteApi {
       var resp = json.decode(response.body);
       if (resp['status'] == 0) {
         var jsonString = jsonEncode(resp['data']);
-
         return bidsListFromJson(jsonString);
       } else {
         return null;
@@ -97,7 +91,6 @@ class RemoteApi {
   }
 
 // Winnings //
-// Bid list api call
   static Future<List<WinModal>?> fetchWinining(
       String action,
       String mobile,
@@ -151,10 +144,8 @@ class RemoteApi {
       'lend': lend,
       //'searchKey': searchKey,
     };
-
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       if (resp['status'] == 0) {
@@ -215,10 +206,8 @@ class RemoteApi {
       'pmgateway': pmgateway,
       'deviceKey': token
     };
-
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       return resp;
@@ -239,10 +228,8 @@ class RemoteApi {
       'txnRef': txnRef,
       'approvalRef': approvalRef
     };
-
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       return resp;
@@ -267,10 +254,8 @@ class RemoteApi {
       'refer_id': referid,
       'devkey': token
     };
-
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
-
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       return resp;
