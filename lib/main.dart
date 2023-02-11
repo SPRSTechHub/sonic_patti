@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/notifications.dart';
+import 'package:sonic_patti/views/splashscreen.dart';
 import 'package:sonic_patti/views/users/login.dart';
 import 'controllers/controller_binding.dart';
 import 'firebase_options.dart';
@@ -56,32 +57,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        initialBinding: ControllerBinding(),
-        debugShowCheckedModeBanner: false,
-        title: 'Sonic Patti',
-        theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
-        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-        themeMode: ThemeMode.system,
-        home: AnimatedSplashScreen(
-            duration: 1000,
-            splashIconSize: 90,
-            splash: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: const Image(
-                  width: 90,
-                  height: 90,
-                  image: AssetImage("assets/icon/logo_sonic.png")),
-            ),
-            nextScreen: openApp(),
-            splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: Colors.yellow));
+      initialBinding: ControllerBinding(),
+      debugShowCheckedModeBanner: false,
+      title: 'Sonic Patti',
+      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+      themeMode: ThemeMode.system,
+      home: /*  AnimatedSplashScreen(
+        duration: 1000,
+        splashIconSize: 90,
+        splash: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: const Image(
+              width: 90,
+              height: 90,
+              image: AssetImage("assets/icon/logo_sonic.png")),
+        ),
+        nextScreen: openApp(),
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: Colors.yellow,
+      ) */
+          openApp(),
+    );
   }
 
   openApp() {
     if (Constant.box.read('isLogin') == true) {
       return const GameBoard();
     } else {
-      return initFirst != true ? OnboardingScreenOne() : const LoginScreen();
+      return initFirst != true
+          ? OnboardingScreenOne()
+          : const MainScreen(); //LoginScreen();
     }
   }
 }
