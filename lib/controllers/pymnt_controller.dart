@@ -20,6 +20,8 @@ class PaymentController extends GetxController {
   //transactions vars
   var isTransProcessing = false.obs;
   var transactionsList = <TransactionsClass>[].obs;
+  var isODTransProcessing = false.obs;
+  var odTransactionsList = <OflDepoModel>[].obs;
   var isOfferProcessing = false.obs;
   var offerLists = <Result>[].obs;
 
@@ -158,6 +160,22 @@ class PaymentController extends GetxController {
       }
     } finally {
       isTransProcessing(false);
+    }
+  }
+
+  fetchOfflineTrDetails(String mobile) async {
+    try {
+      isODTransProcessing(true);
+      var transactions = await RemoteApi.fetchOFLDTransactionDetails(
+          'offline_history', mobile);
+      odTransactionsList.clear();
+      odTransactionsList.refresh();
+      if (transactions != null) {
+        isODTransProcessing(false);
+        odTransactionsList.assignAll(transactions);
+      }
+    } finally {
+      isODTransProcessing(false);
     }
   }
 

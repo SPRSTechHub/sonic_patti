@@ -162,6 +162,28 @@ class RemoteApi {
     }
   }
 
+  // Offline Deposites
+  static Future<List<OflDepoModel>?> fetchOFLDTransactionDetails(
+      String action, String mobile) async {
+    var postData = {
+      'action': action,
+      'mobile': mobile,
+    };
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      if (resp['status'] == 0) {
+        var jsonString = jsonEncode(resp['data']);
+        return oflDepoModelFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
 //Get Game Offers
   static Future<GameOfferModel?> fetchOffers(
       String action, String? catId) async {

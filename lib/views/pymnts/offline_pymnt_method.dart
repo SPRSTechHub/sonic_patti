@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -17,11 +19,18 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
   XFile? image;
   final ImagePicker picker = ImagePicker();
   final PaymentController _paymentController = Get.find<PaymentController>();
+
   Future getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
     setState(() {
       image = img;
     });
+  }
+
+  @override
+  void initState() {
+    _paymentController.fetchOfflineTrDetails('1234567890');
+    super.initState();
   }
 
   //show popup dialog
@@ -79,6 +88,36 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold),
           ),
+          actions: [
+            Container(
+              width: 56,
+              child: InkWell(
+                splashColor: Colors.green,
+                onTap: () {},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.history_edu_outlined,
+                      color: Theme.of(context).colorScheme.primary,
+                      shadows: const <Shadow>[
+                        Shadow(
+                            color: Colors.white,
+                            blurRadius: 2.0,
+                            offset: Offset.zero)
+                      ],
+                    ),
+                    Text(
+                      "History",
+                      style: AppTextStyles.kiconText.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -103,7 +142,7 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                   height: 6.0,
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 260,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -268,7 +307,7 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
