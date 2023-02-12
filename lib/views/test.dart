@@ -1,9 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/main.dart';
 import 'package:sonic_patti/utils/constants.dart';
 
 String formatTime(int seconds) {

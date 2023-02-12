@@ -1,4 +1,3 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/notifications.dart';
 import 'package:sonic_patti/views/splashscreen.dart';
-import 'package:sonic_patti/views/users/login.dart';
 import 'controllers/controller_binding.dart';
 import 'firebase_options.dart';
 import 'utils/color_schemes.g.dart';

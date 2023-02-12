@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/models/win_model.dart';
 import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/components/appbar.dart';
 
 class Results extends StatefulWidget {
   const Results({super.key});

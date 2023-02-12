@@ -43,10 +43,8 @@ class HomeController extends GetxController {
       if (offers != null) {
         offerLists.clear();
         notices = offers.notices.toString();
-        if (offers.result != null) {
-          isOfferProcessing(false);
-          offerLists.assignAll(offers.result);
-        }
+        isOfferProcessing(false);
+        offerLists.assignAll(offers.result);
       } else {
         notices = 'No Notice for now';
         offerLists.clear();
@@ -211,21 +209,19 @@ class HomeController extends GetxController {
 
         String selectedBids = json.encode(bidsData);
 
-        if (selectedBids != null) {
-          var resp = await RemoteApi.bidSubmission(selectedBids);
-          if (resp['status'] == 0) {
-            Get.snackbar('Success!', resp['message'],
-                backgroundColor: bottomBarBg,
-                icon: const Icon(Icons.check),
-                duration: const Duration(seconds: 5));
-            Constant.box.write('uwbal', resp['data']['amount']!);
-            return true;
-          } else {
-            Get.snackbar('Alert', resp['message'],
-                snackPosition: SnackPosition.BOTTOM,
-                duration: const Duration(seconds: 1));
-            return false;
-          }
+        var resp = await RemoteApi.bidSubmission(selectedBids);
+        if (resp['status'] == 0) {
+          Get.snackbar('Success!', resp['message'],
+              backgroundColor: bottomBarBg,
+              icon: const Icon(Icons.check),
+              duration: const Duration(seconds: 5));
+          Constant.box.write('uwbal', resp['data']['amount']!);
+          return true;
+        } else {
+          Get.snackbar('Alert', resp['message'],
+              snackPosition: SnackPosition.BOTTOM,
+              duration: const Duration(seconds: 1));
+          return false;
         }
         bids.clear();
         bid.value = bids.length;

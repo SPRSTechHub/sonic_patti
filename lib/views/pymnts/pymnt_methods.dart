@@ -3,10 +3,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sonic_patti/controllers/pymnt_controller.dart';
-import 'package:sonic_patti/services/api.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
 
 class PaymentMethods extends StatefulWidget {
   PaymentMethods({super.key, required this.amount});

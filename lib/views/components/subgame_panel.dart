@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/betplacement_a.dart';
