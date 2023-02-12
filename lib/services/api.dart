@@ -374,7 +374,7 @@ class RemoteApi {
     }
   }
 
-  static Future<List<PgmClass>?> fetchPmtg(String action) async {
+  static Future<PgmClass?> fetchPmtg(String action) async {
     var postData = {'action': action};
 
     final response =
@@ -383,8 +383,8 @@ class RemoteApi {
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       if (resp['status'] == 0) {
-        var jsonString = jsonEncode(resp['message']);
-        return pgmClassFromJson(jsonString);
+        var resp = json.decode(response.body);
+        return PgmClass.fromJson(resp['data']);
       } else {
         return null;
       }

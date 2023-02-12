@@ -10,22 +10,21 @@ import 'package:sonic_patti/views/pymnts/upiindia.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
 
-import '../models/game_offers_model.dart';
-
 class PaymentController extends GetxController {
-  var pgLists = <PgmClass>[].obs;
+  var pgLists = <Onlinemod>[].obs;
+  var offPGLists = <Offlinemod>[].obs;
   var isDataProcessing = false.obs;
   var cday = DateFormat('EEEE').format(currentTime).obs;
-
+  var paynotice = '';
   //transactions vars
   var isTransProcessing = false.obs;
   var transactionsList = <TransactionsClass>[].obs;
   var isODTransProcessing = false.obs;
   var odTransactionsList = <OflDepoModel>[].obs;
   var isOfferProcessing = false.obs;
-  var offerLists = <Result>[].obs;
+  var offerLists = <Payoffer?>[].obs;
 
-  void fetchOffers() async {
+  /* void fetchOffers() async {
     try {
       isOfferProcessing(true);
       var offers = await RemoteApi.fetchOffers('get_offers', '1231231230');
@@ -40,7 +39,7 @@ class PaymentController extends GetxController {
     } finally {
       isOfferProcessing(false);
     }
-  }
+  } */
 
 //makePayment
   Future<dynamic> makePaymentByAllUpi(amount, String? pgMod) async {
@@ -145,9 +144,6 @@ class PaymentController extends GetxController {
 //get Bids Lists
   fetchTransactionDetails(String mobile, String? sortBy, String? sortTo,
       String? lstart, String? lend) async {
-    /*  if(searchKey != ''){
-
-    } */
     try {
       isTransProcessing(true);
       var allBids = await RemoteApi.fetchTransactionDetails(
@@ -194,10 +190,24 @@ class PaymentController extends GetxController {
     try {
       isDataProcessing(true);
       var methods = await RemoteApi.fetchPmtg('pay_methods');
-      pgLists.clear();
+
       if (methods != null) {
-        isDataProcessing(false);
-        pgLists.assignAll(methods);
+        paynotice = methods.paynotice.toString();
+        if (methods.payoffers != '') {
+          offerLists.clear();
+          isDataProcessing(false);
+          offerLists.assignAll(methods.payoffers);
+        }
+        if (methods.onlinemod != '') {
+          pgLists.clear();
+          isDataProcessing(false);
+          pgLists.assignAll(methods.onlinemod);
+        }
+        if (methods.offlinemod != '') {
+          offPGLists.clear();
+          isDataProcessing(false);
+          offPGLists.assignAll(methods.offlinemod);
+        }
       }
     } finally {
       isDataProcessing(false);

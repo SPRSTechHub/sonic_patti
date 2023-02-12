@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sonic_patti/controllers/pymnt_controller.dart';
@@ -29,8 +30,13 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
 
   @override
   void initState() {
+    snapShotOff();
     _paymentController.fetchOfflineTrDetails('1234567890');
     super.initState();
+  }
+
+  void snapShotOff() async {
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   }
 
   //show popup dialog
@@ -141,65 +147,96 @@ class _OfflinePaymentMethodsStat extends State<OfflinePaymentMethod> {
                 const SizedBox(
                   height: 6.0,
                 ),
-                SizedBox(
-                  height: 260,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Positioned(
-                        top: 200,
-                        child: Container(
-                          alignment: Alignment.bottomCenter,
-                          width: 330,
-                          height: 55,
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Theme.of(context).colorScheme.surface,
-                          ),
-                          child: Text(
-                            '9768327053@ybl',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.kSubGameTitle.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontSize: 16),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          width: 347,
-                          height: 223,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromRGBO(0, 0, 0, 0.25),
-                                  offset: Offset(0, 2),
-                                  blurRadius: 4)
+                Obx(() {
+                  if (_paymentController.isDataProcessing.value == true) {
+                    return GestureDetector(
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  } else {
+                    if (_paymentController.offPGLists.isNotEmpty) {
+                      var ofdata = _paymentController.offPGLists;
+                      print(ofdata[0].payVpa);
+                      return Container(
+                        height: 280,
+                        width: Get.width,
+                        child: SizedBox(
+                          height: 280,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Positioned(
+                                top: 200,
+                                child: Container(
+                                  alignment: Alignment.bottomCenter,
+                                  width: 330,
+                                  height: 55,
+                                  padding: const EdgeInsets.all(4.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                  ),
+                                  child: Text(
+                                    '${ofdata[0].payVpa}',
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyles.kSubGameTitle.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  width: 347,
+                                  height: 223,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                                          offset: Offset(0, 2),
+                                          blurRadius: 4)
+                                    ],
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
+                                      width: 4,
+                                    ),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(18),
+                                    child: FadeInImage(
+                                      height: 160,
+                                      width: 160,
+                                      filterQuality: FilterQuality.low,
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(ofdata[0].payQr),
+                                      placeholder: AssetImage(
+                                          'assets/images/pay_qr.png'),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Theme.of(context).colorScheme.background,
-                              width: 4,
-                            ),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: const Image(
-                              height: 160,
-                              width: 160,
-                              image: AssetImage("assets/images/pay_qr.png"),
-                              fit: BoxFit.contain,
-                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                      );
+                    } else {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text('Offers are loading ....'),
+                        ],
+                      );
+                    }
+                  }
+                }),
                 const SizedBox(
                   height: 10,
                 ),

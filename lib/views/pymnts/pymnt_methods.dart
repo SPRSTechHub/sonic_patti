@@ -21,6 +21,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
 
   @override
   void initState() {
+    paymentController.fetchPmtMethod();
     super.initState();
   }
 
@@ -129,7 +130,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                                                 const BorderRadius.all(
                                                     Radius.elliptical(10, 10)),
                                             child: Image.network(
-                                              '${RemoteApi.url}/../uploads/payqr/${pgData.pgUrl}',
+                                              '${pgData.pgUrl}',
                                               fit: BoxFit.fill,
                                               errorBuilder:
                                                   (context, error, stackTrace) {

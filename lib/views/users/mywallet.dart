@@ -26,7 +26,7 @@ class _MyWalletState extends State<MyWallet> {
   final amounCtltxt = TextEditingController();
   @override
   void initState() {
-    _paymentController.fetchOffers();
+    _paymentController.fetchPmtMethod();
     super.initState();
   }
 
@@ -150,7 +150,7 @@ class _MyWalletState extends State<MyWallet> {
                                   filterQuality: FilterQuality.low,
                                   fit: BoxFit.fill,
                                   image: NetworkImage(_paymentController
-                                      .offerLists[itemIndex].offerLink),
+                                      .offerLists[itemIndex]!.offerLink),
                                   placeholder:
                                       AssetImage('assets/images/offer1.png'),
                                 ),
