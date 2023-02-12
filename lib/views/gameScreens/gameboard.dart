@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:sonic_patti/controllers/controller_binding.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
@@ -86,11 +87,13 @@ class _GameBoardState extends State<GameBoard> {
       ),
       body: buildBody(),
       floatingActionButton: FloatingActionButton(
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        backgroundColor: Theme.of(context).colorScheme.inverseSurface,
+        foregroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.surfaceTint,
         onPressed: () {
           _mainController.fetchCatagories();
-          Get.to(const MyWallet(), transition: Transition.leftToRightWithFade);
+          Get.to(const MyWallet(),
+              binding: ControllerBinding(),
+              transition: Transition.leftToRightWithFade);
         },
         elevation: _isVisible ? 8.0 : null,
         child: const Icon(

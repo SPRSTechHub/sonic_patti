@@ -40,7 +40,7 @@ class ConnectionManagerController extends GetxController {
           Get.rawSnackbar(message: 'InternetConnection Lost...');
         } else {
           isAlertSet.value = false;
-          Get.rawSnackbar(message: 'InternetConnection Connected...');
+          //Get.rawSnackbar(message: 'InternetConnection Connected...');
         }
       });
 

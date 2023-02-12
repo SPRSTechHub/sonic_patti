@@ -1,11 +1,12 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonic_patti/controllers/controller_binding.dart';
+import 'package:sonic_patti/controllers/pymnt_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/components/appbar.dart';
 import 'package:sonic_patti/views/components/cardatm.dart';
-import 'package:sonic_patti/views/components/cardslides.dart';
 import 'package:sonic_patti/views/pymnts/offline_pymnt_method.dart';
 import 'package:sonic_patti/views/pymnts/pymnt_methods.dart';
 import 'package:sonic_patti/views/pymnts/transactions.dart';
@@ -19,11 +20,13 @@ class MyWallet extends StatefulWidget {
 }
 
 class _MyWalletState extends State<MyWallet> {
+  final PaymentController _paymentController = Get.find<PaymentController>();
   late TextEditingController textController;
   final formKey = GlobalKey<FormState>();
   final amounCtltxt = TextEditingController();
   @override
   void initState() {
+    _paymentController.fetchOffers();
     super.initState();
   }
 
@@ -120,31 +123,65 @@ class _MyWalletState extends State<MyWallet> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              width: Get.width,
-              color: Theme.of(context).colorScheme.onInverseSurface,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 180,
-                    width: Get.width,
-                    child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return buildCard(index);
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            width: 2,
-                          );
-                        },
-                        itemCount: 5),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                SizedBox(
+                  height: 180,
+                  width: Get.width,
+                  child: Obx(() {
+                    if (_paymentController.isOfferProcessing.value == true) {
+                      return GestureDetector(
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    } else {
+                      if (_paymentController.offerLists.isNotEmpty) {
+                        return Container(
+                          height: 180,
+                          width: Get.width,
+                          child: CarouselSlider.builder(
+                            itemCount: _paymentController.offerLists.length,
+                            itemBuilder: (BuildContext context, itemIndex,
+                                    int pageViewIndex) =>
+                                Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(18),
+                                child: FadeInImage(
+                                  width: Get.width,
+                                  filterQuality: FilterQuality.low,
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage(_paymentController
+                                      .offerLists[itemIndex].offerLink),
+                                  placeholder:
+                                      AssetImage('assets/images/offer1.png'),
+                                ),
+                              ),
+                            ),
+                            options: CarouselOptions(
+                              aspectRatio: 16 / 9,
+                              enlargeCenterPage: true,
+                              enableInfiniteScroll: false,
+                              initialPage: 1,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 5),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text('Offers are loading ....'),
+                          ],
+                        );
+                      }
+                    }
+                  }),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
           ],
         ),

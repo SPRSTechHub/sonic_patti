@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -22,6 +23,7 @@ class _AllGamesState extends State<AllGames> {
   final List<bool> _selectedFruits = <bool>[false, true];
   @override
   void initState() {
+    _mainController.fetchOffers();
     super.initState();
   }
 
@@ -38,38 +40,81 @@ class _AllGamesState extends State<AllGames> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 4,
-                ),
-                SizedBox(
-                  height: 180,
-                  width: Get.width,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return buildCard(index);
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          width: 6,
-                        );
-                      },
-                      itemCount: 5),
-                ),
-                const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  height: 32,
-                  color: Colors.red,
-                  child: TextScroll(
-                    'Hey! I\'m a RTL text, check me out. Hey! I\'m a RTL text, check me out. Hey! I\'m a RTL text, check me out. ',
-                    style: AppTextStyles.kSubGameTitle
-                        .copyWith(fontSize: 12, height: 2.5),
-                    mode: TextScrollMode.bouncing,
-                    velocity: const Velocity(pixelsPerSecond: Offset(30, 0)),
-                    delayBefore: const Duration(milliseconds: 500),
-                    selectable: true,
-                  ),
+                SizedBox(
+                  height: 240,
+                  width: Get.width,
+                  child: Obx(() {
+                    if (_mainController.isOfferProcessing.value == true) {
+                      return GestureDetector(
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    } else {
+                      if (_mainController.offerLists.isNotEmpty) {
+                        return Column(
+                          children: [
+                            Container(
+                              height: 180,
+                              width: Get.width,
+                              child: CarouselSlider.builder(
+                                itemCount: _mainController.offerLists.length,
+                                itemBuilder: (BuildContext context, itemIndex,
+                                        int pageViewIndex) =>
+                                    Container(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(18),
+                                    child: FadeInImage(
+                                      width: Get.width,
+                                      filterQuality: FilterQuality.low,
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(_mainController
+                                          .offerLists[itemIndex].offerLink),
+                                      placeholder: AssetImage(
+                                          'assets/images/offer1.png'),
+                                    ),
+                                  ),
+                                ),
+                                options: CarouselOptions(
+                                  aspectRatio: 16 / 9,
+                                  enlargeCenterPage: true,
+                                  enableInfiniteScroll: false,
+                                  initialPage: 1,
+                                  autoPlay: true,
+                                  autoPlayInterval: Duration(seconds: 5),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              height: 32,
+                              color: Colors.red,
+                              child: TextScroll(
+                                _mainController.notices,
+                                style: AppTextStyles.kSubGameTitle
+                                    .copyWith(fontSize: 12, height: 2.5),
+                                mode: TextScrollMode.bouncing,
+                                velocity: const Velocity(
+                                    pixelsPerSecond: Offset(30, 0)),
+                                delayBefore: const Duration(milliseconds: 500),
+                                selectable: true,
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text('Offers are loading ....'),
+                          ],
+                        );
+                      }
+                    }
+                  }),
                 ),
                 const SizedBox(
                   height: 10,
@@ -79,8 +124,9 @@ class _AllGamesState extends State<AllGames> {
                   child: Center(
                     child: Obx(() {
                       if (_mainController.isDataProcessing.value == true) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return GestureDetector(
+                          onTap: () => _mainController.fetchCatagories(),
+                          child: Center(child: CircularProgressIndicator()),
                         );
                       } else {
                         if (_mainController.catLists.isNotEmpty) {
@@ -150,33 +196,4 @@ class _AllGamesState extends State<AllGames> {
       ),
     );
   }
-
-  Widget buildCard(int index) => Container(
-        width: Get.width * .9,
-        height: 120,
-        padding: const EdgeInsets.all(4),
-        margin: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.blueGrey, offset: Offset(6, 4), blurRadius: 6),
-          ],
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.blue.withOpacity(0.3), BlendMode.screen),
-            image: const AssetImage('assets/images/offer1.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              '$index',
-              style: const TextStyle(color: Colors.white),
-            ),
-          ],
-        ),
-      );
 }

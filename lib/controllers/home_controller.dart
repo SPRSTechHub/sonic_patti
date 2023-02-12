@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -13,6 +12,7 @@ import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/users/login.dart';
 
 import '../models/catagory_model.dart';
+import '../models/game_offers_model.dart';
 import '../services/api.dart';
 
 class HomeController extends GetxController {
@@ -32,8 +32,31 @@ class HomeController extends GetxController {
   var bidsList = <BidsList>[].obs;
   var isWinListsProcessing = false.obs;
   var winList = <WinModal>[].obs;
+  var isOfferProcessing = false.obs;
+  var offerLists = <Result>[].obs;
+  var notices = '';
 
-  ////////////////////
+  void fetchOffers() async {
+    try {
+      isOfferProcessing(true);
+      var offers = await RemoteApi.fetchOffers('get_offers', '1231231230');
+      if (offers != null) {
+        offerLists.clear();
+        notices = offers.notices.toString();
+        if (offers.result != null) {
+          isOfferProcessing(false);
+          offerLists.assignAll(offers.result);
+        }
+      } else {
+        notices = 'No Notice for now';
+        offerLists.clear();
+        isOfferProcessing(false);
+      }
+    } finally {
+      isOfferProcessing(false);
+    }
+  }
+
   final RxList<BidsModal> bids = RxList<BidsModal>([]);
   late BidsModal bidsModal;
   var bid = 0.obs;

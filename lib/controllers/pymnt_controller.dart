@@ -10,6 +10,8 @@ import 'package:sonic_patti/views/pymnts/upiindia.dart';
 import 'package:sonic_patti/views/gameScreens/gameboard.dart';
 import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
 
+import '../models/game_offers_model.dart';
+
 class PaymentController extends GetxController {
   var pgLists = <PgmClass>[].obs;
   var isDataProcessing = false.obs;
@@ -18,6 +20,25 @@ class PaymentController extends GetxController {
   //transactions vars
   var isTransProcessing = false.obs;
   var transactionsList = <TransactionsClass>[].obs;
+  var isOfferProcessing = false.obs;
+  var offerLists = <Result>[].obs;
+
+  void fetchOffers() async {
+    try {
+      isOfferProcessing(true);
+      var offers = await RemoteApi.fetchOffers('get_offers', '1231231230');
+      offerLists
+          .clear(); /* 
+      print(offers!.notices);
+      print(offers.result); */
+      if (offers!.result != null) {
+        isOfferProcessing(false);
+        offerLists.assignAll(offers.result);
+      }
+    } finally {
+      isOfferProcessing(false);
+    }
+  }
 
 //makePayment
   Future<dynamic> makePaymentByAllUpi(amount, String? pgMod) async {

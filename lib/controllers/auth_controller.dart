@@ -22,51 +22,44 @@ class AuthController extends GetxController {
 
   Future<dynamic> signInFunction(
       String? mobile, String? password, String? token) async {
-    try {
-      var getLogin =
-          await RemoteApi.signInCall('login', mobile, password, token);
-      if (getLogin != null) {
-        if (getLogin['status'] == 1) {
-          Get.rawSnackbar(
-            message: getLogin['message'],
-            backgroundColor: Get.isDarkMode
-                ? ThemeData.dark().colorScheme.error
-                : ThemeData.light().colorScheme.error,
-          );
-          return false;
-        } else if (getLogin['status'] == 0) {
-          Get.rawSnackbar(
-            message: getLogin['message'],
-            backgroundColor: Get.isDarkMode
-                ? ThemeData.dark().colorScheme.surface
-                : ThemeData.light().colorScheme.surface,
-          );
-/*           Get.snackbar('Success!', getLogin['message'],
-              backgroundColor: Get.isDarkMode
-                  ? ThemeData.dark().colorScheme.inverseSurface
-                  : ThemeData.light().colorScheme.onBackground,
-              icon: const Icon(Icons.check),
-              colorText: Get.isDarkMode
-                  ? ThemeData.dark().colorScheme.surface
-                  : ThemeData.light().colorScheme.surface,
-              duration: const Duration(seconds: 5));
- */
-          Constant.box.write('isLogin', true);
-          Constant.box.write('imgurl', getLogin['result']['imgurl']);
-          Constant.box.write('mobile', getLogin['result']['mobile'] ?? mobile);
-          Constant.box.write('userid', getLogin['result']['userid'] ?? mobile);
-          Constant.box.write('uwbal', getLogin['result']['bal'] ?? 0);
-          return true;
-        } else {
-          Get.snackbar('Error!', 'Try again later',
-              backgroundColor: ThemeData.dark().colorScheme.error,
-              icon: const Icon(Icons.error),
-              duration: const Duration(seconds: 5));
-          return false;
-        }
+    var getLogin = await RemoteApi.signInCall('login', mobile, password, token);
+    if (getLogin != null) {
+      if (getLogin['status'] == 1) {
+        Get.rawSnackbar(
+          message: getLogin['message'],
+          backgroundColor: Get.isDarkMode
+              ? ThemeData.dark().colorScheme.error
+              : ThemeData.light().colorScheme.error,
+        );
+        return false;
+      } else if (getLogin['status'] == 0) {
+        Get.rawSnackbar(
+          message: getLogin['message'],
+          backgroundColor: Get.isDarkMode
+              ? ThemeData.light().colorScheme.surface
+              : ThemeData.light().colorScheme.surface,
+        );
+        Constant.box.write('isLogin', true);
+        Constant.box.write('imgurl', getLogin['result']['imgurl']);
+        Constant.box.write('mobile', getLogin['result']['mobile'] ?? mobile);
+        Constant.box.write('userid', getLogin['result']['userid'] ?? mobile);
+        Constant.box.write('uwbal', getLogin['result']['bal'] ?? 0);
+        return true;
+      } else {
+        Get.snackbar('Error!', 'Try again later',
+            backgroundColor: ThemeData.dark().colorScheme.error,
+            icon: const Icon(Icons.error),
+            duration: const Duration(seconds: 5));
+        return false;
       }
-    } finally {
-      //
+    } else {
+      Get.rawSnackbar(
+        message: 'Server Error!',
+        backgroundColor: Get.isDarkMode
+            ? ThemeData.dark().colorScheme.error
+            : ThemeData.light().colorScheme.error,
+      );
+      return false;
     }
   }
 

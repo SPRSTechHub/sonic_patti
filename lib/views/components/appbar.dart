@@ -66,6 +66,7 @@ class _TopAppBarState extends State<TopAppBar> {
         GestureDetector(
           onTap: (() {
             Get.to(const MyWallet(),
+                binding: ControllerBinding(),
                 transition: Transition.leftToRightWithFade);
           }),
           child: Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sonic_patti/controllers/controller_binding.dart';
 import 'package:sonic_patti/controllers/home_controller.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import 'package:sonic_patti/views/users/mywallet.dart';
@@ -222,7 +223,10 @@ class _SideNavState extends State<SideNav> {
                     color: Theme.of(context).colorScheme.inverseSurface)),
             onTap: () {
               Navigator.pop(context);
-              Get.to(const MyWallet());
+              Get.to(
+                const MyWallet(),
+                binding: ControllerBinding(),
+              );
             },
           ),
           const Divider(thickness: 1),

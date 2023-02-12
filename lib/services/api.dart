@@ -8,6 +8,7 @@ import 'package:sonic_patti/models/transactions.dart';
 import 'package:sonic_patti/models/win_model.dart';
 import 'package:sonic_patti/utils/constants.dart';
 import '../models/catagory_model.dart';
+import '../models/game_offers_model.dart';
 
 class RemoteApi {
   static var client = http.Client();
@@ -23,6 +24,7 @@ class RemoteApi {
     var postData = {'action': action, 'day': day};
     final response =
         await http.post(Uri.parse(url), headers: headers, body: postData);
+    //print(response.body);
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
       if (resp['status'] == 0) {
@@ -155,6 +157,20 @@ class RemoteApi {
       } else {
         return null;
       }
+    } else {
+      return null;
+    }
+  }
+
+//Get Game Offers
+  static Future<GameOfferModel?> fetchOffers(
+      String action, String? catId) async {
+    var postData = {'action': action, 'cat_id': catId};
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      return GameOfferModel.fromJson(resp);
     } else {
       return null;
     }
@@ -294,7 +310,7 @@ class RemoteApi {
 
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
-      print(resp);
+      //print(resp);
       return resp;
     } else {
       return null;

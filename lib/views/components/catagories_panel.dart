@@ -107,9 +107,7 @@ class _ListofGamesState extends State<ListofGames> {
                                   bottomLeft: Radius.circular(4),
                                   bottomRight: Radius.circular(4),
                                 ),
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onInverseSurface,
+                                color: Theme.of(context).colorScheme.surface,
                               ),
                               child: Column(
                                 mainAxisAlignment:

@@ -4,8 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'color_schemes.g.dart';
 
-const apiUrl = 'https://consolet.sprs.store';
-
+const apiUrl = 'https://console.sprs.store';
+bool savingprogress = false;
 dynamic currentTime = DateTime.now();
 
 //colors used in this app
