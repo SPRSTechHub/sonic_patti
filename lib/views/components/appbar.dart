@@ -69,26 +69,31 @@ class _TopAppBarState extends State<TopAppBar> {
                 binding: ControllerBinding(),
                 transition: Transition.leftToRightWithFade);
           }),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.account_balance_wallet_outlined,
-                size: Get.width * .060,
-                color: Theme.of(context).colorScheme.primary,
-                shadows: const <Shadow>[
-                  Shadow(
-                      color: Colors.black, blurRadius: 1.0, offset: Offset.zero)
-                ],
-              ),
-              Text(
-                '₹ ${uwbal ?? 0}',
-                style: AppTextStyles.kiconText.copyWith(
-                  color: Theme.of(context).colorScheme.secondary,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.account_balance_wallet_outlined,
+                  size: Get.width * .060,
+                  color: Theme.of(context).colorScheme.primary,
+                  shadows: const <Shadow>[
+                    Shadow(
+                        color: Colors.black,
+                        blurRadius: 1.0,
+                        offset: Offset.zero)
+                  ],
                 ),
-              ),
-            ],
+                Text(
+                  '₹ ${uwbal ?? 0}',
+                  style: AppTextStyles.kiconText.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Badge(
