@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sonic_patti/views/users/login.dart';
+import 'package:sonicpattilive/views/users/login.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'dart:math' as math;
 

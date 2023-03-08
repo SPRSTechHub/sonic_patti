@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sonic_patti/controllers/pymnt_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonicpattilive/controllers/pymnt_controller.dart';
+import 'package:sonicpattilive/utils/constants.dart';
 
 class OfflinePaymentMethod extends StatefulWidget {
   OfflinePaymentMethod({super.key, required this.amount});

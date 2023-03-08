@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/components/subgame_panel.dart';
+import 'package:sonicpattilive/controllers/home_controller.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/components/subgame_panel.dart';
 
 import '../components/appbar.dart';
 

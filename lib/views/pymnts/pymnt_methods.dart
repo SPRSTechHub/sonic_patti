@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sonic_patti/controllers/pymnt_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonicpattilive/controllers/pymnt_controller.dart';
+import 'package:sonicpattilive/utils/constants.dart';
 import 'package:badges/badges.dart' as badges;
 
 class PaymentMethods extends StatefulWidget {

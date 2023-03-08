@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/controllers/pymnt_controller.dart';
-import 'package:sonic_patti/models/transactions.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/components/appbar.dart';
+import 'package:sonicpattilive/controllers/pymnt_controller.dart';
+import 'package:sonicpattilive/models/transactions.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/components/appbar.dart';
 
 class TransactionsScreen extends StatefulWidget {
   const TransactionsScreen({super.key});

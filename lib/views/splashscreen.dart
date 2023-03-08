@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/views/users/login.dart';
+import 'package:sonicpattilive/views/users/login.dart';
 
 import '../controllers/cmc.dart';
 

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:sonic_patti/models/bids_modal.dart';
-import 'package:sonic_patti/models/games_model.dart';
-import 'package:sonic_patti/models/market_ratio.dart';
-import 'package:sonic_patti/models/win_model.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/users/login.dart';
+import 'package:sonicpattilive/models/bids_modal.dart';
+import 'package:sonicpattilive/models/games_model.dart';
+import 'package:sonicpattilive/models/market_ratio.dart';
+import 'package:sonicpattilive/models/win_model.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/users/login.dart';
 
 import '../models/catagory_model.dart';
 import '../models/game_offers_model.dart';
@@ -210,21 +210,24 @@ class HomeController extends GetxController {
         String selectedBids = json.encode(bidsData);
 
         var resp = await RemoteApi.bidSubmission(selectedBids);
+
         if (resp['status'] == 0) {
           Get.snackbar('Success!', resp['message'],
               backgroundColor: bottomBarBg,
               icon: const Icon(Icons.check),
               duration: const Duration(seconds: 5));
           Constant.box.write('uwbal', resp['data']['amount']!);
+          bids.clear();
+          bid.value = bids.length;
+
           return true;
         } else {
           Get.snackbar('Alert', resp['message'],
               snackPosition: SnackPosition.BOTTOM,
               duration: const Duration(seconds: 1));
+
           return false;
         }
-        bids.clear();
-        bid.value = bids.length;
       } else {
         Get.snackbar('Alert', "No Bids selected!",
             snackPosition: SnackPosition.BOTTOM,
@@ -242,7 +245,8 @@ class HomeController extends GetxController {
   void fetchCatagories() async {
     try {
       isDataProcessing(true);
-      var cats = await RemoteApi.fetchCatagory('game_cat', 'monday');
+      var cday1 = DateFormat('EEEE').format(currentTime);
+      var cats = await RemoteApi.fetchCatagory('game_cat', cday1);
       catLists.clear();
       if (cats != null) {
         isDataProcessing(false);

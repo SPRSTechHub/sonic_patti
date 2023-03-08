@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/obscreen/screen_three.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/obscreen/screen_three.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../controllers/animCtroller.dart';
 import 'comps/slanding_clipper.dart';

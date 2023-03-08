@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:sonic_patti/controllers/controller_binding.dart';
-import 'package:sonic_patti/models/pg_model.dart';
-import 'package:sonic_patti/models/transactions.dart';
-import 'package:sonic_patti/services/api.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/pymnts/upiindia.dart';
-import 'package:sonic_patti/views/gameScreens/gameboard.dart';
-import 'package:sonic_patti/views/pymnts/csfr_screen.dart';
+import 'package:sonicpattilive/controllers/controller_binding.dart';
+import 'package:sonicpattilive/models/pg_model.dart';
+import 'package:sonicpattilive/models/transactions.dart';
+import 'package:sonicpattilive/services/api.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/pymnts/upiindia.dart';
+import 'package:sonicpattilive/views/gameScreens/gameboard.dart';
+import 'package:sonicpattilive/views/pymnts/csfr_screen.dart';
 
 class PaymentController extends GetxController {
   var pgLists = <Onlinemod>[].obs;

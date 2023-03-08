@@ -1,4 +1,4 @@
-# sonic_patti
+# sonicpattilive
 
 Best Game app fron SPRS GAMEX.
 

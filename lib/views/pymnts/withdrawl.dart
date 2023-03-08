@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sonic_patti/views/components/appbar.dart';
+import 'package:sonicpattilive/views/components/appbar.dart';
 
 class WithdrawScreen extends StatefulWidget {
   const WithdrawScreen({super.key});

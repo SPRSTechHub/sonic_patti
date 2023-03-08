@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/controllers/controller_binding.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/users/mywallet.dart';
+import 'package:sonicpattilive/controllers/controller_binding.dart';
+import 'package:sonicpattilive/controllers/home_controller.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/users/mywallet.dart';
 
 class SideNav extends StatefulWidget {
   const SideNav({super.key});

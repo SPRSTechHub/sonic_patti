@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonicpattilive/utils/constants.dart';
 
 import '../../controllers/home_controller.dart';
 import '../gameScreens/sub_games.dart';
@@ -47,7 +47,7 @@ class _ListofGamesState extends State<ListofGames> {
                         borderRadius: BorderRadius.circular(12),
                         image: DecorationImage(
                             image: NetworkImage(
-                                "https://control.fatafatguru.in/uploads/cat_img/${catData.catIurl}"),
+                                "https://console.sprs.store/uploads/cat_img/${catData.catIurl}"),
                             fit: BoxFit.cover),
                       ),
                       child: Column(

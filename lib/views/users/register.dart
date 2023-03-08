@@ -2,9 +2,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:sonic_patti/controllers/auth_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/users/login.dart';
+import 'package:sonicpattilive/controllers/auth_controller.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/users/login.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:sonic_patti/models/bids_modal.dart';
-import 'package:sonic_patti/models/games_model.dart';
-import 'package:sonic_patti/models/market_ratio.dart';
-import 'package:sonic_patti/models/pg_model.dart';
-import 'package:sonic_patti/models/transactions.dart';
-import 'package:sonic_patti/models/win_model.dart';
-import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonicpattilive/models/bids_modal.dart';
+import 'package:sonicpattilive/models/games_model.dart';
+import 'package:sonicpattilive/models/market_ratio.dart';
+import 'package:sonicpattilive/models/pg_model.dart';
+import 'package:sonicpattilive/models/transactions.dart';
+import 'package:sonicpattilive/models/win_model.dart';
+import 'package:sonicpattilive/utils/constants.dart';
 import '../models/catagory_model.dart';
 import '../models/game_offers_model.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonicpattilive/utils/constants.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

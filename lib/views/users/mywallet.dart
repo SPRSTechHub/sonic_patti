@@ -2,15 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/controllers/controller_binding.dart';
-import 'package:sonic_patti/controllers/pymnt_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/components/appbar.dart';
-import 'package:sonic_patti/views/components/cardatm.dart';
-import 'package:sonic_patti/views/pymnts/offline_pymnt_method.dart';
-import 'package:sonic_patti/views/pymnts/pymnt_methods.dart';
-import 'package:sonic_patti/views/pymnts/transactions.dart';
-import 'package:sonic_patti/views/pymnts/withdrawl.dart';
+import 'package:sonicpattilive/controllers/controller_binding.dart';
+import 'package:sonicpattilive/controllers/pymnt_controller.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/components/appbar.dart';
+import 'package:sonicpattilive/views/components/cardatm.dart';
+import 'package:sonicpattilive/views/pymnts/offline_pymnt_method.dart';
+import 'package:sonicpattilive/views/pymnts/pymnt_methods.dart';
+import 'package:sonicpattilive/views/pymnts/transactions.dart';
+import 'package:sonicpattilive/views/pymnts/withdrawl.dart';
 
 class MyWallet extends StatefulWidget {
   const MyWallet({super.key});

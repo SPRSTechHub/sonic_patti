@@ -2,11 +2,11 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/models/bids_modal.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/components/appbar.dart';
-import 'package:sonic_patti/views/gameScreens/gameboard.dart';
+import 'package:sonicpattilive/controllers/home_controller.dart';
+import 'package:sonicpattilive/models/bids_modal.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/components/appbar.dart';
+import 'package:sonicpattilive/views/gameScreens/gameboard.dart';
 
 class SingleDigitBet extends StatefulWidget {
   const SingleDigitBet({super.key, required this.matchId});

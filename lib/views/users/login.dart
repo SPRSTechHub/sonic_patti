@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:sonic_patti/controllers/auth_controller.dart';
-import 'package:sonic_patti/controllers/cmc.dart';
-import 'package:sonic_patti/controllers/controller_binding.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/gameScreens/gameboard.dart';
-import 'package:sonic_patti/views/users/register.dart';
+import 'package:sonicpattilive/controllers/auth_controller.dart';
+import 'package:sonicpattilive/controllers/cmc.dart';
+import 'package:sonicpattilive/controllers/controller_binding.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/gameScreens/gameboard.dart';
+import 'package:sonicpattilive/views/users/register.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

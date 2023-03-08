@@ -1,4 +1,4 @@
-package com.example.sonic_patti
+package com.sprsgmx.sonicpattilive
 
 import io.flutter.embedding.android.FlutterActivity
 

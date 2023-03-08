@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sonic_patti/views/components/catagories_panel.dart';
-import 'package:sonic_patti/views/earnscreen/earnland.dart';
+import 'package:sonicpattilive/views/components/catagories_panel.dart';
+import 'package:sonicpattilive/views/earnscreen/earnland.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 import '../../controllers/home_controller.dart';

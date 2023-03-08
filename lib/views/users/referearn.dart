@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/utils/constants.dart';
+import 'package:sonicpattilive/controllers/home_controller.dart';
+import 'package:sonicpattilive/utils/constants.dart';
 
 class MyReferral extends StatefulWidget {
   const MyReferral({super.key});

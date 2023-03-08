@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:sonic_patti/controllers/animCtroller.dart';
-import 'package:sonic_patti/controllers/auth_controller.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/controllers/pymnt_controller.dart';
+import 'package:sonicpattilive/controllers/animCtroller.dart';
+import 'package:sonicpattilive/controllers/auth_controller.dart';
+import 'package:sonicpattilive/controllers/home_controller.dart';
+import 'package:sonicpattilive/controllers/pymnt_controller.dart';
 
 import 'cmc.dart';
 

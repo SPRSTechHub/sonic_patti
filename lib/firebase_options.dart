@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBG-nDNo2MpYBSEUNUdsBmyjqLGUv2vNqI',
-    appId: '1:727450063419:web:4421cfa19a475acd9ac21e',
-    messagingSenderId: '727450063419',
-    projectId: 'sonic-patti',
-    authDomain: 'sonic-patti.firebaseapp.com',
-    storageBucket: 'sonic-patti.appspot.com',
-    measurementId: 'G-WB4261026T',
+    apiKey: 'AIzaSyC2bmgDJXtdUsHcSgdKoDYzaTYLxv7QwBE',
+    appId: '1:241019019766:web:9ead7e293e63aeff7b27d7',
+    messagingSenderId: '241019019766',
+    projectId: 'sonic-patti-97e4c',
+    authDomain: 'sonic-patti-97e4c.firebaseapp.com',
+    storageBucket: 'sonic-patti-97e4c.appspot.com',
+    measurementId: 'G-EGDH2R92T6',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAmanR2Oeg8l5hSQnwHYl8i0_Y0auuHpQk',
-    appId: '1:727450063419:android:855c37c67c29cd659ac21e',
-    messagingSenderId: '727450063419',
-    projectId: 'sonic-patti',
-    storageBucket: 'sonic-patti.appspot.com',
+    apiKey: 'AIzaSyDzB6JVEyw0MRkG8SwuvGC2y2dkjytdZ9I',
+    appId: '1:241019019766:android:81c349546f5f44017b27d7',
+    messagingSenderId: '241019019766',
+    projectId: 'sonic-patti-97e4c',
+    storageBucket: 'sonic-patti-97e4c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAx-_4FUWmkty8lytYvZXOPZKncorGxuBU',
-    appId: '1:727450063419:ios:144653b68aa4b3e49ac21e',
-    messagingSenderId: '727450063419',
-    projectId: 'sonic-patti',
-    storageBucket: 'sonic-patti.appspot.com',
-    iosClientId: '727450063419-fe32ubhcjn4aa1nr2sr1ckj3dfklibbq.apps.googleusercontent.com',
-    iosBundleId: 'com.example.sonicPatti',
+    apiKey: 'AIzaSyDPg7LF0GVao-i9LkejTAH7aMiyEJYeaZM',
+    appId: '1:241019019766:ios:efd63bf45510fbe97b27d7',
+    messagingSenderId: '241019019766',
+    projectId: 'sonic-patti-97e4c',
+    storageBucket: 'sonic-patti-97e4c.appspot.com',
+    iosClientId: '241019019766-kkducqbfv2a37r17rd110lvduis6tvt5.apps.googleusercontent.com',
+    iosBundleId: 'com.sprsgmx.sonicpattilive',
   );
 }

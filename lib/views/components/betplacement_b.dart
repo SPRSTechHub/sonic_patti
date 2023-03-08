@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sonic_patti/controllers/home_controller.dart';
-import 'package:sonic_patti/models/bids_modal.dart';
-import 'package:sonic_patti/utils/constants.dart';
-import 'package:sonic_patti/views/components/appbar.dart';
+import 'package:sonicpattilive/controllers/home_controller.dart';
+import 'package:sonicpattilive/models/bids_modal.dart';
+import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/components/appbar.dart';
 
 class PannaBet extends StatefulWidget {
   const PannaBet({super.key, required this.matchId});
