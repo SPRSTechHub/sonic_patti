@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sonicpattilive/controllers/controller_binding.dart';
@@ -152,6 +153,26 @@ class SetGameScreen extends StatefulWidget {
 }
 
 class _SetGameScreenState extends State<SetGameScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadImage();
+  }
+
+  loadImage() async {
+    //a list of images names (i need only one)
+    var _file_name = 'wlpbg';
+
+    //select the image url
+    Reference ref = FirebaseStorage.instance.ref('wlpbg').child('pp.jpg');
+
+    //get image url from firebase storage
+    var url = await ref.getDownloadURL();
+
+    print(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
