@@ -8,6 +8,8 @@ import 'package:sonicpattilive/controllers/cmc.dart';
 import 'package:sonicpattilive/controllers/controller_binding.dart';
 import 'package:sonicpattilive/utils/constants.dart';
 import 'package:sonicpattilive/views/gameScreens/gameboard.dart';
+import 'package:sonicpattilive/views/obscreen/screen_four.dart';
+import 'package:sonicpattilive/views/splashscreen.dart';
 import 'package:sonicpattilive/views/users/register.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -36,9 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
     isLogin = Constant.box.read('isLogin') ?? false;
     if (isLogin == true) {
       Get.to(
-        const GameBoard(),
+        const MainScreen(),
         binding: ControllerBinding(),
       );
+      /*  Get.to(
+        const GameBoard(),
+        binding: ControllerBinding(),
+      ); */
     }
   }
 

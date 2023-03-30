@@ -30,6 +30,7 @@ const double appPadding = 20.0;
 const double appmargin = 10.0;
 
 const isLogin = false;
+const setGame = 0;
 
 class AppColors {
   static var kAppTextColor = GetStorage().read('IS_DARK_MODE')

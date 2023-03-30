@@ -8,6 +8,7 @@ import 'package:sonicpattilive/utils/constants.dart';
 import 'package:sonicpattilive/views/gameScreens/gameboard.dart';
 import 'package:sonicpattilive/views/notifications.dart';
 import 'package:sonicpattilive/views/splashscreen.dart';
+import 'package:sonicpattilive/views/users/login.dart';
 import 'controllers/controller_binding.dart';
 import 'firebase_options.dart';
 import 'utils/color_schemes.g.dart';
@@ -81,11 +82,9 @@ class MyApp extends StatelessWidget {
 
   openApp() {
     if (Constant.box.read('isLogin') == true) {
-      return const GameBoard();
+      return const MainScreen();
     } else {
-      return initFirst != true
-          ? OnboardingScreenOne()
-          : const MainScreen(); //LoginScreen();
+      return initFirst != true ? OnboardingScreenOne() : const LoginScreen();
     }
   }
 }
