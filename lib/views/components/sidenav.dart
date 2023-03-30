@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sonicpattilive/controllers/controller_binding.dart';
 import 'package:sonicpattilive/controllers/home_controller.dart';
 import 'package:sonicpattilive/utils/constants.dart';
+import 'package:sonicpattilive/views/users/login.dart';
 import 'package:sonicpattilive/views/users/mywallet.dart';
 
 class SideNav extends StatefulWidget {
@@ -105,24 +106,35 @@ class _SideNavState extends State<SideNav> {
                       ),
                     ),
                     Flexible(
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.logout_outlined,
-                            color: Theme.of(context).colorScheme.secondary,
-                            shadows: const <Shadow>[
-                              Shadow(
-                                  color: Colors.black,
-                                  blurRadius: 1.0,
-                                  offset: Offset.zero)
-                            ],
-                          ),
-                          Text(
-                            'Sign Out',
-                            style: AppTextStyles.kiconText.copyWith(
-                                color: Theme.of(context).colorScheme.secondary),
-                          )
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          Constant.box.write('setGame', false);
+                          Constant.box.write('isLogin', false);
+                          Get.to(
+                            LoginScreen(),
+                            binding: ControllerBinding(),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.logout_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                              shadows: const <Shadow>[
+                                Shadow(
+                                    color: Colors.black,
+                                    blurRadius: 1.0,
+                                    offset: Offset.zero)
+                              ],
+                            ),
+                            Text(
+                              'Sign Out',
+                              style: AppTextStyles.kiconText.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],

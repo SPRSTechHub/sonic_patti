@@ -29,7 +29,7 @@ class _EarningBoardState extends State<EarningBoard> {
     return Scaffold(
       appBar: AppBar(actions: []),
       body: Container(
-        color: const Color(0xffE7F4FB) /* AppColors.kPrimaryBoxBackground */,
+        color: const Color(0xffE7F4FB),
         child: SingleChildScrollView(
           child: Stack(
             fit: StackFit.loose,

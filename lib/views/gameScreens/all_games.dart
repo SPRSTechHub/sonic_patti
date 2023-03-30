@@ -23,6 +23,7 @@ class _AllGamesState extends State<AllGames> {
   final List<bool> _selectedFruits = <bool>[false, true];
   @override
   void initState() {
+    print(Constant.box.read('setGame'));
     _mainController.fetchOffers();
     super.initState();
   }

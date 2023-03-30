@@ -127,6 +127,7 @@ class _TopAppBarState extends State<TopAppBar> {
           ),
           onPressed: () {
             //Logout
+            Constant.box.write('setGame', false);
             Constant.box.write('isLogin', false);
             Get.to(
               LoginScreen(),

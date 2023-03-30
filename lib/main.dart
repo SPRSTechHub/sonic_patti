@@ -62,21 +62,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       themeMode: ThemeMode.system,
-      home: /*  AnimatedSplashScreen(
-        duration: 1000,
-        splashIconSize: 90,
-        splash: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: const Image(
-              width: 90,
-              height: 90,
-              image: AssetImage("assets/icon/logo_sonic.png")),
-        ),
-        nextScreen: openApp(),
-        splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: Colors.yellow,
-      ) */
-          openApp(),
+      home: openApp(),
     );
   }
 

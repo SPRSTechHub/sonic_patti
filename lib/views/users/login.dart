@@ -7,8 +7,6 @@ import 'package:sonicpattilive/controllers/auth_controller.dart';
 import 'package:sonicpattilive/controllers/cmc.dart';
 import 'package:sonicpattilive/controllers/controller_binding.dart';
 import 'package:sonicpattilive/utils/constants.dart';
-import 'package:sonicpattilive/views/gameScreens/gameboard.dart';
-import 'package:sonicpattilive/views/obscreen/screen_four.dart';
 import 'package:sonicpattilive/views/splashscreen.dart';
 import 'package:sonicpattilive/views/users/register.dart';
 
@@ -235,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   await Get.deleteAll(force: true);
                                   Phoenix.rebirth(context);
                                   Get.to(
-                                    const GameBoard(),
+                                    const MainScreen(),
                                     binding: ControllerBinding(),
                                   );
                                 } else {
