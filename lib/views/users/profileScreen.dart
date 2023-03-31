@@ -10,6 +10,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  var setGame = Constant.box.read('setGame');
   @override
   void initState() {
     super.initState();
@@ -168,7 +169,7 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Material(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.tertiaryContainer,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
@@ -228,17 +229,19 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Material(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.tertiaryContainer,
                   elevation: 8,
                   borderRadius: BorderRadius.circular(8),
                   child: SwitchListTile(
                     activeColor: Theme.of(context).colorScheme.tertiary,
                     inactiveThumbColor: Theme.of(context).colorScheme.surface,
-                    title: const Text('APP UPDATE'),
-                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    title: const Text('RESET MYHOME'),
+                    value: setGame != '' ? true : false,
                     onChanged: (bool? value) {
                       setState(() {
-                        //Constant.box.write('IS_DARK_MODE', value);
+                        Constant.box.write('setGame', 0);
+                        Get.rawSnackbar(
+                            message: 'App will reset now from Next time.');
                       });
                     },
                   ),

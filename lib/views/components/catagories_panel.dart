@@ -37,7 +37,7 @@ class _ListofGamesState extends State<ListofGames> {
                           transition: Transition.zoom);
                     }),
                     child: Container(
-                      height: 220,
+                      height: 200,
                       margin: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -107,7 +107,9 @@ class _ListofGamesState extends State<ListofGames> {
                                   bottomLeft: Radius.circular(4),
                                   bottomRight: Radius.circular(4),
                                 ),
-                                color: Theme.of(context).colorScheme.surface,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSecondaryContainer,
                               ),
                               child: Column(
                                 mainAxisAlignment:

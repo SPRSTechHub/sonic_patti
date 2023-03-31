@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sonicpattilive/views/components/catagories_panel.dart';
-import 'package:sonicpattilive/views/earnscreen/earnland.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 import '../../controllers/home_controller.dart';
@@ -19,13 +18,14 @@ class AllGames extends StatefulWidget {
 class _AllGamesState extends State<AllGames> {
   final HomeController _mainController = Get.find<HomeController>();
 
-  static const List<Widget> fruits = <Widget>[Text('Play'), Text('Earn')];
-  final List<bool> _selectedFruits = <bool>[false, true];
+  //static const List<Widget> fruits = <Widget>[Text('Play'), Text('Earn')];
+  //final List<bool> _selectedFruits = <bool>[false, true];
+
   @override
   void initState() {
-    print(Constant.box.read('setGame'));
     _mainController.fetchOffers();
     super.initState();
+    print(Constant.box.read('setGame'));
   }
 
   @override
@@ -150,8 +150,42 @@ class _AllGamesState extends State<AllGames> {
                 ),
               ],
             ),
-            Center(
+            Positioned(
+              top: 100,
+              left: Get.width * .35,
               child: Container(
+                  height: 42,
+                  width: 150,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.30),
+                          offset: Offset(4, 6),
+                          blurRadius: 8)
+                    ],
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromRGBO(221, 200, 0, 1),
+                        Color.fromRGBO(255, 0, 0, 1)
+                      ],
+                    ),
+                  ),
+                  child: Text('sddd')),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+/*
+Container(
                 height: 42,
                 width: 150,
                 decoration: BoxDecoration(
@@ -191,10 +225,4 @@ class _AllGamesState extends State<AllGames> {
                   },
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+              */

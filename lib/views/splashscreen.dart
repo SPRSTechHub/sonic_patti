@@ -4,13 +4,11 @@ import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sonicpattilive/controllers/controller_binding.dart';
 import 'package:sonicpattilive/utils/constants.dart';
 import 'package:sonicpattilive/views/earnscreen/earnland.dart';
 import 'package:sonicpattilive/views/gameScreens/gameboard.dart';
-import 'package:sonicpattilive/views/users/login.dart';
 
 import '../controllers/cmc.dart';
 
@@ -28,12 +26,36 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   late AnimationController _fadeanimcontroller;
   late Animation<double> _animationfade;
 
+  final Reference storageRef = FirebaseStorage.instance.ref();
+  var _images;
+  int _randomNumber = 0;
+  Random random = Random();
+
+  void _generateRandom() {
+    setState(() {
+      _randomNumber = random.nextInt(14);
+    });
+  }
+
+  void _pickFile(_randomNumber) async {
+    final ref = storageRef.child("wlpbg").child("$_randomNumber.jpg");
+    try {
+      String fileUrl = await ref.getDownloadURL();
+      setState(() {
+        _images = fileUrl.toString();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     if (!mounted) {
       return;
     }
+
     setState(() {
       _fadeanimcontroller = AnimationController(
         duration: const Duration(seconds: 3),
@@ -44,14 +66,17 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         end: 1.0,
       ).animate(_fadeanimcontroller.view);
       _fadeanimcontroller.forward();
-
       _fadeanimcontroller = AnimationController(
         duration: const Duration(seconds: 3),
         vsync: this,
       );
+
+      _generateRandom();
+      _pickFile(_randomNumber);
     });
+    var setGame = Constant.box.read('setGame');
     switch (setGame) {
-      case 0:
+      case '1':
         {
           Timer(const Duration(seconds: 5), () {
             setState(() {
@@ -63,7 +88,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         }
         break;
 
-      case 1:
+      case '2':
         {
           Timer(const Duration(seconds: 5), () {
             setState(() {
@@ -75,7 +100,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         }
         break;
 
-      case 2:
+      case '3':
         {
           Timer(const Duration(seconds: 5), () {
             setState(() {
@@ -89,7 +114,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
       default:
         {
-          print(setGame);
           Timer(const Duration(seconds: 5), () {
             setState(() {
               Get.to(SetGameScreen(),
@@ -110,25 +134,54 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          child: FadeTransition(
-            opacity: _animationfade,
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: const Image(
-                    width: 90,
-                    height: 90,
-                    image: AssetImage("assets/icon/logo_sonic.png")),
-              ),
+    return Container(
+      width: Get.width,
+      height: Get.height,
+      alignment: Alignment.center,
+      child: Stack(
+        fit: StackFit.loose,
+        children: [
+          SizedBox(
+            height: Get.height,
+            width: Get.width,
+            child: Center(
+              child: _images == null
+                  ? const Image(
+                      image: AssetImage('assets/images/dash.png'),
+                      fit: BoxFit.cover,
+                    )
+                  : FadeInImage.assetNetwork(
+                      fadeInDuration: const Duration(milliseconds: 700),
+                      placeholder: 'assets/images/dash.png',
+                      image: _images.toString(),
+                      fit: BoxFit.fitHeight,
+                    ),
             ),
           ),
-        ),
-      ],
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                child: FadeTransition(
+                  opacity: _animationfade,
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: const Image(
+                          width: 90,
+                          height: 90,
+                          image: AssetImage("assets/icon/logo_sonic.png")),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -141,35 +194,9 @@ class SetGameScreen extends StatefulWidget {
 }
 
 class _SetGameScreenState extends State<SetGameScreen> {
-  final Reference storageRef = FirebaseStorage.instance.ref();
-  var _images;
-  int _randomNumber = 0;
-  Random random = Random();
-
-  void _generateRandom() {
-    setState(() {
-      _randomNumber = random.nextInt(9);
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _generateRandom();
-    _pickFile(_randomNumber);
-    print(_randomNumber);
-  }
-
-  void _pickFile(_randomNumber) async {
-    final ref = storageRef.child("wlpbg").child("$_randomNumber.jpg");
-    try {
-      String fileUrl = await ref.getDownloadURL();
-      setState(() {
-        _images = fileUrl.toString();
-      });
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override
@@ -181,22 +208,14 @@ class _SetGameScreenState extends State<SetGameScreen> {
           height: Get.height,
           alignment: Alignment.center,
           child: Stack(
+            fit: StackFit.loose,
             children: [
               SizedBox(
                 height: Get.height,
                 width: Get.width,
-                child: Center(
-                  child: _images == null
-                      ? const Image(
-                          image: AssetImage('assets/images/dash.png'),
-                          fit: BoxFit.cover,
-                        )
-                      : FadeInImage.assetNetwork(
-                          fadeInDuration: const Duration(milliseconds: 700),
-                          placeholder: 'assets/images/dash.png',
-                          image: _images.toString(),
-                          fit: BoxFit.cover,
-                        ),
+                child: const Image(
+                  image: AssetImage('assets/images/dash.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
               Column(
@@ -210,7 +229,7 @@ class _SetGameScreenState extends State<SetGameScreen> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            Constant.box.write('setGame', 0);
+                            Constant.box.write('setGame', '1');
                           });
                           Get.to(const EarningBoard(),
                               transition: Transition.fade);
@@ -219,12 +238,7 @@ class _SetGameScreenState extends State<SetGameScreen> {
                           width: 140,
                           height: 140,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
+                            borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
                                   color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -252,7 +266,7 @@ class _SetGameScreenState extends State<SetGameScreen> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            Constant.box.write('setGame', 1);
+                            Constant.box.write('setGame', '2');
                           });
                           Get.to(
                             const GameBoard(),
@@ -283,7 +297,6 @@ class _SetGameScreenState extends State<SetGameScreen> {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Gugi',
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
                                 height: 1),
@@ -298,7 +311,7 @@ class _SetGameScreenState extends State<SetGameScreen> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        //Constant.box.write('setGame', false);
+                        Constant.box.write('setGame', 3);
                       });
                     },
                     child: Container(
@@ -336,9 +349,6 @@ class _SetGameScreenState extends State<SetGameScreen> {
               ),
             ],
           ),
-          /*  ),
-          
-         */
         ),
       ),
     );
