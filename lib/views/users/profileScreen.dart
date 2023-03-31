@@ -236,7 +236,7 @@ class _ProfileState extends State<Profile> {
                     activeColor: Theme.of(context).colorScheme.tertiary,
                     inactiveThumbColor: Theme.of(context).colorScheme.surface,
                     title: const Text('RESET MYHOME'),
-                    value: setGame != '' ? true : false,
+                    value: setGame != '' ? false : true,
                     onChanged: (bool? value) {
                       setState(() {
                         Constant.box.write('setGame', 0);
