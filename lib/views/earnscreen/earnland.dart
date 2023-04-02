@@ -26,6 +26,7 @@ class _EarnDashBoardState extends State<EarnDashBoard> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.onBackground,
         body: Column(
           children: [
             Container(
