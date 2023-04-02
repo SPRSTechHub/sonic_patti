@@ -12,7 +12,7 @@ import '../models/game_offers_model.dart';
 
 class RemoteApi {
   static var client = http.Client();
-  static var url = apiUrl + '/api/';
+  static var url = Constant.box.read('apiUrl') + '/api/';
 
   static Map<String, String> headers = {
     "Content-type": "application/x-www-form-urlencoded",

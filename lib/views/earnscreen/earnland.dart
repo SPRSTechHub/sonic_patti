@@ -6,86 +6,6 @@ import 'package:sonicpattilive/utils/constants.dart';
 
 import '../../controllers/home_controller.dart';
 
-class EarningBoard extends StatefulWidget {
-  const EarningBoard({super.key});
-
-  @override
-  State<EarningBoard> createState() => _EarningBoardState();
-}
-
-class _EarningBoardState extends State<EarningBoard> {
-  final HomeController _mainController = Get.find<HomeController>();
-
-  static const List<Widget> fruits = <Widget>[Text('Play'), Text('Earn')];
-  final List<bool> _selectedFruits = <bool>[true, false];
-  @override
-  void initState() {
-    super.initState();
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(actions: []),
-      body: Container(
-        color: const Color(0xffE7F4FB),
-        child: SingleChildScrollView(
-          child: Stack(
-            fit: StackFit.loose,
-            children: <Widget>[
-              const EarnDashBoard(),
-              Center(
-                child: Container(
-                  height: 42,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.30000001192092896),
-                          offset: Offset(4, 6),
-                          blurRadius: 8)
-                    ],
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromRGBO(221, 200, 0, 1),
-                        Color.fromRGBO(255, 0, 0, 1)
-                      ],
-                    ),
-                  ),
-                  child: ToggleButtons(
-                    direction: Axis.horizontal,
-                    borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    selectedBorderColor: Theme.of(context).colorScheme.primary,
-                    selectedColor: Colors.white,
-                    fillColor: bgColor1,
-                    constraints:
-                        const BoxConstraints(minHeight: 41.5, minWidth: 73.5),
-                    isSelected: _selectedFruits,
-                    children: fruits,
-                    onPressed: (int index) {
-                      setState(() {
-                        if (index != 1) {
-                          Navigator.pop(context);
-                          /*  Get.off(const GameBoard(),
-                              transition: Transition.fade); */
-                        }
-                      });
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class EarnDashBoard extends StatefulWidget {
   const EarnDashBoard({super.key});
 
@@ -97,146 +17,93 @@ class _EarnDashBoardState extends State<EarnDashBoard> {
   final HomeController gameController = Get.find<HomeController>();
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: Get.width,
-          height: 74,
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromRGBO(253, 232, 218, 1),
-                        Color.fromRGBO(255, 209, 192, 1)
-                      ]),
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(4, 4),
-                        blurRadius: 6)
-                  ],
-                ),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.widgets_outlined,
-                    color: Colors.black,
-                    shadows: <Shadow>[
-                      Shadow(
-                          color: Colors.white,
-                          blurRadius: 2.0,
-                          offset: Offset.zero)
-                    ],
-                  ),
-                  onPressed: () {
-                    //
-                  },
-                ),
-              ),
-              Container(
-                width: 42,
-                height: 42,
-                decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                        offset: Offset(4, 4),
-                        blurRadius: 4)
-                  ],
-                  color: Color.fromRGBO(217, 217, 217, 1),
-                  image: DecorationImage(
-                      image: AssetImage('assets/icon/logo_sonic.png'),
-                      fit: BoxFit.fitWidth),
-                  borderRadius: BorderRadius.all(Radius.elliptical(75, 74)),
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 200,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: 0,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: Get.width * .05),
-                  width: Get.width * .9,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff3F00FD),
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(4, 4),
-                          blurRadius: 6)
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Sonic',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.kEarnTitleHeading,
-                          ),
-                          Text(
-                            '10000 ',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.kAtmCardTitle
-                                .copyWith(fontSize: 42),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.balance,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Container(
+              width: Get.width,
+              height: 74,
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromRGBO(253, 232, 218, 1),
+                            Color.fromRGBO(255, 209, 192, 1)
+                          ]),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(
                             color: Colors.white,
-                            shadows: <Shadow>[
-                              Shadow(
-                                  color: Colors.white,
-                                  blurRadius: 2.0,
-                                  offset: Offset.zero)
-                            ],
-                          ),
-                          Text(
-                            '10.00',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.kAtmCardTitle
-                                .copyWith(fontSize: 42),
-                          ),
+                            offset: Offset(4, 4),
+                            blurRadius: 6)
+                      ],
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.widgets_outlined,
+                        color: Colors.black,
+                        shadows: <Shadow>[
+                          Shadow(
+                              color: Colors.white,
+                              blurRadius: 2.0,
+                              offset: Offset.zero)
                         ],
                       ),
-                    ],
+                      onPressed: () {
+                        //
+                      },
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 42,
+                    height: 42,
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                            offset: Offset(4, 4),
+                            blurRadius: 4)
+                      ],
+                      color: Color.fromRGBO(217, 217, 217, 1),
+                      image: DecorationImage(
+                          image: AssetImage('assets/icon/logo_sonic.png'),
+                          fit: BoxFit.fitWidth),
+                      borderRadius: BorderRadius.all(Radius.elliptical(75, 74)),
+                    ),
+                  ),
+                ],
               ),
-              Positioned(
-                  top: 100,
-                  child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: Get.width * .1),
-                      width: Get.width * .8,
-                      height: 70,
+            ),
+            SizedBox(
+              height: 200,
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 0,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: Get.width * .05),
+                      width: Get.width * .9,
+                      height: 150,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
+                        color: const Color(0xff3F00FD),
+                        borderRadius: BorderRadius.circular(30),
                         boxShadow: const [
                           BoxShadow(
                               color: Colors.grey,
@@ -244,192 +111,262 @@ class _EarnDashBoardState extends State<EarnDashBoard> {
                               blurRadius: 6)
                         ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      child: Column(
                         children: [
-                          Container(
-                            height: 62,
-                            width: 62,
-                            decoration: BoxDecoration(
-                              color: const Color(0xff3F00FD),
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.redAccent,
-                                    offset: Offset(4, 4),
-                                    blurRadius: 6)
-                              ],
-                            ),
-                            child: Text(
-                              '31',
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.kAtmCardTitle
-                                  .copyWith(fontSize: 40),
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Sonic',
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.kEarnTitleHeading,
+                              ),
+                              Text(
+                                '10000 ',
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.kAtmCardTitle
+                                    .copyWith(fontSize: 42),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'Daily Tasks',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.kAtmCardTitle
-                                .copyWith(color: Colors.black45),
-                          ),
-                          const Icon(
-                            Icons.done_all_outlined,
-                            color: Colors.blueAccent,
-                            shadows: <Shadow>[
-                              Shadow(
-                                  color: Colors.white,
-                                  blurRadius: 2.0,
-                                  offset: Offset.zero)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.balance,
+                                color: Colors.white,
+                                shadows: <Shadow>[
+                                  Shadow(
+                                      color: Colors.white,
+                                      blurRadius: 2.0,
+                                      offset: Offset.zero)
+                                ],
+                              ),
+                              Text(
+                                '10.00',
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.kAtmCardTitle
+                                    .copyWith(fontSize: 42),
+                              ),
                             ],
                           ),
                         ],
-                      ))),
-            ],
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              'Quick Tasks',
-              textAlign: TextAlign.center,
-              style: AppTextStyles.kAtmCardTitle.copyWith(color: Colors.black),
-            ),
-            const Icon(
-              Icons.double_arrow,
-              color: Colors.blueAccent,
-              shadows: <Shadow>[
-                Shadow(
-                    color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
-              ],
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(4.0),
-              width: 160,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(22),
-                color: const Color.fromRGBO(238, 12, 12, 1),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const ClipRRect(
-                    child: Image(
-                        width: 60,
-                        height: 60,
-                        image: AssetImage("assets/images/yt_icon.png")),
-                  ),
-                  Text(
-                    'WATCH & EARN',
-                    textAlign: TextAlign.center,
-                    style: AppTextStyles.kAtmCardTitle,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: 160,
-              height: 150,
-              padding: const EdgeInsets.all(4.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(22),
-                color: const Color(0xff26D000),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const ClipRRect(
-                    child: Image(
-                        width: 60,
-                        height: 60,
-                        image: AssetImage("assets/images/nw_icon.png")),
-                  ),
-                  Text(
-                    'READ & EARN',
-                    textAlign: TextAlign.center,
-                    style: AppTextStyles.kAtmCardTitle,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              'All Tasks',
-              textAlign: TextAlign.center,
-              style: AppTextStyles.kAtmCardTitle.copyWith(color: Colors.black),
-            ),
-            const Icon(
-              Icons.double_arrow,
-              color: Colors.blueAccent,
-              shadows: <Shadow>[
-                Shadow(
-                    color: Colors.white, blurRadius: 2.0, offset: Offset.zero)
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          /*  height: 800, */
-          child: Obx(() {
-            if (gameController.isDataProcessing.value == true) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              if (gameController.gameLists.isNotEmpty) {
-                return AnimationLimiter(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: ((context, index) {
-                        var gameData = gameController.gameLists[index];
-                        return AnimationConfiguration.staggeredList(
-                          position: index,
-                          duration: const Duration(milliseconds: 575),
-                          delay: const Duration(milliseconds: 175),
-                          child: SlideAnimation(
-                            verticalOffset: 50.0,
-                            child: FadeInAnimation(
-                              child: ListofSubTasks(
-                                  matchId: gameData.matchId,
-                                  matchTime: gameData.matchTime,
-                                  gameTitle: gameData.gameTitle,
-                                  matchIcon: gameData.matchIcon,
-                                  status: gameData.status,
-                                  live: gameData.live),
-                            ),
-                          ),
-                        );
-                      }),
-                      itemCount: gameController.gameLists.length),
-                );
-              } else {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Lottie.asset(
-                      'assets/anim/loading1.json',
-                      fit: BoxFit.fill,
+                      ),
                     ),
-                    const Text('Games are loading ....'),
+                  ),
+                  Positioned(
+                      top: 100,
+                      child: Container(
+                          margin:
+                              EdgeInsets.symmetric(horizontal: Get.width * .1),
+                          width: Get.width * .8,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(4, 4),
+                                  blurRadius: 6)
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                height: 62,
+                                width: 62,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff3F00FD),
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.redAccent,
+                                        offset: Offset(4, 4),
+                                        blurRadius: 6)
+                                  ],
+                                ),
+                                child: Text(
+                                  '31',
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.kAtmCardTitle
+                                      .copyWith(fontSize: 40),
+                                ),
+                              ),
+                              Text(
+                                'Daily Tasks',
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.kAtmCardTitle
+                                    .copyWith(color: Colors.black45),
+                              ),
+                              const Icon(
+                                Icons.done_all_outlined,
+                                color: Colors.blueAccent,
+                                shadows: <Shadow>[
+                                  Shadow(
+                                      color: Colors.white,
+                                      blurRadius: 2.0,
+                                      offset: Offset.zero)
+                                ],
+                              ),
+                            ],
+                          ))),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Quick Tasks',
+                  textAlign: TextAlign.center,
+                  style:
+                      AppTextStyles.kAtmCardTitle.copyWith(color: Colors.black),
+                ),
+                const Icon(
+                  Icons.double_arrow,
+                  color: Colors.blueAccent,
+                  shadows: <Shadow>[
+                    Shadow(
+                        color: Colors.white,
+                        blurRadius: 2.0,
+                        offset: Offset.zero)
                   ],
-                );
-              }
-            }
-          }),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(4.0),
+                  width: 160,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(22),
+                    color: const Color.fromRGBO(238, 12, 12, 1),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const ClipRRect(
+                        child: Image(
+                            width: 60,
+                            height: 60,
+                            image: AssetImage("assets/images/yt_icon.png")),
+                      ),
+                      Text(
+                        'WATCH & EARN',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.kAtmCardTitle,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 160,
+                  height: 150,
+                  padding: const EdgeInsets.all(4.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(22),
+                    color: const Color(0xff26D000),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const ClipRRect(
+                        child: Image(
+                            width: 60,
+                            height: 60,
+                            image: AssetImage("assets/images/nw_icon.png")),
+                      ),
+                      Text(
+                        'READ & EARN',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.kAtmCardTitle,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'All Tasks',
+                  textAlign: TextAlign.center,
+                  style:
+                      AppTextStyles.kAtmCardTitle.copyWith(color: Colors.black),
+                ),
+                const Icon(
+                  Icons.double_arrow,
+                  color: Colors.blueAccent,
+                  shadows: <Shadow>[
+                    Shadow(
+                        color: Colors.white,
+                        blurRadius: 2.0,
+                        offset: Offset.zero)
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              /*  height: 800, */
+              child: Obx(() {
+                if (gameController.isDataProcessing.value == true) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  if (gameController.gameLists.isNotEmpty) {
+                    return AnimationLimiter(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: ((context, index) {
+                            var gameData = gameController.gameLists[index];
+                            return AnimationConfiguration.staggeredList(
+                              position: index,
+                              duration: const Duration(milliseconds: 575),
+                              delay: const Duration(milliseconds: 175),
+                              child: SlideAnimation(
+                                verticalOffset: 50.0,
+                                child: FadeInAnimation(
+                                  child: ListofSubTasks(
+                                      matchId: gameData.matchId,
+                                      matchTime: gameData.matchTime,
+                                      gameTitle: gameData.gameTitle,
+                                      matchIcon: gameData.matchIcon,
+                                      status: gameData.status,
+                                      live: gameData.live),
+                                ),
+                              ),
+                            );
+                          }),
+                          itemCount: gameController.gameLists.length),
+                    );
+                  } else {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Lottie.asset(
+                          'assets/anim/loading1.json',
+                          fit: BoxFit.fill,
+                        ),
+                        const Text('Games are loading ....'),
+                      ],
+                    );
+                  }
+                }
+              }),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

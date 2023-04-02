@@ -47,7 +47,7 @@ class _ListofGamesState extends State<ListofGames> {
                         borderRadius: BorderRadius.circular(12),
                         image: DecorationImage(
                             image: NetworkImage(
-                                "https://console.sprs.store/uploads/cat_img/${catData.catIurl}"),
+                                apiUrl + "/uploads/cat_img/${catData.catIurl}"),
                             fit: BoxFit.cover),
                       ),
                       child: Column(

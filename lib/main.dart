@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,6 +18,7 @@ import 'views/obscreen/screen_one.dart';
 
 bool? initFirst;
 bool? isLogin;
+final remoteConfig = FirebaseRemoteConfig.instance;
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -43,6 +46,26 @@ void main() async {
     Get.isDarkMode
         ? GetStorage().write('IS_DARK_MODE', false)
         : GetStorage().write('IS_DARK_MODE', true);
+  }
+
+  // Get server apilink //
+  if (Constant.box.read('apiUrl') == null) {
+    var data = await remoteConfig.setDefaults(const {
+      "apiUrl": 'https://sprsinfotech.cloud',
+    });
+    await remoteConfig.fetchAndActivate();
+    try {
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(hours: 4),
+        minimumFetchInterval: Duration.zero,
+      ));
+      await remoteConfig.fetchAndActivate();
+    } on PlatformException catch (exception) {
+      print(exception);
+    }
+    var apiUrl = remoteConfig.getString("apiUrl");
+    print(apiUrl);
+    GetStorage().write('apiUrl', apiUrl);
   }
 
   GetStorage().write('fcmToken', fcmToken ?? false);

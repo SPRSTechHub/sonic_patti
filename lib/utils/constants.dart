@@ -4,7 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'color_schemes.g.dart';
 
-const apiUrl = 'https://console.sprs.store';
+var apiUrl = GetStorage().read('apiUrl');
+
 bool savingprogress = false;
 dynamic currentTime = DateTime.now();
 

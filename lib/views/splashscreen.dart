@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -231,7 +230,8 @@ class _SetGameScreenState extends State<SetGameScreen> {
                           setState(() {
                             Constant.box.write('setGame', '1');
                           });
-                          Get.to(const EarningBoard(),
+                          Get.to(const EarnDashBoard(),
+                              binding: ControllerBinding(),
                               transition: Transition.fade);
                         },
                         child: Container(
