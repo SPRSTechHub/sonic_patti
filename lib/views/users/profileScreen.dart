@@ -156,11 +156,15 @@ class _ProfileState extends State<Profile> {
                   child: SwitchListTile(
                     activeColor: Theme.of(context).colorScheme.tertiary,
                     inactiveThumbColor: Theme.of(context).colorScheme.surface,
-                    title: const Text('ACCOUNT UPDATE'),
-                    value: Constant.box.read('IS_DARK_MODE') ? true : false,
+                    title: const Text('SHOW GIRLS 18 +'),
+                    value:
+                        Constant.box.read('subfolder') == 'pro' ? true : false,
                     onChanged: (bool? value) {
                       setState(() {
-                        //Constant.box.write('IS_DARK_MODE', value);
+                        Constant.box.write('subfolder', 'pro');
+                        Get.rawSnackbar(
+                            message:
+                                'Hot wallpaper are on from next app launch');
                       });
                     },
                   ),

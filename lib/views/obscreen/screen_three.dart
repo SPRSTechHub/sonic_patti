@@ -150,8 +150,7 @@ class OnboardingScreenThree extends StatelessWidget {
                     padding: const EdgeInsets.only(right: appPadding),
                     child: FloatingActionButton(
                       onPressed: () async {
-                        GetStorage box = GetStorage();
-                        box.write('initFirst', true);
+                        Constant.box.write('initFirst', true);
                         Get.to(
                           const LoginScreen(),
                           transition: Transition.circularReveal,

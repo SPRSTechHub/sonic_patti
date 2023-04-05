@@ -18,14 +18,10 @@ class AllGames extends StatefulWidget {
 class _AllGamesState extends State<AllGames> {
   final HomeController _mainController = Get.find<HomeController>();
 
-  //static const List<Widget> fruits = <Widget>[Text('Play'), Text('Earn')];
-  //final List<bool> _selectedFruits = <bool>[false, true];
-
   @override
   void initState() {
     _mainController.fetchOffers();
     super.initState();
-    print(Constant.box.read('setGame'));
   }
 
   @override

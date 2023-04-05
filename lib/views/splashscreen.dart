@@ -37,7 +37,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   }
 
   void _pickFile(_randomNumber) async {
-    final ref = storageRef.child("wlpbg").child("$_randomNumber.jpg");
+    final ref = storageRef
+        .child("wlpbg")
+        .child(Constant.box.read('subfolder') ?? "basic")
+        .child("$_randomNumber.jpg");
     try {
       String fileUrl = await ref.getDownloadURL();
       setState(() {
@@ -134,15 +137,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width,
-      height: Get.height,
+      height: double.infinity,
+      width: double.infinity,
       alignment: Alignment.center,
       child: Stack(
         fit: StackFit.loose,
         children: [
-          SizedBox(
-            height: Get.height,
-            width: Get.width,
+          Container(
             child: Center(
               child: _images == null
                   ? const Image(
@@ -153,7 +154,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                       fadeInDuration: const Duration(milliseconds: 700),
                       placeholder: 'assets/images/dash.png',
                       image: _images.toString(),
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.fill,
+                      height: Get.height,
                     ),
             ),
           ),
@@ -311,7 +313,8 @@ class _SetGameScreenState extends State<SetGameScreen> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        Constant.box.write('setGame', 3);
+                        Get.rawSnackbar(message: 'Not available for now');
+                        //Constant.box.write('setGame', 3);
                       });
                     },
                     child: Container(

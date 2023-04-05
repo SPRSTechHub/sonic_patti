@@ -332,6 +332,8 @@ class AppStyles {
 class Constant {
   // Data Storage
   static final box = GetStorage();
+  static final mbox = GetStorage();
+
   showSuccessSnack(String? data, context) {
     final SnackBar snakbar = SnackBar(
       content: Text(

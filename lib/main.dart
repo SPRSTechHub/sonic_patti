@@ -51,7 +51,7 @@ void main() async {
   // Get server apilink //
   if (Constant.box.read('apiUrl') == null) {
     var data = await remoteConfig.setDefaults(const {
-      "apiUrl": 'https://sprsinfotech.cloud',
+      "apiUrl": 'https://console.ulibaba.store',
     });
     await remoteConfig.fetchAndActivate();
     try {
@@ -64,13 +64,23 @@ void main() async {
       print(exception);
     }
     var apiUrl = remoteConfig.getString("apiUrl");
-    print(apiUrl);
+    //print(apiUrl);
     GetStorage().write('apiUrl', apiUrl);
   }
 
   GetStorage().write('fcmToken', fcmToken ?? false);
+  getWalp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(Phoenix(child: MyApp()));
+}
+
+void getWalp() {
+  Constant.box.read('subfolder') ?? Constant.mbox.write('subfolder', 'basic');
+  /*  if (Constant.box.read('subfolder') == null) {
+    Constant.mbox.write('subfolder', 'pro');
+  } else {
+    Constant.mbox.write('subfolder', 'basic');
+  } */
 }
 
 class MyApp extends StatelessWidget {

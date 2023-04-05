@@ -32,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    //print(Constant.box.read('apiUrl'));
     passwordVisibility = false;
     isLogin = Constant.box.read('isLogin') ?? false;
     if (isLogin == true) {
@@ -227,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 var password = passwordCtltxt.text;
                                 var response = await authController
                                     .signInFunction(mobile, password, token);
-                                print(response);
+
                                 if (response == true) {
                                   savingprogress = false;
                                   await Get.deleteAll(force: true);

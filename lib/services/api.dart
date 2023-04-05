@@ -205,7 +205,7 @@ class RemoteApi {
         await http.post(Uri.parse(url), headers: headers, body: postData);
     if (response.statusCode == 200) {
       var resp = json.decode(response.body);
-      return MktClass.fromJson(resp['data']);
+      return resp['status'] == 0 ? MktClass.fromJson(resp['data']) : null;
     } else {
       return null;
     }

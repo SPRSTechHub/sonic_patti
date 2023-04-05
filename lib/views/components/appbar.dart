@@ -112,8 +112,11 @@ class _TopAppBarState extends State<TopAppBar> {
               ],
             ),
             onPressed: () {
-              Get.to(const Notifications(),
-                  transition: Transition.leftToRightWithFade);
+              setState(() {
+                Get.to(const Notifications(),
+                    transition: Transition.leftToRightWithFade,
+                    binding: ControllerBinding());
+              });
             },
           ),
         ),

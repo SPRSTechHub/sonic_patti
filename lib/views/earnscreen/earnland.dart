@@ -68,7 +68,11 @@ class _EarnDashBoardState extends State<EarnDashBoard> {
                         ],
                       ),
                       onPressed: () {
-                        //
+                        setState(() {
+                          Constant.box.write('setGame', 0);
+                          Get.rawSnackbar(
+                              message: 'App will reset now from Next time.');
+                        });
                       },
                     ),
                   ),
